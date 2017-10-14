@@ -30,7 +30,7 @@ var oprtunityVal='';
 		var imgList="";
 		for(i=1;i<=30;i++){
 					
-			imgList+='<div style="width:30%; float:left; border:1px solid #00bfff; border-radius:10px; height:100px; margin:.2%;" ><img width="70" alt="Image" id="myImage'+i+'" onClick="gotoPic('+i+');"><input name="prPhoto'+i+'" id="prPhoto'+i+'" type="hidden"/><div style="float:right;"><a href="#" style="font-size:20px; text-decoration:none;" class="icon remove" onClick="cancelPicture('+i+')" ></a></div></div>';//<img src="cancel.png" width="20" height="20" alt="X" id="myImage1"  onClick="cancelPicture('+i+')"></span>
+			imgList+='<div style="width:30%; float:left; border:1px solid #00bfff; border-radius:10px; height:100px; margin:.2%;" ><img width="75" alt="Image'+i+'" id="myImage'+i+'" onClick="gotoPic('+i+');"><input name="prPhoto'+i+'" id="prPhoto'+i+'" type="hidden"/><div style="float:right;"><a href="#" style="font-size:20px; text-decoration:none;" class="icon remove" onClick="cancelPicture('+i+')" ></a></div></div>';//<img src="cancel.png" width="20" height="20" alt="X" id="myImage1"  onClick="cancelPicture('+i+')"></span>
 			
 		}
 		$("#imgList").append(imgList);
@@ -791,8 +791,8 @@ function uploadPhoto(imageURI, imageName) {
 }
 
 function winPr(r) {
-	$("#error_prescription_submit").text('Update Prescription');
-	$.afui.loadContent("#imageSinglePage",true,true,'right');	
+	$("#btn_prescription_submit").hide();	
+	$.afui.loadContent("#page_PrescriptionCapture",true,true,'right');	
 }
 
 function failPr(error) {
