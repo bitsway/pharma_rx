@@ -227,12 +227,12 @@
     </div>
     <footer>
         <a href="#" onclick="$.afui.drawer.show('#doctor_add','left','push')"><img src="doctor_add.png" style="width:40px;" /></a>
-        <a href="#"  onclick="$.afui.drawer.show('#ul_med_add','left','push')">Medicine Not Listed</a>
+        <a href="#"  onclick="$.afui.drawer.show('#ul_med_add','left','push')"> Not Listed !</a>
         <a href="#"  onclick="$.afui.drawer.show('#op_med_add','right','push')" ><img src="med.png" style="width:30px;" /></a>
         <!--<a href="#"  onclick="$.afui.drawer.show('#med_add','right','push')">Med</a>-->
     </footer>
     
-    <nav id="doctor_add"  style="z-index:100; background-color:#e6f9ff; width:60%;" >			
+    <nav id="doctor_add"  style="z-index:100; background-color:#e6f9ff; width:80%;" >			
         <header align="left"><h1>Doctor</h1></header>
         	
             <br/>
@@ -241,13 +241,13 @@
           <div id="docSelect"></div><br/>
         <div id="doctorList" style="padding:5px; height:80%; overflow:scroll;"></div>
     </nav>
-    <nav id="ul_med_add"  style="z-index:100; background-color:#e6f9ff; width:60%;" >			
-        <header ><h4 style="text-align:center;">Medicine Not Listed</h4></header>
+    <nav id="ul_med_add"  style="z-index:100; background-color:#e6f9ff; width:80%;" >			
+        <header ><h1 style="text-align:center;">Medicine Not Listed</h1></header>
             <br/>
-            <input id="medicine_1" type="text" style="width:80%; color:#000; background-color:#F4F8FF; font-weight:normal; margin:10px;" placeholder="Name 1"   />
-            <input id="medicine_2" type="text" style="width:80%; color:#000; background-color:#F4F8FF; font-weight:normal; margin:10px;" placeholder="Name 2"   />
-            <input id="medicine_3" type="text" style="width:80%; color:#000; background-color:#F4F8FF; font-weight:normal; margin:10px;" placeholder="Name 3"   />
-            <input id="medicine_4" type="text" style="width:80%; color:#000; background-color:#F4F8FF; font-weight:normal; margin:10px;" placeholder="Name 4"   />
+            <input id="medicine_1" type="text" style="width:80%; color:#000; background-color:#F4F8FF; font-weight:normal; margin:10px;" placeholder="Orphan Drug 1"   />
+            <input id="medicine_2" type="text" style="width:80%; color:#000; background-color:#F4F8FF; font-weight:normal; margin:10px;" placeholder="Orphan Drug 2"   />
+            <input id="medicine_3" type="text" style="width:80%; color:#000; background-color:#F4F8FF; font-weight:normal; margin:10px;" placeholder="Orphan Drug 3"   />
+            <input id="medicine_4" type="text" style="width:80%; color:#000; background-color:#F4F8FF; font-weight:normal; margin:10px;" placeholder="Orphan Drug 4"   />
             
             <!--<input type="submit" onClick="ulMedAdd()" style=" margin:10px; width:80%; height:50px; background-color:#09C; color:#FFF; font-size:20px; margin-top:6px;" value="     Submit     "   />
           -->
@@ -272,9 +272,9 @@
         <header align="left"><h1>Product</h1></header>
             <br/>
             <input type="text" id="opitemSearch" style="width:70%; color:#000; background-color:#F4F8FF; font-weight:normal" placeholder="Search"   />&nbsp;&nbsp;
-            <a href="#" onClick="searchMedicine()" style="font-size:30px; text-decoration:none;" class="icon magnifier" ></a>&nbsp;&nbsp;<a href="#" style="font-size:30px; text-decoration:none;" class="icon add" id="opMedAdd" ></a><!--<img onClick="searchMedicine()" src="search-icon.png" width="40" height="40" alt="S"  >-->
+            <a href="#" onClick="searchMedicine()" style="font-size:30px; text-decoration:none;" class="icon magnifier" ><br/></a>&nbsp;&nbsp;<a href="#" style="font-size:30px; text-decoration:none;" class="icon add" id="opMedAdd" ></a><!--<img onClick="searchMedicine()" src="search-icon.png" width="40" height="40" alt="S"  >-->
           
-        <div id="medicineList" style="padding:5px; height:80%; overflow:scroll;"></div>
+        <div id="medicineList" style="padding:0px 10px; height:80%; overflow:scroll;"></div>
     </nav>
 </div>   
 

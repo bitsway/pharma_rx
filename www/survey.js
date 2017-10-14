@@ -1,4 +1,5 @@
 $.afui.useOSThemes=false;
+$.afui.useOSThemes=false;
 $.afui.loadDefaultHash=true;
 $.afui.autoLaunch=false;
 
@@ -26,7 +27,7 @@ var  apipath =''; //for medicine search
         $.afui.launch();		
 		
 		var imgList="";
-		for(i=1;i<=30;i++){
+		for(i=11;i<=40;i++){
 			/*if(i<11){
 				i='0'+i
 				}	*/		
@@ -58,7 +59,7 @@ var  apipath =''; //for medicine search
 		//first_page();
 		
 	//===============SetPR=================
-	for (j=0; j < 10; j++){
+	for (j=10; j < 40; j++){
 		var picNo=parseInt(j)+1 
 		var imageDiv="myImage"+picNo
 		var imageText="prPhoto"+picNo
@@ -297,7 +298,7 @@ function docAdd(docid){
 			  doc_cart_list+='<div style="clear:both; border-bottom:1px solid #8CAFD7; margin:2px;"></div><br/>';
 			
 			  $('#docCart').append(doc_cart_list);
-			  $('#docSelect').append('<div  style="float:center; width:100%; background-color:#e6e6ff; text-align:right;" ><h3>'+docName+'</h3><p >'+docAdd+'</p></div>');
+			  $('#docSelect').append('<div  style="float:center; width:100%; background-color:#e6e6ff; text-align:left;" ><h3>'+docName+'</h3><p >'+docAdd+'</p></div>');
 			  	
 			}		
 		}
@@ -313,7 +314,7 @@ function searchDoc(){
 	else{
 		//alert(apipath+'search_doctor?searchValue='+searchValue);
 		$.ajax({
-			  url: apipath+'search_doctor?searchValue='+searchValue,
+			  url: localStorage.apipath+'search_doctor?searchValue='+searchValue,
 			  success: function(resStr) {
 				if (resStr!=""){
 					keywordStr=resStr.split("||");
@@ -370,10 +371,10 @@ function searchMedicine(){
 						  keywordLi=keywordStr[i].split("|")
 						  var pID=keywordLi[0].trim();
 						  var medName=keywordLi[1];
-						  keywordS+='<div  style="float:left; width:80%"  id="medId'+pID+'">'
+						  keywordS+='<div  style="float:left; width:75%"  id="medId'+pID+'">'
 						  keywordS+='<span onclick="medClickVal2(\''+pID+'\',\''+medName+'\')" style="margin-bottom:10px; " >'+medName+'</span>' 
 						  keywordS+='</div>'
-						  keywordS+='<div style="float:right; width:20%">'
+						  keywordS+='<div style="float:right; width:15%">'
 						  keywordS+='<input onmouseout="medClickVal(\''+pID+'\',\''+medName+'\')" id="inpId'+pID+'" type="number" style="width:56px; height:35px;" />'
 						  keywordS+='</div>'
 						  keywordS+='<div style="clear:both; border-bottom:1px solid #8CAFD7; margin:2px;"></div>'
@@ -525,7 +526,8 @@ function check_user() {
 						var photo_url=resultArray[1]; // application path http://a007.yeapps.com/ipi/
 						var photo_submit_url=resultArray[2]; // image submission url
 						var report_url=resultArray[3]; // report url
-						apipath =  photo_url + 'medSearch/';
+						localStorage.apipath =  photo_url + 'medSearch/';
+						
 						base_url = photo_url + 'syncmobile_rx/';
 						//alert (base_url);
 						
@@ -564,7 +566,7 @@ function check_user() {
 							var today=  year + "-" + month + "-" + day;
 							localStorage.sync_date=today;
 							
-							alert (localStorage.base_url+'check_user_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode)
+							//alert (localStorage.base_url+'check_user_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode)
 							$("#error_logintext").val(localStorage.base_url+'check_user_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode);
 	
 							$.ajax(localStorage.base_url+'check_user_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode,{
