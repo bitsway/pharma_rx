@@ -27,13 +27,11 @@ var  apipath =''; //for medicine search
         $.afui.launch();		
 		
 		var imgList="";
-		for(i=1;i<=30;i++){
-			/*if(i<11){
-				i='0'+i
-				}	*/		
+		/*for(i=1;i<=30;i++){
+					
 			imgList+='<div style="width:30%; float:left; border:1px solid #00bfff; border-radius:10px; height:100px; margin:.2%;" ><img width="60" alt="Image" id="myImage'+i+'" onClick="gotoPic('+i+');"><input name="prPhoto'+i+'" id="prPhoto'+i+'" type="hidden"/><div style="float:right;"><a href="#" style="font-size:20px; text-decoration:none;" class="icon remove" onClick="cancelPicture('+i+')" ></a></div></div>';//<img src="cancel.png" width="20" height="20" alt="X" id="myImage1"  onClick="cancelPicture('+i+')"></span>
 			
-		}
+		}*/
 		$("#imgList").append(imgList);
 		
 		//-----------------
@@ -362,7 +360,7 @@ function searchMedicine(){
 	else{
 		//alert(apipath+'search_medicine?searchValue='+searchValue);
 		$.ajax({
-			  url: apipath+'search_medicine?searchValue='+searchValue,
+			  url: localStorage.apipath+'search_medicine?searchValue='+searchValue,
 			  success: function(resStr) {
 				if (resStr!=""){
 					keywordStr=resStr.split("||");
