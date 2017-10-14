@@ -848,10 +848,9 @@ function cameraSuccess(uri){
 		localStorage.prPhoto10=uri
 	}
 		
-	$("#"+imageText).val(imagePath);
-	
 	takePicture();
-        
+	
+    $("#"+imageText).val(imagePath);    
 }
 
 function cameraError(message){
