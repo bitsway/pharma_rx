@@ -27,11 +27,11 @@ var  apipath =''; //for medicine search
         $.afui.launch();		
 		
 		var imgList="";
-		/*for(i=1;i<=30;i++){
+		for(i=1;i<=30;i++){
 					
-			imgList+='<div style="width:30%; float:left; border:1px solid #00bfff; border-radius:10px; height:100px; margin:.2%;" ><img width="60" alt="Image" id="myImage'+i+'" onClick="gotoPic('+i+');"><input name="prPhoto'+i+'" id="prPhoto'+i+'" type="hidden"/><div style="float:right;"><a href="#" style="font-size:20px; text-decoration:none;" class="icon remove" onClick="cancelPicture('+i+')" ></a></div></div>';//<img src="cancel.png" width="20" height="20" alt="X" id="myImage1"  onClick="cancelPicture('+i+')"></span>
+			imgList+='<div style="width:30%; float:left; border:1px solid #00bfff; border-radius:10px; height:100px; margin:.2%;" ><img width="60" alt="Image" id="prPhoto'+i+'" id="myImage'+i+'" onClick="gotoPic('+i+');"><input name="prPhoto'+i+'" id="prPhoto'+i+'" type="hidden"/><div style="float:right;"><a href="#" style="font-size:20px; text-decoration:none;" class="icon remove" onClick="cancelPicture('+i+')" ></a></div></div>';//<img src="cancel.png" width="20" height="20" alt="X" id="myImage1"  onClick="cancelPicture('+i+')"></span>
 			
-		}*/
+		}
 		$("#imgList").append(imgList);
 		
 		//-----------------
@@ -201,6 +201,7 @@ var  apipath =''; //for medicine search
 $.afui.animateHeader(true);
 
 function page_login() {
+	
 	$("#wait_image_login").hide();
 		
 	$("#loginButton").show();
@@ -214,7 +215,7 @@ localStorage.picFlag=0;
 }
 
 function gotoPic(picNo) {
-	$.afui.loadContent("#imageSinglePage",true,true,'right');
+	
 	var imageDiv="myImage"+picNo
 	var imageText="prPhoto"+picNo
 	
@@ -248,7 +249,9 @@ function gotoPic(picNo) {
 	
 	//alert (prPic)
 	if (prPic!=''){		
-	$.afui.loadContent("#imageSinglePage",true,true,'right');
+		$.afui.loadContent("#imageSinglePage",true,true,'right');
+	}else{
+		$.afui.loadContent("#imageSinglePage",true,true,'right');
 	}
 }
 
@@ -554,7 +557,7 @@ function check_user() {
 							localStorage.user_id=user_id;
 							localStorage.user_pass=user_pass;   		
 							localStorage.synced='NO';
-							
+							localStorage.picFlag=0;
 							
 							
 							var currentDate = new Date();
@@ -844,11 +847,10 @@ function cameraSuccess(uri){
 	if (picNo==10){
 		localStorage.prPhoto10=uri
 	}
-	//alert (uri)
-	takePicture();
-	
-	
+		
 	$("#"+imageText).val(imagePath);
+	
+	takePicture();
         
 }
 
