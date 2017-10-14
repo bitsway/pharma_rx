@@ -27,7 +27,7 @@ var  apipath =''; //for medicine search
         $.afui.launch();		
 		
 		var imgList="";
-		for(i=11;i<=40;i++){
+		for(i=1;i<=30;i++){
 			/*if(i<11){
 				i='0'+i
 				}	*/		
@@ -59,7 +59,7 @@ var  apipath =''; //for medicine search
 		//first_page();
 		
 	//===============SetPR=================
-	for (j=10; j < 40; j++){
+	for (j=0; j < 10; j++){
 		var picNo=parseInt(j)+1 
 		var imageDiv="myImage"+picNo
 		var imageText="prPhoto"+picNo
