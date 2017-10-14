@@ -95,6 +95,66 @@ var oprtunityVal='';
 		if (picNo==10){
 			imageSource=localStorage.prPhoto10
 		}
+		if (picNo==11){
+			imageSource=localStorage.prPhoto11
+		}
+		if (picNo==12){
+			imageSource=localStorage.prPhoto12
+		}
+		if (picNo==13){
+			imageSource=localStorage.prPhoto13
+		}
+		if (picNo==14){
+			imageSource=localStorage.prPhoto14
+		}
+		if (picNo==15){
+			imageSource=localStorage.prPhoto15
+		}
+		if (picNo==16){
+			imageSource=localStorage.prPhoto16
+		}
+		if (picNo==17){
+			imageSource=localStorage.prPhoto17
+		}
+		if (picNo==18){
+			imageSource=localStorage.prPhoto18
+		}
+		if (picNo==19){
+			imageSource=localStorage.prPhoto19
+		}
+		if (picNo==20){
+			imageSource=localStorage.prPhoto20
+		}
+		if (picNo==21){
+			imageSource=localStorage.prPhoto21
+		}
+		if (picNo==22){
+			imageSource=localStorage.prPhoto22
+		}
+		if (picNo==23){
+			imageSource=localStorage.prPhoto23
+		}
+		if (picNo==24){
+			imageSource=localStorage.prPhoto24
+		}
+		if (picNo==25){
+			imageSource=localStorage.prPhoto25
+		}
+		if (picNo==26){
+			imageSource=localStorage.prPhoto26
+		}
+		if (picNo==27){
+			imageSource=localStorage.prPhoto27
+		}
+		if (picNo==28){
+			imageSource=localStorage.prPhoto28
+		}
+		if (picNo==29){
+			imageSource=localStorage.prPhoto29
+		}
+		if (picNo==30){
+			imageSource=localStorage.prPhoto30
+		}
 		
 		//alert (imageSource)
 		var image = document.getElementById(imageDiv);
@@ -203,6 +263,8 @@ $.afui.animateHeader(true);
 
 function page_login() {
 	
+	$("#btn_prescription_submit").show();
+	
 	$("#wait_image_login").hide();
 		
 	$("#loginButton").show();
@@ -232,6 +294,8 @@ function gotoPic(picNo) {
 		$("#medicine_3").val('');
 		$("#medicine_4").val('');
 		$("#medicine_5").val('');
+		
+		$("#btn_prescription_submit").show();
 		//localStorage.prProdID_Str=''
 		localStorage.opProdID_Str=''
 		//getDocDataprCart()
@@ -275,6 +339,27 @@ function cancelPicture(i){
 	if (picNo==8){localStorage.prPhoto8=''}
 	if (picNo==9){localStorage.prPhoto9=''}
 	if (picNo==10){localStorage.prPhoto10=''}
+	if (picNo==11){localStorage.prPhoto11=''}
+	if (picNo==12){localStorage.prPhoto12=''}
+	if (picNo==13){localStorage.prPhoto13=''}
+	if (picNo==14){localStorage.prPhoto14=''}
+	if (picNo==15){localStorage.prPhoto15=''}
+	if (picNo==16){localStorage.prPhoto16=''}
+	if (picNo==17){localStorage.prPhoto17=''}
+	if (picNo==18){localStorage.prPhoto18=''}
+	if (picNo==19){localStorage.prPhoto19=''}
+	if (picNo==20){localStorage.prPhoto20=''}
+	if (picNo==21){localStorage.prPhoto21=''}
+	if (picNo==22){localStorage.prPhoto22=''}
+	if (picNo==23){localStorage.prPhoto23=''}
+	if (picNo==24){localStorage.prPhoto24=''}
+	if (picNo==25){localStorage.prPhoto25=''}
+	if (picNo==26){localStorage.prPhoto26=''}
+	if (picNo==27){localStorage.prPhoto27=''}
+	if (picNo==28){localStorage.prPhoto28=''}
+	if (picNo==29){localStorage.prPhoto29=''}
+	if (picNo==30){localStorage.prPhoto30=''}
+	
 }
 
 //------------------ doc search 
@@ -796,6 +881,7 @@ function winPr(r) {
 }
 
 function failPr(error) {
+	$("#btn_prescription_submit").show();
 	$("#error_prescription_submit").text('Memory Error. Please take new picture and Submit');
 }
 
@@ -850,6 +936,67 @@ function cameraSuccess(uri){
 	if (picNo==10){
 		localStorage.prPhoto10=uri
 	}
+	if (picNo==11){
+		localStorage.prPhoto11=uri
+	}
+	if (picNo==12){
+		localStorage.prPhoto12=uri
+	}
+	if (picNo==13){
+		localStorage.prPhoto13=uri
+	}
+	if (picNo==14){
+		localStorage.prPhoto14=uri
+	}
+	if (picNo==15){
+		localStorage.prPhoto15=uri
+	}
+	if (picNo==16){
+		localStorage.prPhoto16=uri
+	}
+	if (picNo==17){
+		localStorage.prPhoto17=uri
+	}
+	if (picNo==18){
+		localStorage.prPhoto18=uri
+	}
+	if (picNo==19){
+		localStorage.prPhoto19=uri
+	}
+	if (picNo==20){
+		localStorage.prPhoto20=uri
+	}
+	if (picNo==21){
+		localStorage.prPhoto21=uri
+	}
+	if (picNo==22){
+		localStorage.prPhoto22=uri
+	}
+	if (picNo==23){
+		localStorage.prPhoto23=uri
+	}
+	if (picNo==24){
+		localStorage.prPhoto24=uri
+	}
+	if (picNo==25){
+		localStorage.prPhoto25=uri
+	}
+	if (picNo==26){
+		localStorage.prPhoto26=uri
+	}
+	if (picNo==27){
+		localStorage.prPhoto27=uri
+	}
+	if (picNo==28){
+		localStorage.prPhoto28=uri
+	}
+	if (picNo==29){
+		localStorage.prPhoto29=uri
+	}
+	if (picNo==30){
+		localStorage.prPhoto30=uri
+	}
+
 		
 	takePicture();
 	
