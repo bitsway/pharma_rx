@@ -786,7 +786,7 @@ function uploadPhoto(imageURI, imageName) {
 	options.chunkedMode = false;
 	
     var ft = new FileTransfer();
-     ft.upload(imageURI, encodeURI(localStorage.photo_submit_url+"fileUploaderPrescription/"),winPr,failPr,options);
+     ft.upload(imageURI, encodeURI(localStorage.photo_submit_url),winPr,failPr,options);
 	 
 }
 
