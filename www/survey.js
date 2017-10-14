@@ -22,6 +22,7 @@ var  apipath =''; //for medicine search
 
 //var  apipath ='http://127.0.0.1:8000/w02_ipi/medSearch/'
 
+var oprtunityVal='';
 
     $(document).ready(function(){
         $.afui.launch();		
@@ -29,7 +30,7 @@ var  apipath =''; //for medicine search
 		var imgList="";
 		for(i=1;i<=30;i++){
 					
-			imgList+='<div style="width:30%; float:left; border:1px solid #00bfff; border-radius:10px; height:100px; margin:.2%;" ><img width="60" alt="Image" id="prPhoto'+i+'" id="myImage'+i+'" onClick="gotoPic('+i+');"><input name="prPhoto'+i+'" id="prPhoto'+i+'" type="hidden"/><div style="float:right;"><a href="#" style="font-size:20px; text-decoration:none;" class="icon remove" onClick="cancelPicture('+i+')" ></a></div></div>';//<img src="cancel.png" width="20" height="20" alt="X" id="myImage1"  onClick="cancelPicture('+i+')"></span>
+			imgList+='<div style="width:30%; float:left; border:1px solid #00bfff; border-radius:10px; height:100px; margin:.2%;" ><img width="70" alt="Image" id="myImage'+i+'" onClick="gotoPic('+i+');"><input name="prPhoto'+i+'" id="prPhoto'+i+'" type="hidden"/><div style="float:right;"><a href="#" style="font-size:20px; text-decoration:none;" class="icon remove" onClick="cancelPicture('+i+')" ></a></div></div>';//<img src="cancel.png" width="20" height="20" alt="X" id="myImage1"  onClick="cancelPicture('+i+')"></span>
 			
 		}
 		$("#imgList").append(imgList);
@@ -421,7 +422,7 @@ function removeCarItemOp(product_idGet){
 
 
 /***********  medClickVal *********/
-var oprtunityVal='';
+
 function medClickVal(pid, name){
 	var inpVal = $("#inpId"+pid).val();
 	
@@ -632,8 +633,8 @@ function prescription_submit(){
 	
 	var areaId=localStorage.docStr.split('|')[3]
 	
-	if (doctor_name=='' || localStorage.opProdID_Str==""){		
-		$("#error_prescription_submit").text("Required Doctor and Item");
+	if (doctor_name=='' ){		
+		$("#error_prescription_submit").text("Required Doctor and Item"); //|| localStorage.opProdID_Str==""
 		$("#wait_image_prescription").show();
 		$("#btn_prescription_submit").hide();
 	}else{
@@ -725,7 +726,7 @@ function prescription_submit(){
 
 						//--------------------------
 
-						$.afui.loadContent("#imageSinglePage",true,true,'right');
+						//$.afui.loadContent("#imageSinglePage",true,true,'right');
 						
 					}else{						
 						$("#error_prescription_submit").html('Authentication error. Please register and sync to retry.');
@@ -790,6 +791,8 @@ function uploadPhoto(imageURI, imageName) {
 }
 
 function winPr(r) {
+	$("#error_prescription_submit").text('Update Prescription');
+	$.afui.loadContent("#imageSinglePage",true,true,'right');	
 }
 
 function failPr(error) {
