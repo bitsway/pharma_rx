@@ -41,7 +41,7 @@ $(document).ready(function(){
 		
 		//imgList='<div style="width:30%; position:relative; float:left; border:1px solid #b3e4ff; border-radius:5px; height:120px; margin:1%; overflow:hidden; box-shadow:3px 3px 3px #b3e4ff;" ><img src="roxy.jpg" width="100%" style="border-radius: 5px; height:auto;" alt="&nbsp;&nbsp;&nbsp;Image &nbsp;'+100+'" id="myImage'+100+'" onClick="gotoPic('+100+')"><input name="prPhoto'+100+'" id="prPhoto'+100+'" type="hidden"/><div style="float:right; position: absolute; top:0; right: 0; width: 20px;height: 20px; "><a href="#" style="font-size:20px; text-decoration:none; color:#00a6ff;" class="icon remove" onClick="cancelPicture('+100+')" ></a></div></div>';
 		
-		for(i=1;i<=30;i++){					
+		for(i=1;i<=60;i++){					
 			imgList+='<div style="width:30%; position:relative; float:left; border:1px solid #b3e4ff; border-radius:5px; height:120px; margin:1%; overflow:hidden; box-shadow:3px 3px 3px #b3e4ff;" ><img width="100%" style="border-radius: 5px; height:auto;" alt="&nbsp;&nbsp;&nbsp;Image &nbsp;'+i+'" id="myImage'+i+'" onClick="gotoPic('+i+')"><input name="prPhoto'+i+'" id="prPhoto'+i+'" type="hidden"/><div style="float:right; position: absolute; top:0; right: 0; width: 20px;height: 20px; "><a href="#" style="font-size:20px; text-decoration:none; color:#00a6ff;" class="icon remove" onClick="cancelPicture('+i+')" ></a></div></div>';//<img src="cancel.png" width="20" height="20" alt="X" id="myImage1"  onClick="cancelPicture('+i+')"></span>
 		}
 		
@@ -108,8 +108,38 @@ $(document).ready(function(){
 		if (picNo==27){imageSource=localStorage.prPhoto27}
 		if (picNo==28){imageSource=localStorage.prPhoto28}
 		if (picNo==29){imageSource=localStorage.prPhoto29}
-		if (picNo==30){imageSource=localStorage.prPhoto30}
-		
+        if (picNo == 30) { imageSource = localStorage.prPhoto30 }
+        if (picNo == 31) { imageSource = localStorage.prPhoto31 }
+        if (picNo == 32) { imageSource = localStorage.prPhoto32 }
+        if (picNo == 33) { imageSource = localStorage.prPhoto33 }
+        if (picNo == 34) { imageSource = localStorage.prPhoto34 }
+        if (picNo == 35) { imageSource = localStorage.prPhoto35 }
+        if (picNo == 36) { imageSource = localStorage.prPhoto36 }
+        if (picNo == 37) { imageSource = localStorage.prPhoto37 }
+        if (picNo == 38) { imageSource = localStorage.prPhoto38 }
+        if (picNo == 39) { imageSource = localStorage.prPhoto39 }
+        if (picNo == 40) { imageSource = localStorage.prPhoto40 }
+        if (picNo == 41) { imageSource = localStorage.prPhoto41 }
+        if (picNo == 42) { imageSource = localStorage.prPhoto42 }
+        if (picNo == 43) { imageSource = localStorage.prPhoto43 }
+        if (picNo == 44) { imageSource = localStorage.prPhoto44 }
+        if (picNo == 45) { imageSource = localStorage.prPhoto45 }
+        if (picNo == 46) { imageSource = localStorage.prPhoto46 }
+        if (picNo == 47) { imageSource = localStorage.prPhoto47 }
+        if (picNo == 48) { imageSource = localStorage.prPhoto48 }
+        if (picNo == 49) { imageSource = localStorage.prPhoto49 }
+        if (picNo == 50) { imageSource = localStorage.prPhoto50 }
+        if (picNo == 51) { imageSource = localStorage.prPhoto51 }
+        if (picNo == 52) { imageSource = localStorage.prPhoto52 }
+        if (picNo == 53) { imageSource = localStorage.prPhoto53 }
+        if (picNo == 54) { imageSource = localStorage.prPhoto54 }
+        if (picNo == 55) { imageSource = localStorage.prPhoto55 }
+        if (picNo == 56) { imageSource = localStorage.prPhoto56 }
+        if (picNo == 57) { imageSource = localStorage.prPhoto57 }
+        if (picNo == 58) { imageSource = localStorage.prPhoto58 }
+        if (picNo == 59) { imageSource = localStorage.prPhoto59 }
+        if (picNo == 60) { imageSource = localStorage.prPhoto60 } 
+		                                                   
 		//alert (imageSource)
 		var image = document.getElementById(imageDiv);
 		image.src = imageSource;
@@ -172,13 +202,13 @@ function page_login() {
 
 function clearPicture(){
 	localStorage.picFlag=0;	
-	$("#imgList").empty();
+	/*$("#imgList").empty();
 	
 	var imgList="";
 	for(i=1;i<=30;i++){					
 		imgList+='<div style="width:30%; position:relative; float:left; border:1px solid #b3e4ff; border-radius:5px; height:120px; margin:1%; overflow:hidden; box-shadow:3px 3px 3px #b3e4ff;" ><img width="100%" style="border-radius: 5px; height:auto;" alt="&nbsp;&nbsp;&nbsp;Image &nbsp;'+i+'" id="myImage'+i+'" onClick="gotoPic('+i+');"><input name="prPhoto'+i+'" id="prPhoto'+i+'" type="hidden"/><div style="float:right; position: absolute; top:0; right: 0; width: 20px;height: 20px; "><a href="#" style="font-size:20px; text-decoration:none; color:#00a6ff;" class="icon remove" onClick="cancelPicture('+i+')" ></a></div></div>';//<img src="cancel.png" width="20" height="20" alt="X" id="myImage1"  onClick="cancelPicture('+i+')"></span>
 	}
-	$("#imgList").append(imgList);
+	$("#imgList").append(imgList); */
 
 }
 
@@ -261,7 +291,37 @@ function cancelPicture(i){
 	if (picNo==27){localStorage.prPhoto27=''}
 	if (picNo==28){localStorage.prPhoto28=''}
 	if (picNo==29){localStorage.prPhoto29=''}
-	if (picNo==30){localStorage.prPhoto30=''}
+    if (picNo == 30) { localStorage.prPhoto30 = '' }
+    if (picNo == 31) { localStorage.prPhoto31 = '' }
+    if (picNo == 32) { localStorage.prPhoto32 = '' }
+    if (picNo == 33) { localStorage.prPhoto33 = '' }
+    if (picNo == 34) { localStorage.prPhoto34 = '' }
+    if (picNo == 35) { localStorage.prPhoto35 = '' }
+    if (picNo == 36) { localStorage.prPhoto36 = '' }
+    if (picNo == 37) { localStorage.prPhoto37 = '' }
+    if (picNo == 38) { localStorage.prPhoto38 = '' }
+    if (picNo == 39) { localStorage.prPhoto39 = '' }
+    if (picNo == 40) { localStorage.prPhoto40 = '' }
+    if (picNo == 41) { localStorage.prPhoto41 = '' }
+    if (picNo == 42) { localStorage.prPhoto42 = '' }
+    if (picNo == 43) { localStorage.prPhoto43 = '' }
+    if (picNo == 44) { localStorage.prPhoto44 = '' }
+    if (picNo == 45) { localStorage.prPhoto45 = '' }
+    if (picNo == 46) { localStorage.prPhoto46 = '' }
+    if (picNo == 47) { localStorage.prPhoto47 = '' }
+    if (picNo == 48) { localStorage.prPhoto48 = '' }
+    if (picNo == 49) { localStorage.prPhoto49 = '' }
+    if (picNo == 50) { localStorage.prPhoto50 = '' }
+    if (picNo == 51) { localStorage.prPhoto51 = '' }
+    if (picNo == 52) { localStorage.prPhoto52 = '' }
+    if (picNo == 53) { localStorage.prPhoto53 = '' }
+    if (picNo == 54) { localStorage.prPhoto54 = '' }
+    if (picNo == 55) { localStorage.prPhoto55 = '' }
+    if (picNo == 56) { localStorage.prPhoto56 = '' }
+    if (picNo == 57) { localStorage.prPhoto57 = '' }
+    if (picNo == 58) { localStorage.prPhoto58 = '' }
+    if (picNo == 59) { localStorage.prPhoto59 = '' }
+    if (picNo == 60) { localStorage.prPhoto60 = '' }
 	
 }
 
@@ -745,7 +805,37 @@ function prescription_submit(){
 						if (picNo==27){localStorage.prPhoto27=''}
 						if (picNo==28){localStorage.prPhoto28=''}
 						if (picNo==29){localStorage.prPhoto29=''}
-						if (picNo==30){localStorage.prPhoto30=''}
+                        if (picNo == 30) { localStorage.prPhoto30 = '' }
+                        if (picNo == 31) { localStorage.prPhoto31 = '' }
+                        if (picNo == 32) { localStorage.prPhoto32 = '' }
+                        if (picNo == 33) { localStorage.prPhoto33 = '' }
+                        if (picNo == 34) { localStorage.prPhoto34 = '' }
+                        if (picNo == 35) { localStorage.prPhoto35 = '' }
+                        if (picNo == 36) { localStorage.prPhoto36 = '' }
+                        if (picNo == 37) { localStorage.prPhoto37 = '' }
+                        if (picNo == 38) { localStorage.prPhoto38 = '' }
+                        if (picNo == 39) { localStorage.prPhoto39 = '' }
+                        if (picNo == 40) { localStorage.prPhoto40 = '' }
+                        if (picNo == 41) { localStorage.prPhoto41 = '' }
+                        if (picNo == 42) { localStorage.prPhoto42 = '' }
+                        if (picNo == 43) { localStorage.prPhoto43 = '' }
+                        if (picNo == 44) { localStorage.prPhoto44 = '' }
+                        if (picNo == 45) { localStorage.prPhoto45 = '' }
+                        if (picNo == 46) { localStorage.prPhoto46 = '' }
+                        if (picNo == 47) { localStorage.prPhoto47 = '' }
+                        if (picNo == 48) { localStorage.prPhoto48 = '' }
+                        if (picNo == 49) { localStorage.prPhoto49 = '' }
+                        if (picNo == 50) { localStorage.prPhoto50 = '' }
+                        if (picNo == 51) { localStorage.prPhoto51 = '' }
+                        if (picNo == 52) { localStorage.prPhoto52 = '' }
+                        if (picNo == 53) { localStorage.prPhoto53 = '' }
+                        if (picNo == 54) { localStorage.prPhoto54 = '' }
+                        if (picNo == 55) { localStorage.prPhoto55 = '' }
+                        if (picNo == 56) { localStorage.prPhoto56 = '' }
+                        if (picNo == 57) { localStorage.prPhoto57 = '' }
+                        if (picNo == 58) { localStorage.prPhoto58 = '' }
+                        if (picNo == 59) { localStorage.prPhoto59 = '' }
+                        if (picNo == 60) { localStorage.prPhoto60 = '' }
 
 
 						$("#lat").val("");
@@ -865,7 +955,37 @@ function cameraSuccess(uri){
 	if (picNo==27){localStorage.prPhoto27=uri}
 	if (picNo==28){localStorage.prPhoto28=uri}
 	if (picNo==29){localStorage.prPhoto29=uri}
-	if (picNo==30){localStorage.prPhoto30=uri}
+    if (picNo == 30) { localStorage.prPhoto30 = uri }
+    if (picNo == 31) { localStorage.prPhoto31 = uri }
+    if (picNo == 32) { localStorage.prPhoto32 = uri }
+    if (picNo == 33) { localStorage.prPhoto33 = uri }
+    if (picNo == 34) { localStorage.prPhoto34 = uri }
+    if (picNo == 35) { localStorage.prPhoto35 = uri }
+    if (picNo == 36) { localStorage.prPhoto36 = uri }
+    if (picNo == 37) { localStorage.prPhoto37 = uri }
+    if (picNo == 38) { localStorage.prPhoto38 = uri }
+    if (picNo == 39) { localStorage.prPhoto39 = uri }
+    if (picNo == 40) { localStorage.prPhoto40 = uri }
+    if (picNo == 41) { localStorage.prPhoto41 = uri }
+    if (picNo == 42) { localStorage.prPhoto42 = uri }
+    if (picNo == 43) { localStorage.prPhoto43 = uri }
+    if (picNo == 44) { localStorage.prPhoto44 = uri }
+    if (picNo == 45) { localStorage.prPhoto45 = uri }
+    if (picNo == 46) { localStorage.prPhoto46 = uri }
+    if (picNo == 47) { localStorage.prPhoto47 = uri }
+    if (picNo == 48) { localStorage.prPhoto48 = uri }
+    if (picNo == 49) { localStorage.prPhoto49 = uri }
+    if (picNo == 50) { localStorage.prPhoto50 = uri }
+    if (picNo == 51) { localStorage.prPhoto51 = uri }
+    if (picNo == 52) { localStorage.prPhoto52 = uri }
+    if (picNo == 53) { localStorage.prPhoto53 = uri }
+    if (picNo == 54) { localStorage.prPhoto54 = uri }
+    if (picNo == 55) { localStorage.prPhoto55 = uri }
+    if (picNo == 56) { localStorage.prPhoto56 = uri }
+    if (picNo == 57) { localStorage.prPhoto57 = uri }
+    if (picNo == 58) { localStorage.prPhoto58 = uri }
+    if (picNo == 59) { localStorage.prPhoto59 = uri }
+    if (picNo == 60) { localStorage.prPhoto60 = uri }
 
 		
 	takePicture();
