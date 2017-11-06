@@ -71,6 +71,7 @@ $(document).ready(function(){
 		$("#wait_image_login").hide();
 		$("#loginButton").show();
 		
+		getLocationInfo_ready();
 		
 	//===============SetPR=================
 	for (j=1; j <= 30; j++){
@@ -193,6 +194,60 @@ $(document).ready(function(){
 
 $.afui.animateHeader(true);
 
+
+//==Reload Location
+function getLocationInfo_ready() { //location
+	$("#wait_image_visit_submit").show();
+	$("#visit_location").hide();
+	
+	$("#checkLocation").html(''); 
+	
+	
+	$("#wait_image_visit_submit_doc").hide();	
+	$("#checkLocation_doc").html('');
+	
+	var options = { enableHighAccuracy: true, timeout:30000};
+	navigator.geolocation.getCurrentPosition(onSuccess_ready, onError_ready, options);
+}
+
+// onSuccess Geolocationshom
+function onSuccess_ready(position) {
+	$("#lat").val(position.coords.latitude);
+	$("#longitude").val(position.coords.longitude);
+	
+	localStorage.latitude=position.coords.latitude
+	localStorage.longitude=position.coords.longitude	
+	
+		
+	$("#checkLocation").html('Location Confirmed'); 		
+	
+	$("#wait_image_visit_submit").hide();
+	$("#visit_submit").show();
+	$("#visit_location").hide();
+	
+	$("#checkLocation_doc").html('Location Confirmed');
+		
+} 
+function onError_ready(error) {	
+	$("#lat").val(0);
+	$("#longitude").val(0);	
+		
+	$("#checkLocation").html(''); 
+	$("#wait_image_visit_submit").hide();
+	$("#visit_submit").show();
+	$("#visit_location").hide();
+		
+    $("#checkLocation_doc").html('');
+	$("#wait_image_visit_submit_doc").hide();
+	alert ("Please on your GPS")
+	
+}
+
+
+
+
+
+
 function page_login() {
 	$("#error_login").text("").removeClass('success').removeClass('error');
 	$("#wait_image_login").hide();		
@@ -269,7 +324,7 @@ function gotoPic(picNo) {
 	if (prPic!=''){		
 		$.afui.loadContent("#imageSinglePage",true,true,'right');
 	}else{
-		$.afui.loadContent("#page_PrescriptionCapture",true,true,'right');
+		$.afui.loadContent("#imageSinglePage",true,true,'right');
 	}
 }
 
@@ -662,7 +717,7 @@ function check_user() {
 							localStorage.user_id=user_id;
 							localStorage.user_pass=user_pass;   		
 							localStorage.synced='NO';
-							//localStorage.picFlag=0;
+							localStorage.picFlag=0;
 							
 														
 							//alert (localStorage.base_url+'check_user_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode)
@@ -690,6 +745,9 @@ function check_user() {
 													localStorage.synced='YES';
 													
 													localStorage.docStr="";
+													localStorage.opProdID_Str ="";
+													
+													$('#opCart').empty();
 													$('#docCart').empty();
 													$('#docSelect').empty();	
 													$('#doctorList').empty();
