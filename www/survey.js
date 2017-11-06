@@ -166,7 +166,7 @@ $(document).ready(function(){
 			if (localStorage.opProdID_Str!=""){				
 				op_cart_list='<table style="width:100%;">';
 				op_cart_list+='<tr><td colspan="3" style="border-bottom:0px;"><h2 style="border-bottom:1px solid #d9d9d9;background-color:#ccedff; padding-left:5px; margin:0px;">Medicine</h2></td></tr>';			
-				op_cart_list+='<tr style="background-color:#99dbff; height:20px;"><td style="width:85%; padding-left:5px;">Name</td><td style="width:10%; text-align:center;">Qty</td><td style="width:3px;"></td></tr>';				
+				op_cart_list+='<tr style="background-color:#99dbff; height:20px;"><td style="width:85%; padding-left:5px;">Name</td><td style="width:10%; text-align:center;"></td><td style="width:3px;"></td></tr>';				
 				for ( i=0; i < campaignListLength; i++){
 					
 					var pID=campaignList[i];
@@ -179,7 +179,7 @@ $(document).ready(function(){
 					}
 					
 					if(medId!=''){						
-						op_cart_list+='<tr style="background-color:#ccedff; height:20px;" id="cartOp_'+medId+'"><td style="padding-left:5px;">'+medName+'<input id="inpId'+medId+'" type="hidden" value="'+medVal+'"/></td><td style="text-align:center;" >'+medVal+'</td><td style="text-align:center;">&nbsp;<a onClick="removeCarItemOp(\''+medId+'\');" style="font-size:15px; text-decoration:none; color:#cc3300" class="icon remove"></a></td></tr>'; //<img  src="cancel.png" width="20" height="20" alt="X" >
+						op_cart_list+='<tr style="background-color:#ccedff; height:20px;" id="cartOp_'+medId+'"><td style="padding-left:5px;">'+medName+'<input id="inpId'+medId+'" type="hidden" value="'+medVal+'"/></td><td style="text-align:center;" ></td><td style="text-align:center;">&nbsp;<a onClick="removeCarItemOp(\''+medId+'\');" style="font-size:15px; text-decoration:none; color:#cc3300" class="icon remove"></a></td></tr>'; //<img  src="cancel.png" width="20" height="20" alt="X" >
 					}				
 				}
 				op_cart_list+='</table>';
@@ -216,6 +216,7 @@ function gotoPic(picNo) {
 	$("#error_prescription_submit").text("").removeClass('error').removeClass('success');
 	$("#btn_prescription_submit").show();
 	$("#wait_image_prescription").hide();
+	$(".panzoom").removeClass('panzoom').addClass('panzoom');
 	
 	var imageDiv="myImage"+picNo
 	var imageText="prPhoto"+picNo
@@ -245,11 +246,30 @@ function gotoPic(picNo) {
 	image_show.src = prPic;
 	$("#myImagePrescription_show").val(prPic)
 	
-	//alert (prPic)
+	if (localStorage.docStr!=""){			
+		  keywordLi=localStorage.docStr.split("|")		  
+		  var docID=keywordLi[0].trim();
+		  var docName=keywordLi[1];
+		  var docAdd=keywordLi[2];
+		  var docArea=keywordLi[3];
+		  		  
+		  doc_cart_list='<div style="background-color:#ccedff; border-bottom:1px solid #d9d9d9; margin:5px; padding:5px; border-radius:2px;">';
+		  doc_cart_list+='<input type="hidden" id="doc'+docID+'" value="'+localStorage.docStr+'"/>'
+		  doc_cart_list+='<h2 style="border-bottom:1px solid #d9d9d9;">Doctor</h2>';
+		  doc_cart_list+='<h3 > '+docName+'</h3>';
+		  doc_cart_list+='<p style="margin:0px; font-size:11px; line-height:normal;">'+docAdd+'</p>';  
+		  doc_cart_list+='</div>';
+		  doc_cart_list+='<div style="clear:both;"></div><br/>';
+		
+		  $('#docCart').append(doc_cart_list);
+		  $('#docSelect').append('<div  style="background-color:#e6fff9; border-bottom:1px solid #00cc99; margin:5px; border-radius:5px; padding:5px;" ><h3 >'+docName+'</h3><p style="margin:0px; font-size:11px; line-height:normal;" >'+docAdd+'</p></div>');
+			
+		}
+		
 	if (prPic!=''){		
 		$.afui.loadContent("#imageSinglePage",true,true,'right');
 	}else{
-		$.afui.loadContent("#imageSinglePage",true,true,'right');
+		$.afui.loadContent("#page_PrescriptionCapture",true,true,'right');
 	}
 }
 
@@ -341,7 +361,7 @@ function docAdd(docid){
 			  
 			  
 			  doc_cart_list='<div style="background-color:#ccedff; border-bottom:1px solid #d9d9d9; margin:5px; padding:5px; border-radius:2px;">';
-			  doc_cart_list+='<input type="hidden" id="doc'+docID+'" value="'+keywordStr[i]+'"/>'
+			  doc_cart_list+='<input type="hidden" id="doc'+docID+'" value="'+localStorage.docStr+'"/>'
 			  doc_cart_list+='<h2 style="border-bottom:1px solid #d9d9d9;">Doctor</h2>';
 			  doc_cart_list+='<h3 > '+docName+'</h3>';
 			  doc_cart_list+='<p style="margin:0px; font-size:11px; line-height:normal;">'+docAdd+'</p>';  
@@ -412,7 +432,7 @@ function searchDoc(){
 }
 
 function clearDoc(){
-	$('#docSelect').empty();	
+	//$('#docSelect').empty();	
 	$('#doctorList').empty(); 
 	$("#btn_search_doc").show();
 	$("#wait_image_doc").hide();	
@@ -435,7 +455,7 @@ function searchMedicine(){
 		$("#btn_search_med").show();
 	}
 	else{
-		//alert(apipath+'search_medicine?searchValue='+searchValue);
+		//alert(localStorage.apipath+'search_medicine?searchValue='+searchValue);
 		$.ajax({
 			  url: localStorage.apipath+'search_medicine?searchValue='+searchValue,
 			  success: function(resStr) {
@@ -453,7 +473,7 @@ function searchMedicine(){
 						  keywordS+='<span onclick="medClickVal2(\''+pID+'\',\''+medName+'\')"  >'+medName+'</span>' 
 						  keywordS+='</div>'
 						  keywordS+='<div style="float:left; width:15%;">'
-						  keywordS+='<input onmouseout="medClickVal(\''+pID+'\',\''+medName+'\')" id="inpId'+pID+'" type="number" style="width:50px; height:30px; margin:0px; padding:0px;" />'
+						  keywordS+='<input onmouseout="medClickVal(\''+pID+'\',\''+medName+'\')" id="inpId'+pID+'" type="hidden" style="width:50px; height:30px; margin:0px; padding:0px;" />'
 						  keywordS+='</div>'
 						  keywordS+='<div style="clear:both;"></div></div>'
 					  }
@@ -642,7 +662,7 @@ function check_user() {
 							localStorage.user_id=user_id;
 							localStorage.user_pass=user_pass;   		
 							localStorage.synced='NO';
-							localStorage.picFlag=0;
+							//localStorage.picFlag=0;
 							
 														
 							//alert (localStorage.base_url+'check_user_pharma?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode)
@@ -668,6 +688,11 @@ function check_user() {
 										else if (resultArray[0]=='SUCCESS'){										
 													localStorage.synccode=resultArray[1];
 													localStorage.synced='YES';
+													
+													localStorage.docStr="";
+													$('#docCart').empty();
+													$('#docSelect').empty();	
+													$('#doctorList').empty();
 																									
 		
 													//$.afui.loadContent("#pageHome",true,true,'right');
@@ -707,7 +732,7 @@ function prescription_submit(){
 	$("#btn_prescription_submit").hide();
 	
 	
-	if (localStorage.docStr	==undefined ){
+	if (localStorage.docStr	==undefined || localStorage.docStr	=="" ){
 		$("#error_prescription_submit").text("Required Doctor.").removeClass('success').addClass('error');		
 		$("#wait_image_prescription").hide();
 		$("#btn_prescription_submit").show();
@@ -899,10 +924,13 @@ function uploadPhoto(imageURI, imageName) {
 
 function winPr(r) {
 	$("#error_prescription_submit").text("Submitted Succesfully.").removeClass('error').addClass('success');
+	$("#myImagePrescription_show").val('')
+	$("#btn_prescription_submit").hide();
 }
 
 function failPr(error) {
-	$("#error_prescription_submit").text('Memory Error. Please take new picture and Submit').removeClass('success').addClass('error');	
+	$("#error_prescription_submit").text('Memory Error. Please take new picture and Submit').removeClass('success').addClass('error');
+	$("#btn_prescription_submit").show();	
 }
 
 
