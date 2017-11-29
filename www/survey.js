@@ -917,7 +917,7 @@ function check_user() {
 	//var apipath_base_photo_dm ='http://127.0.0.1:8000/w02_ipi/syncmobile_rx_171128/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 	//var apipath_base_photo_dm ='http://a007.yeapps.com/ipi/dmpath_live_new/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
 	//online
-    var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_new/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
+    var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_new_28/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
     //alert (apipath_base_photo_dm)	
 	
 	var user_id=$("#user_id").val();
