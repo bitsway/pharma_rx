@@ -200,6 +200,11 @@ $(document).ready(function(){
 
 $.afui.animateHeader(true);
 
+
+
+
+
+
 //-   ----- popup
 function showSearchDoc() {
 	
@@ -233,15 +238,19 @@ function showSearchDoc() {
 			  	localStorage.docSelect='';
 				
 				$('#searchSelect').empty();
-				$("#error_doctorList").text("Required Territory.").removeClass('success').addClass('error');				
+				$("#error_doctorList").text("Required Territory.").removeClass('success').addClass('error');							
 			}else{			
 				localStorage.searchSelect='<div  style="background-color:#e6fff9; border-bottom:1px solid #00cc99; margin:5px; border-radius:5px; padding:5px;" ><h3 >Region &nbsp;&nbsp;&nbsp;:<span style="font-size:11px;">'+localStorage.doc_region+'</span></h3><h3 >Area &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<span style="font-size:11px;">'+localStorage.doc_area+'</span></h3><h3 >Territory &nbsp;:<span style="font-size:11px;">'+localStorage.doc_territory+'</span></h3><h3 >Category &nbsp;:<span style="font-size:11px;">'+localStorage.doc_category+'</span></h3></div>'
 				
 				$('#searchSelect').empty();
 				$('#docCart').empty();
 				$('#searchSelect').append(localStorage.searchSelect);
-				searchDoc()
+				
 			}
+			
+			if (localStorage.searchSelect!=''){
+				searchDoc()	
+			}	
 			
         },
         cancelOnly: false		
@@ -488,7 +497,15 @@ function onError_ready(error) {
 
 
 
-
+function page_home() {
+	$("#error_login").text("").removeClass('success').removeClass('error');
+	
+	if (localStorage.synced=='YES'){	
+		$.afui.loadContent("#pageHome",true,true,'right');
+	}else{
+		$("#error_login").text("Required LogIn.").removeClass('success').addClass('error');	
+	}
+}
 
 function page_login() {
 	$("#error_login").text("").removeClass('success').removeClass('error');
@@ -562,14 +579,21 @@ function gotoPic(picNo) {
 		  
 		  localStorage.docSelect='<div  style="background-color:#e6fff9; border-bottom:1px solid #00cc99; margin:5px; border-radius:5px; padding:5px;" ><h3 >'+docName+'</h3><p style="margin:0px; font-size:11px; line-height:normal;" >'+docAdd+'</p></div>';
 		  			
+		 		  
 		  $('#docCart').empty();
 		  $('#docCart').html(localStorage.doc_cart_list);
 		  $('#docSelect').empty();
 		  $('#docSelect').html(localStorage.docSelect);
-		  
-		  
-			
+		  			
 		}
+	
+	var ffPresentStr='<div ><div style="width:70%; float:left;"><label  >FF Present</label></div><div style="width:30%; float:right; padding-right:30px;"><input type="checkbox" id="ff_present" name="ff_present" class="toggle" onChange="ffPresent()" ><label for="ff_present" data-on="Yes" data-off="NO" ><span></span></label></div></div>';
+	var associativeCallStr='<div ><div style="width:70%; float:left;"><label>Associated Call(FS)</label></div><div style="width:30%; float:right; padding-right:30px;"><input type="checkbox" id="associated_call" name="associated_call" class="toggle" onChange="associatedCall()" ><label for="associated_call" data-on="YES" data-off="NO" ><span ></span></label></div></div>'; 
+	
+	$('#ffPresentDiv').empty();
+	$('#ffPresentDiv').html(ffPresentStr);
+	$('#associativeCallDiv').empty();
+	$('#associativeCallDiv').html(associativeCallStr);	  
 		
 	if (prPic!=''){		
 		$.afui.loadContent("#imageSinglePage",true,true,'right');
@@ -686,9 +710,14 @@ function docAdd(docid){
 		}
 
 <!-- doctor-->
-function docList(){		
+function docList(){
+	$("#wait_image_doc").hide();		
 	$.afui.drawer.show('#doctor_add','left','push');
-	searchDoc()	
+	
+	if (localStorage.doc_territory!=""){
+		searchDoc()
+		}
+		
 	}
 	
 function searchDoc(){
@@ -708,7 +737,7 @@ function searchDoc(){
 	var docCat=localStorage.doc_category;
 	var searchValue = $("#drSearch").val();
 	
-		
+	
 		//alert(localStorage.apipath+'search_doctor?region='+docRegion[0]+'&area='+docArea[0]+'&tr='+docTr[0]+'&category='+docCat+'&searchValue='+searchValue);
 		$.ajax({
 			  url: localStorage.apipath+'search_doctor?region='+docRegion[0]+'&area='+docArea[0]+'&tr='+docTr[0]+'&category='+docCat+'&searchValue='+searchValue,
@@ -738,7 +767,7 @@ function searchDoc(){
 					$("#btn_search_doc").show();
 					$("#wait_image_doc").hide();		
 				}else{					
-					$("#error_doctorList").text("No Dr. Found.").removeClass('success').addClass('error');
+					$("#error_doctorList").text("Dr. Not Available.").removeClass('success').addClass('error');
 					$("#wait_image_doc").hide();
 					
 				}
@@ -756,8 +785,11 @@ function clearDoc(){
 	$("#btn_search_doc").show();
 	$("#wait_image_doc").hide();	
 	$("#drSearch").val('');	
-	$('#docSelect').empty();		
-	searchDoc()
+	$('#docSelect').empty();
+			
+	if (localStorage.doc_territory!=""){
+		searchDoc()
+		}
 }
 
 
@@ -809,7 +841,7 @@ function searchMedicine(){
 					$("#wait_image_med").hide();
 					
 				}else{
-					$("#error_medicineList").text("Medicine Not Found..").removeClass('success').addClass('error');
+					$("#error_medicineList").text("Medicine Not Not Available.").removeClass('success').addClass('error');
 				}
 			
 			  }
@@ -914,10 +946,10 @@ function check_user() {
 	cid=$.trim(cid);
 	
 	//Local
-	//var apipath_base_photo_dm ='http://127.0.0.1:8000/w02_ipi/syncmobile_rx_171128/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
-	//var apipath_base_photo_dm ='http://a007.yeapps.com/ipi/dmpath_live_new/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
+	//var apipath_base_photo_dm ='http://127.0.0.1:8000/skf/syncmobile_rx_171128/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+	//var apipath_base_photo_dm ='http://a007.yeapps.com/skf/dmpath_live_new/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
 	//online
-    var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_new_28/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
+    var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_new_new/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
     //alert (apipath_base_photo_dm)	
 	
 	var user_id=$("#user_id").val();
@@ -1017,6 +1049,12 @@ function check_user() {
 													
 													localStorage.docStr="";
 													localStorage.opProdID_Str ="";
+													localStorage.doc_region='';
+													localStorage.doc_area='';
+													localStorage.doc_territory='';
+													localStorage.searchSelect='';
+													localStorage.doc_cart_list='';
+													localStorage.docSelect='';
 													
 													
 													
@@ -1074,7 +1112,7 @@ function prescription_submit(){
 	//alert(localStorage.ff_present+'   '+localStorage.associated_call);
 	$("#error_prescription_submit").html("").removeClass('error').removeClass('success');		
 	$("#wait_image_prescription").show();
-	$("#btn_prescription_submit").hide();
+	
 	
 	
 	if (localStorage.docStr	==undefined || localStorage.docStr	=="" ){
@@ -1082,6 +1120,8 @@ function prescription_submit(){
 		$("#wait_image_prescription").hide();
 		$("#btn_prescription_submit").show();
 	}else{
+		$("#btn_prescription_submit").hide();
+		
 		var doctorId=localStorage.docStr.split('|')[0]	
 		var doctor_name=localStorage.docStr.split('|')[1]		
 		var areaId=localStorage.docStr.split('|')[3]
@@ -1248,6 +1288,7 @@ function prescription_submit(){
 
 
 function uploadPhoto(imageURI, imageName) {
+	$("#btn_prescription_submit").hide();
 	$("#error_prescription_submit").text("Image Sync...").removeClass('error').addClass('success');
 	
 	var options = new FileUploadOptions();
@@ -1386,7 +1427,9 @@ function exit() {
 //======================== report==========
 
 function page_report(){
-	$("#wait_image_daily_summary").hide();	
+	$("#wait_image_daily_summary").hide();
+	$("#error_summary_rpt").text("").removeClass('success').removeClass('error');
+		
 	$.afui.loadContent("#page_report",true,true,'right');
 }
 
@@ -1425,15 +1468,14 @@ function summaryDaily(){
 				rpt_daily_list+='<tr style="background-color:#99dbff; height:20px; font-weight:bold;" ><td style="padding-left:5px;"></td><td style="text-align:right;" >Total</td><td style="text-align:center;">'+prtDailyTotal+'</td></tr>'
 				rpt_daily_list+='</table>';
 				
-				$("#wait_image_daily_summary").hide();
+				
 				$('#summaryRpt').empty();
-				$('#summaryRpt').html(rpt_daily_list);						  
-								
+				$('#summaryRpt').html(rpt_daily_list);
 				
 			}else{				
-				$("#error_summary_rpt").text("Data Not Found..").removeClass('success').addClass('error');
+				$("#error_summary_rpt").text("Data Not Available.").removeClass('success').addClass('error');
 			}
-		
+			$("#wait_image_daily_summary").hide();		
 		  }		
 	});	
 }
@@ -1464,10 +1506,11 @@ function getNotice(){
 				$('#notice_list').empty();
 				$('#notice_list').html(notice_list_str);							
 				
-			}else{				
-				$("#error_notice_list").text("Data Not Found..").removeClass('success').addClass('error');
+			}else{	
+				$("#wait_image_notice").hide();			
+				$("#error_notice_list").text("Data Not Available.").removeClass('success').addClass('error');
 			}
-		
+					
 		  }		
 	});	
 }

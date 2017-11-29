@@ -95,7 +95,7 @@
         </div>
     </div>
     <footer>
-        <a href="#pageHome" class="icon home" data-transition="slide" ></a>
+        <a href="#" onClick="page_home()" class="icon home" data-transition="slide" ></a>
         <a href="#"></a>
     </footer>
 </div>
@@ -120,7 +120,7 @@
     </div>
     
     <footer>
-        <a href="#login" class="icon key" ></a>
+        <a href="#login" onClick="page_login()" class="icon key" ></a>
         <a href="#" ></a>         
     </footer>
    
@@ -240,22 +240,9 @@
 			<input type="hidden" name="longitude" id="longitude" >
            	
            
+            <div id="ffPresentDiv"></div> 
+            <div id="associativeCallDiv"></div> 
             
-            <div >   
-                <div style="width:70%; float:left;"><label  >FF Present</label></div> 
-                <div style="width:30%; float:right; padding-right:30px;">
-                	<input type="checkbox" id="ff_present" name="ff_present" class="toggle" onChange="ffPresent()" >
-                	<label for="ff_present" data-on="Yes" data-off="NO" ><span></span></label>
-                </div>
-            </div> 
-           
-            <div >   
-                <div style="width:70%; float:left;"><label>Associated Call(FS)</label></div> 
-                <div style="width:30%; float:right; padding-right:30px;">
-                	<input type="checkbox" id="associated_call" name="associated_call" class="toggle" onChange="associatedCall()" >
-                	<label for="associated_call" data-on="YES" data-off="NO" ><span ></span></label>
-                </div>
-            </div> 
            <div style="clear:both;"></div>             
             <div id="error_prescription_submit" ></div>            
             <input type="submit" id="btn_prescription_submit" onClick="prescription_submit()" style="width:100%; height:50px; background-color:#0088d1; color:#FFF; font-size:20px; margin-top:6px;" value="     Submit     "   />
