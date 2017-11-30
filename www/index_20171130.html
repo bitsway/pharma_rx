@@ -44,7 +44,15 @@
 		.parent{ height:330px; border:1px solid #00bfff; border-radius:5px; margin:1%; box-shadow:3px 3px 3px #b3e4ff; overflow:hidden; }
 		
 		
+		label{ width:100%; text-align:left;}
+		input.toggle + label > span{ background-color:#00a6ff;}
+		.tabbed { margin:0px;}
+		.button{ border:none;}
+		/*.button-grouped{ width:100%; margin:0px; border:0px; border-color:inherit;}
+		input[type="checkbox"] + label{ width:40%;}*/
     </style>
+
+
 
 </head>
 
@@ -66,7 +74,7 @@
 <div class="view" id="loginView">
     <div class="pages">
         <header>
-        	<h1 style="font-size:18px; font-weight:normal; color:#F8F8F8">Login</h1> 
+        	<h1 style="font-size:18px; font-weight:normal; color:#F8F8F8;">Login</h1> 
         </header> 
         <div class="panel" id="login" style="background-color:#e6f6ff">
         	<br><br><br>
@@ -87,59 +95,105 @@
         </div>
     </div>
     <footer>
-        <a href="#page_PrescriptionCapture" class="icon home" ></a>
+        <a href="#" onClick="page_home()" class="icon home" data-transition="slide" ></a>
         <a href="#"></a>
     </footer>
 </div>
 
-      
 <!--//==============================smartView Page=================-->
       
-<!--<div class="view" id="pageHomeView">
+<div class="view" id="pageHomeView">
     <div class="pages">
         <header align="center"><h1>Smart View RX</h1></header>
                  
         <div class="panel" id="pageHome" style="background-color:#e6f6ff;">
             </br></br></br></br>
             <div id="error_image" style="color:#C00"></div>                    
-            <div>
+            <div>            	
                 <div align="center"  style="width:43%; background-color:#09C; margin:10px; box-shadow:5px 5px 5px #8EBFF0; float:left;"><img style="height:100px;" onClick="page_PrescriptionCapture();" src="PrescriptionCapture.png"> </div>
-                <div align="center"  style="width:43%; background-color:#09C; margin:10px; box-shadow:5px 5px 5px #8EBFF0; float:left;"><img style="height:100px;" onClick="page_notice()"  src="notice.png"></div>
+                <div align="center"  style="width:43%; background-color:#09C; margin:10px; box-shadow:5px 5px 5px #8EBFF0; float:left; padding:10px;"><a href="#page_attendance" style="font-size:70px; color:#FFF;" class="icon user" onClick="page_attendance();" ></a></div>
+                <div align="center"  style="width:43%; background-color:#09C; margin:10px; box-shadow:5px 5px 5px #8EBFF0; float:left; padding:10px;"><a href="#page_report" style="font-size:70px; color:#FFF;" class="icon paper" onClick="page_report();" ></a></div>
+                <div align="center"  style="width:43%; background-color:#09C; margin:10px; box-shadow:5px 5px 5px #8EBFF0; float:left; padding:10px;"><a href="#page_notice" style="font-size:70px; color:#FFF;" class="icon warning" onClick="getNotice()" ></a></div>
             </div>               
         </div>
+        
     </div>
     
     <footer>
-        <a href="#" class="icon key" onclick="$.afui.drawer.show('#home_left','left','push')"></a>
+        <a href="#login" onClick="page_login()" class="icon key" ></a>
         <a href="#" ></a>         
     </footer>
-    <nav id="home_left"  style="z-index:100; background-color:#e6f6ff;" >			
-        <header align="left"></header>
-            </br></br></br>
-            <div onClick="page_login()" align="center" > <img style="height:50px; width:50px" src="key.png"></div>                               
-            </br> </br> </br> </br>  </br> </br> </br> </br> </br> </br>  </br> </br></br> </br> </br> </br>  </br> </br>
-            <div onClick="exit()" align="center"> <img style="height:30px; width:30px" src="exit.png"></div>
-            <br>
-        
-    </nav>-->    
-    <!--<nav id="right" style="z-index:5; background-color:#FFF">
-        <div class="view active" id="navView2">                
-            <br>
-            <div onClick="page_promo_main()" align="center"> <img style="height:70px; width:70px" src="promo.png"></div>
-            </br></br>              
-            <div onClick="page_stock_main()" align="center"> <img style="height:70px; width:70px" src="stock.png"></div>
-            </br></br>
-            <div onClick="page_notice()" align="center"> <img style="height:70px; width:70px" src="notice.png"></div>
-        </div>
-    </nav>    -->    
-<!--</div> -->     
+   
+</div>      
 
+<!--<div class="view" id="pageReportView">
+    <div class="pages">
+        <div class="panel" id="page_report">
+            <br>
+            <div class="card">
+                <h1>Daily Summary</h1>
+                <br>
+                <div class="input-group">
+                    <input type="date" placeholder="Date">
+                </div>
+                <a class='button' href='#' data-transition='up-reveal:dismiss'>Daily Summary</a>
+            </div>
+        </div>
+    </div>
+</div>-->
+    
+<div class="view" id="page_report_view">
+    <div class="pages">
+        <header>
+        	 <h1>Report</h1> 
+        </header> 
+       
+        <div id="page_report" class="panel" style="background-color:#e6f6ff; width:100%;">
+            <br><br> <br> 
+            <h3>Daily Summary</h3>
+            <br>            
+            <input type="date" id="from_date" placeholder="Date" >
+             <div style="float:right;">
+                <a class='button' href='#' onClick="summaryDaily()" >Daily Summary</a>
+            </div>
+            <div style="clear:both;" ></div>
+            <div style="height:30px;"><img id="wait_image_daily_summary" src="loading.gif" /></div>
+            <div id="error_summary_rpt" ></div>             
+            <div id="summaryRpt"></div>
+            
+        </div>
+        
+    </div>    
+    <footer>
+        <a href="#pageHome" class="icon home" ></a>
+        <a ></a>
+    </footer>
+</div>
+ 
+
+<div class="view" id="page_notice_view">
+    <div class="pages">
+        <header>
+        	 <h1>Notice</h1> 
+        </header> 
+        <div data-left-drawer="left" class="panel" id="page_notice" data-title="Cards" style="background-color:#e6f6ff; width:100%;">
+            <br><br> <br>
+            <div style="height:30px;"><img id="wait_image_notice" src="loading.gif" /></div>            
+            <div id="error_notice_list"></div>
+            <div id="notice_list"></div>            
+        </div>
+    </div>    
+    <footer>
+        <a href="#pageHome" class="icon home" ></a>
+        <a ></a>
+    </footer>
+</div>
 
 <!-- prescription Image--> 
 <div class="view" id="page_PrescriptionCaptureView">
     <div class="pages">
         <header>
-        	<div style="width:50%; float:left; margin-left:10px;"><a class="icon camera" onClick="takePicture()" style="font-size:35px;" ></a></div> <h1><div style="width:50%; float:left;">Prescription</div></h1> 
+        	<div style="width:50%; float:left; margin-left:10px;"><a href="#pageHome" style="text-decoration:none; color:#FFF; font-size:20px;" class="icon left" ></a>&nbsp;&nbsp;&nbsp;<a class="icon camera" onClick="takePicture()" style="font-size:35px;" ></a></div> <h1><div style="width:50%; float:left;">Prescription</div></h1> 
         </header> 
         <div class="panel" id="page_PrescriptionCapture" style="background-color:#e6f6ff; width:100%;">
         </br></br></br>       
@@ -152,8 +206,8 @@
         </div>    
     </div>    
     <footer>
-        <a onClick="page_login()" class="icon key" ></a>
-        <a onClick="page_report()" class="icon paper" ></a>
+        <a href="#pageHome" class="icon home" ></a>
+        <a ></a>
     </footer>
 </div>
 
@@ -184,28 +238,41 @@
             <div id="opCart"></div>
             <input type="hidden" name="lat" id="lat" >
 			<input type="hidden" name="longitude" id="longitude" >
-                                    
-            <div id="error_prescription_submit" ></div>
+           	
+           
+            <div id="ffPresentDiv"></div> 
+            <div id="associativeCallDiv"></div> 
+            
+           <div style="clear:both;"></div>             
+            <div id="error_prescription_submit" ></div>            
             <input type="submit" id="btn_prescription_submit" onClick="prescription_submit()" style="width:100%; height:50px; background-color:#0088d1; color:#FFF; font-size:20px; margin-top:6px;" value="     Submit     "   />
             <br/><br/>
-			<div align="center"><img id="wait_image_prescription" style="font-size:30px;"  src="loading.gif" /></div>
+			<div align="center"><img id="wait_image_prescription" style="font-size:30px;"  src="loading.gif" /></div>                               
         </div>
     </div>
     <footer>
-        <a href="#" onclick="$.afui.drawer.show('#doctor_add','left','push')"><img src="doctor_add.png" style="width:40px;" /></a>
+        <a href="#" onclick="docList()"><img src="doctor_add.png" style="width:40px;" /></a>
         <a href="#"  onclick="$.afui.drawer.show('#ul_med_add','left','push')" style="font-size:20px; padding:10px 0px;"> Not Listed !</a>
         <a href="#"  onclick="$.afui.drawer.show('#op_med_add','right','push')" ><img src="med.png" style="width:30px;" /></a>
         <!--<a href="#"  onclick="$.afui.drawer.show('#med_add','right','push')">Med</a>-->
     </footer>
     
     <nav id="doctor_add"  style="z-index:100; background-color:#e6f6ff; width:80%;" >			
-        <header align="left" style="padding:3px;">
+        <header align="left" style="padding:3px;">        
         	&nbsp;&nbsp;<input type="text" id="drSearch" style="width:60%; height:40px; color:#000; background-color:#F4F8FF; font-weight:normal" placeholder="Doctor Name/ Address"   />&nbsp;&nbsp;
             <a href="#" id="btn_search_doc" onClick="searchDoc()" style="font-size:25px; text-decoration:none; color:#FFF;" class="icon magnifier" ></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onClick="clearDoc()" style="font-size:20px; text-decoration:none; color:#FFF;" class="icon refresh" ></a>
-        </header>        	
-        <div style="height:30px;"><img id="wait_image_doc" src="loading.gif" /></div>        
-        <div id="docSelect" ></div>            
-        <div id="doctorList" style="height:90%; margin:5px; overflow:scroll;"></div>       
+        </header>
+         
+         <div class="button-grouped flex tabbed">
+            <a href="#" class="button" onClick="showSearchDoc()" >Search</a>
+            <a href="#" class="button" onClick="addNewDoc()">New</a>
+        </div>
+               	
+        <div style="height:30px;"><img id="wait_image_doc" src="loading.gif" /></div>
+        <div id="error_doctorList" ></div>         
+        <div id="searchSelect"></div>
+        <div id="docSelect" ></div>                  
+        <div id="doctorList" style="height:60%; margin:5px; overflow:scroll;"></div>       
     </nav>
     <nav id="ul_med_add"  style="z-index:100; background-color:#e6f6ff; width:80%;" >			
         <header ><h1 style="text-align:left; width:100%; font-size:12px;">Medicine Not Listed</h1></header>
@@ -223,7 +290,8 @@
         	&nbsp;&nbsp;<input type="text" id="opitemSearch" style="width:50%; height:40px; color:#000; background-color:#F4F8FF; font-weight:normal" placeholder="Medicine Name"   />&nbsp;&nbsp;
             <a href="#" id="btn_search_med" onClick="searchMedicine()" style="font-size:25px; text-decoration:none; color:#FFF;" class="icon magnifier" ></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onClick="clearMedicine()" style="font-size:20px; text-decoration:none; color:#FFF;" class="icon refresh" ></a>
         </header>        	
-        <div style="height:30px;"><img id="wait_image_med" src="loading.gif" /></div>        
+        <div style="height:30px;"><img id="wait_image_med" src="loading.gif" /></div>
+        <div id="error_medicineList" ></div>        
         <div id="medicineList" style="height:75%; margin:5px; overflow:scroll;"></div>
         <div style=" width:50px; margin:0px auto;"><a href="#" style="font-size:40px; text-decoration:none; margin-bottom:0; color:#00a6ff; " class="icon add" id="opMedAdd" ></a></div>
     </nav>
