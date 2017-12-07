@@ -25,12 +25,14 @@ var  apipath =''; //for medicine search
 var oprtunityVal='';
 localStorage.ff_present=0
 localStorage.associated_call=0
+localStorage.associated_call_others=0
 
 $(document).ready(function(){
         $.afui.launch();
 		
 		localStorage.ff_present=0
-		localStorage.associated_call=0		
+		localStorage.associated_call=0
+		localStorage.associated_call_others=0		
 		
 		if (localStorage.synced=='YES'){
 			$("#cid").val(localStorage.cid);
@@ -158,7 +160,7 @@ $(document).ready(function(){
 	
 
 		//------------------ op search
-		$("#opMedAdd").click(function (){
+/*		$("#opMedAdd").click(function (){
 			$('#opCart').empty();
 			localStorage.opProdID_Str = oprtunityVal;
 			campaign_doc_str=localStorage.opProdID_Str
@@ -195,7 +197,31 @@ $(document).ready(function(){
 				$('#opCart').html(op_cart_list);
 			}
 		
-		});		
+		});*/
+		
+		
+		var ffPresentStr='<div ><div style="width:70%; float:left;"><label  >FF Present</label></div><div style="width:30%; float:left; padding-right:30px;"><input type="checkbox" id="ff_present" name="ff_present" class="toggle" onChange="ffPresent()" ><label for="ff_present" data-on="Yes" data-off="NO" ><span></span></label></div></div>';
+		var associativeCallStr='<div ><div style="width:70%; float:left;"><label>Associated Call (FS)</label></div><div style="width:30%; float:left; padding-right:30px;"><input type="checkbox" id="associated_call" name="associated_call" class="toggle" onChange="associatedCall()" ><label for="associated_call" data-on="YES" data-off="NO" ><span ></span></label></div></div>'; 
+		var associativeOthersCallStr='<div ><div style="width:70%; float:left;"><label>Associated Call (Others)</label></div><div style="width:30%; float:left; padding-right:30px;"><input type="checkbox" id="associated_call_others" name="associated_call_others" class="toggle" onChange="associatedCallOthers()" ><label for="associated_call_others" data-on="YES" data-off="NO" ><span ></span></label></div></div>'; 
+		
+		$('#ffPresentDiv').empty();
+		$('#ffPresentDiv').html(ffPresentStr);
+		$('#associativeCallDiv').empty();
+		$('#associativeCallDiv').html(associativeCallStr);
+		$('#associativeCallOthersDiv').empty();
+		$('#associativeCallOthersDiv').html(associativeOthersCallStr);
+		
+		
+		
+		$("#opitemSearch").keyup(function(){
+			searchMedicine()
+			});
+		
+		$("#drSearch").keyup(function(){
+			searchDoc()
+			});	
+		
+			
     });
 
 $.afui.animateHeader(true);
@@ -215,6 +241,7 @@ function showSearchDoc() {
         cancelCallback: function () {},
         doneText: "Search",
         doneCallback: function () {
+			localStorage.docListStr="";
 			localStorage.doc_region=$('#doc_region').val();
 			localStorage.doc_area=$('#doc_area').val();
 			localStorage.doc_territory=$('#doc_territory').val();
@@ -238,10 +265,11 @@ function showSearchDoc() {
 			  	localStorage.docSelect='';
 				
 				$('#searchSelect').empty();
-				$("#error_doctorList").text("Required Territory.").removeClass('success').addClass('error');							
+				$("#error_doctorList").text("Required Territory.").removeClass('success').addClass('error');
+				//searchDoc()								
 			}else{			
-				localStorage.searchSelect='<div  style="background-color:#e6fff9; border-bottom:1px solid #00cc99; margin:5px; border-radius:5px; padding:5px;" ><h3 >Region &nbsp;&nbsp;&nbsp;:<span style="font-size:11px;">'+localStorage.doc_region+'</span></h3><h3 >Area &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<span style="font-size:11px;">'+localStorage.doc_area+'</span></h3><h3 >Territory &nbsp;:<span style="font-size:11px;">'+localStorage.doc_territory+'</span></h3><h3 >Category &nbsp;:<span style="font-size:11px;">'+localStorage.doc_category+'</span></h3></div>'
-				
+				localStorage.searchSelect='<div  style="background-color:#e6fff9; border-bottom:1px solid #00cc99; margin:5px; border-radius:5px; padding:5px;" ><h3 >Region &nbsp;&nbsp;:<span style="font-size:10px;">'+localStorage.doc_region+'</span></h3><h3 >Area &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<span style="font-size:10px;">'+localStorage.doc_area+'</span></h3><h3 >Territory :<span style="font-size:10px;">'+localStorage.doc_territory+'</span></h3></div>'
+					
 				$('#searchSelect').empty();
 				$('#docCart').empty();
 				$('#searchSelect').append(localStorage.searchSelect);
@@ -327,12 +355,17 @@ function addNewDoc() {
 	$("#error_doctorList").text("").removeClass('success').removeClass('error');
     $.afui.popup({
         title: "New Doctor <hr/>",
-        message: "Region<sup style='color:#F00;'>*</sup>: <div id='doc_add_region_cmb' ></div><div id='doc_add_area_cmb' ></div><div id='doc_add_tr_cmb' ></div><div>Name<sup style='color:#F00;'>*</sup>: <input type='text' id='doc_name_new' ></div><div>Address<sup style='color:#F00;'>*</sup>: <textarea col='50' rows='3' id='doc_address_new'></textarea></div>",
+        message: "<div id='doc_add_region_cmb' ></div><div id='doc_add_area_cmb' ></div><div id='doc_add_tr_cmb' ></div><div>Name<sup style='color:#F00;'>*</sup>: <input type='text' id='doc_name_new' ></div><div>Address<sup style='color:#F00;'>*</sup>: <textarea col='50' rows='3' id='doc_address_new'></textarea></div>",
         cancelText: "Cancel",
         cancelCallback: function () {},
         doneText: "Save",
-        doneCallback: function () {		
-			var doc_tr_new=$('#doc_add_territory').val();
+        doneCallback: function () {			
+			if (localStorage.doc_territory!='undefined'){
+				var docTr=localStorage.doc_territory.split('|');
+				var doc_tr_new=docTr[0];
+			}else{ 		
+				var doc_tr_new=$('#doc_add_territory').val();
+			}
 			
 			if (doc_tr_new==undefined){
 				$("#error_doctorList").text("Required Territory for New Doctor Add.").removeClass('success').addClass('error');
@@ -343,20 +376,19 @@ function addNewDoc() {
 				if (doc_name_new=='' || doc_address_new==''){
 					$("#error_doctorList").text("Required Name and address For New Doctor Add.").removeClass('success').addClass('error');
 				}else{
-					localStorage.doc_region=$('#doc_add_region').val();
-					localStorage.doc_area=$('#doc_add_area').val();
-					localStorage.doc_territory=$('#doc_add_territory').val();
+										
+					if (localStorage.doc_region=='undefined'){					
+						localStorage.doc_region=$('#doc_add_region').val();				
+					}
 					
 					if (localStorage.doc_area=='undefined'){
-						localStorage.doc_area='';
+						localStorage.doc_area=$('#doc_add_area').val();						
 					}
-					
-					if (localStorage.doc_territory=='undefined'){
-						localStorage.doc_territory='';
-					}
+						
+					localStorage.doc_territory=doc_tr_new;
 								
-					localStorage.searchSelect='<div  style="background-color:#e6fff9; border-bottom:1px solid #00cc99; margin:5px; border-radius:5px; padding:5px;" ><h3 >Region &nbsp;&nbsp;&nbsp;:<span style="font-size:11px;">'+localStorage.doc_region+'</span></h3><h3 >Area &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<span style="font-size:11px;">'+localStorage.doc_area+'</span></h3><h3 >Territory &nbsp;:<span style="font-size:11px;">'+localStorage.doc_territory+'</span></h3></div>'
-					
+					localStorage.searchSelect='<div  style="background-color:#e6fff9; border-bottom:1px solid #00cc99; margin:5px; border-radius:5px; padding:5px;" ><h3 >Region &nbsp;&nbsp;:<span style="font-size:10px;">'+localStorage.doc_region+'</span></h3><h3 >Area &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<span style="font-size:10px;">'+localStorage.doc_area+'</span></h3><h3 >Territory :<span style="font-size:10px;">'+localStorage.doc_territory+'</span></h3></div>'
+				
 					$('#searchSelect').empty();
 					$('#searchSelect').append(localStorage.searchSelect);
 						
@@ -386,18 +418,25 @@ function addNewDoc() {
         cancelOnly: false
     });
 	
-	var regionCmbo='';
-	var regionArr=localStorage.regionStr.split('<rd>');
-	var regionArrLen=regionArr.length;	
-	regionCmbo+='<select id="doc_add_region" onChange="getDocAddArea()">';
-	regionCmbo+='<option value="">Select Region</option>';
-	for (i=0;i<regionArrLen;i++){
-		var regionS=regionArr[i].split('<fd>');																																								
-		regionCmbo+='<option value="'+regionS[0]+'|'+regionS[1]+'">'+regionS[1]+'</option>';																												
-		}
-	regionCmbo+='</select>'	
-	$('#doc_add_region_cmb').html(regionCmbo);
-	
+/*	var docRegion=localStorage.doc_region.split('|');
+	var docArea=localStorage.doc_area.split('|');*/
+	var docTr=localStorage.doc_territory.split('|');
+	if (docTr==''){
+		var regionCmbo='';
+		var regionArr=localStorage.regionStr.split('<rd>');
+		var regionArrLen=regionArr.length;
+		regionCmbo+='Region<sup style="color:#F00;">*</sup>:';	
+		regionCmbo+='<select id="doc_add_region" onChange="getDocAddArea()">';
+		regionCmbo+='<option value="">Select Region</option>';
+		for (i=0;i<regionArrLen;i++){
+			var regionS=regionArr[i].split('<fd>');																																								
+			regionCmbo+='<option value="'+regionS[0]+'|'+regionS[1]+'">'+regionS[1]+'</option>';																												
+			}
+		regionCmbo+='</select>'	
+		$('#doc_add_region_cmb').html(regionCmbo);
+	}else{
+		$('#doc_add_region_cmb').hide();	
+	}
 }
 
 
@@ -587,13 +626,16 @@ function gotoPic(picNo) {
 		  			
 		}
 	
-	var ffPresentStr='<div ><div style="width:70%; float:left;"><label  >FF Present</label></div><div style="width:30%; float:right; padding-right:30px;"><input type="checkbox" id="ff_present" name="ff_present" class="toggle" onChange="ffPresent()" ><label for="ff_present" data-on="Yes" data-off="NO" ><span></span></label></div></div>';
-	var associativeCallStr='<div ><div style="width:70%; float:left;"><label>Associated Call(FS)</label></div><div style="width:30%; float:right; padding-right:30px;"><input type="checkbox" id="associated_call" name="associated_call" class="toggle" onChange="associatedCall()" ><label for="associated_call" data-on="YES" data-off="NO" ><span ></span></label></div></div>'; 
-	
-	$('#ffPresentDiv').empty();
-	$('#ffPresentDiv').html(ffPresentStr);
-	$('#associativeCallDiv').empty();
-	$('#associativeCallDiv').html(associativeCallStr);	  
+		var ffPresentStr='<div ><div style="width:70%; float:left;"><label  >FF Present</label></div><div style="width:30%; float:left; padding-right:30px;"><input type="checkbox" id="ff_present" name="ff_present" class="toggle" onChange="ffPresent()" ><label for="ff_present" data-on="Yes" data-off="NO" ><span></span></label></div></div>';
+		var associativeCallStr='<div ><div style="width:70%; float:left;"><label>Associated Call (FS)</label></div><div style="width:30%; float:left; padding-right:30px;"><input type="checkbox" id="associated_call" name="associated_call" class="toggle" onChange="associatedCall()" ><label for="associated_call" data-on="YES" data-off="NO" ><span ></span></label></div></div>'; 
+		var associativeOthersCallStr='<div ><div style="width:70%; float:left;"><label>Associated Call (Others)</label></div><div style="width:30%; float:left; padding-right:30px;"><input type="checkbox" id="associated_call_others" name="associated_call_others" class="toggle" onChange="associatedCallOthers()" ><label for="associated_call_others" data-on="YES" data-off="NO" ><span ></span></label></div></div>'; 
+		
+		$('#ffPresentDiv').empty();
+		$('#ffPresentDiv').html(ffPresentStr);
+		$('#associativeCallDiv').empty();
+		$('#associativeCallDiv').html(associativeCallStr);
+		$('#associativeCallOthersDiv').empty();
+		$('#associativeCallOthersDiv').html(associativeOthersCallStr);	  
 		
 	if (prPic!=''){		
 		$.afui.loadContent("#imageSinglePage",true,true,'right');
@@ -693,7 +735,7 @@ function docAdd(docid){
 			  doc_cart_list+='<input type="hidden" id="doc'+docID+'" value="'+localStorage.docStr+'"/>'
 			  doc_cart_list+='<h2 style="border-bottom:1px solid #d9d9d9;">Doctor</h2>';
 			  doc_cart_list+='<h3 > '+docName+'</h3>';
-			  doc_cart_list+='<p style="margin:0px; font-size:11px; line-height:normal;">'+docAdd+'</p>';  
+			  doc_cart_list+='<p style="margin:0px; font-size:11px; line-height:normal;">'+docAdd+'|'+docArea+'</p>';  
 			  doc_cart_list+='</div>';
 			  doc_cart_list+='<div style="clear:both;"></div><br/>';
 			  
@@ -716,10 +758,19 @@ function docList(){
 	
 	if (localStorage.doc_territory!=""){
 		searchDoc()
-		}
+	}else{
+		$('#docSelect').empty();
+		$('#doctorList').empty();
+		$("#wait_image_doc").show();
+		$('#searchSelect').empty();
+		$("#wait_image_doc").hide();
 		
 	}
+		
+}
+
 	
+
 function searchDoc(){
 	$("#error_doctorList").text("").removeClass('success').removeClass('error');
 	// opitemSearch
@@ -735,47 +786,90 @@ function searchDoc(){
 	var docArea=localStorage.doc_area.split('|');
 	var docTr=localStorage.doc_territory.split('|');
 	var docCat=localStorage.doc_category;
-	var searchValue = $("#drSearch").val();
+	var searchValue = $("#drSearch").val().toUpperCase();
 	
-	
-		//alert(localStorage.apipath+'search_doctor?region='+docRegion[0]+'&area='+docArea[0]+'&tr='+docTr[0]+'&category='+docCat+'&searchValue='+searchValue);
-		$.ajax({
-			  url: localStorage.apipath+'search_doctor?region='+docRegion[0]+'&area='+docArea[0]+'&tr='+docTr[0]+'&category='+docCat+'&searchValue='+searchValue,
-			  success: function(resStr) {
-				if (resStr!=""){
-					keywordStr=resStr.split("||");
-					  var keywordS='<br/>';
-					  for (i=0;i<keywordStr.length;i++){
-						  keywordLi=keywordStr[i].split("|")
-						  var docID=keywordLi[0].trim();
-						  var docName=keywordLi[1];
-						  var docAdd=keywordLi[2];
-						  var docArea=keywordLi[3];						  
-						  						  
-						  keywordS+='<div  style="background-color:#ccedff; border-bottom:1px solid #d9d9d9; margin-bottom:2px; border-radius:5px; padding:5px; " onclick="docAdd(\''+docID+'\')" >';						  				  
-						  keywordS+='<input type="hidden" id="doc'+docID+'" value="'+keywordStr[i]+'"/>'
-						  keywordS+='<h3 >'+docName+'</h3>';
-						  keywordS+='<p style="margin:0px; font-size:11px; line-height:normal; " >'+docAdd+'</p>';  
-						  keywordS+='</div>';
-						  keywordS+='<div style="clear:both;"></div>';	
-					  }					  
-					  
-					$('#doctorList').empty();
-					$('#doctorList').append(keywordS).trigger('create');
-					
-					
-					$("#btn_search_doc").show();
-					$("#wait_image_doc").hide();		
-				}else{					
-					$("#error_doctorList").text("Dr. Not Available.").removeClass('success').addClass('error');
-					$("#wait_image_doc").hide();
-					
-				}
-			
+	if(localStorage.docListStr!=""){
+		$("#wait_image_doc").hide();
+		var keywordStr=localStorage.docListStr.split("||");
+		var keywordStrLen=keywordStr.length;
+		  var keywordS='<br/>';
+		  for (i=0;i<keywordStrLen;i++){
+			  keywordLi=keywordStr[i].split("|")
+			  var docID=keywordLi[0].trim();
+			  var docName=keywordLi[1];
+			  var docAdd=keywordLi[2];
+			  var docArea=keywordLi[3];						  
+			  
+			  var docNameS=keywordLi[1].toUpperCase();
+			  var docAddS=keywordLi[2].toUpperCase();
+			  
+			  if(searchValue==''){
+				  keywordS+='<div  style="background-color:#ccedff; border-bottom:1px solid #d9d9d9; margin-bottom:2px; border-radius:5px; padding:10px; " onclick="docAdd(\''+docID+'\')" >';						  				  
+				  keywordS+='<input type="hidden" id="doc'+docID+'" value="'+keywordStr[i]+'"/>'
+				  keywordS+='<h3 >'+docName+'</h3>';
+				  keywordS+='<p style="margin:0px; font-size:11px; line-height:normal; " >'+docAdd+'|'+docArea+'</p>';  
+				  keywordS+='</div>';
+				  keywordS+='<div style="clear:both;"></div>';  
+			  
+			  }else{			  
+				  if(docNameS.indexOf(searchValue)>0 || docAddS.indexOf(searchValue)>0 ){						  
+					  keywordS+='<div  style="background-color:#ccedff; border-bottom:1px solid #d9d9d9; margin-bottom:2px; border-radius:5px; padding:10px; " onclick="docAdd(\''+docID+'\')" >';						  				  
+					  keywordS+='<input type="hidden" id="doc'+docID+'" value="'+keywordStr[i]+'"/>'
+					  keywordS+='<h3 >'+docName+'</h3>';
+					  keywordS+='<p style="margin:0px; font-size:11px; line-height:normal; " >'+docAdd+'|'+docArea+'</p>'; 
+					  keywordS+='</div>';
+					  keywordS+='<div style="clear:both;"></div>';
+				  }
 			  }
-			
-		});
-
+		  }					  
+		 
+		$('#doctorList').empty();
+		$('#doctorList').append(keywordS).trigger('create');	
+		
+	}else{
+		if (docTr==undefined){
+			$("#error_doctorList").text("Required Territory.").removeClass('success').addClass('error');
+		}else{			
+			//alert(localStorage.apipath+'search_doctor?cid='+localStorage.cid+'&region='+docRegion[0]+'&area='+docArea[0]+'&tr='+docTr[0]+'&category='+docCat+'&searchValue='+searchValue);
+			$.ajax({
+				  url: localStorage.apipath+'search_doctor?cid='+localStorage.cid+'&region='+docRegion[0]+'&area='+docArea[0]+'&tr='+docTr[0]+'&category='+docCat+'&searchValue='+searchValue,
+				  success: function(resStr) {
+					if (resStr!=""){
+						localStorage.docListStr=resStr;
+						
+						var keywordStr=resStr.split("||");
+						var keywordStrLen=keywordStr.length;
+						  var keywordS='<br/>';
+						  for (i=0;i<keywordStrLen;i++){
+							  keywordLi=keywordStr[i].split("|")
+							  var docID=keywordLi[0].trim();
+							  var docName=keywordLi[1];
+							  var docAdd=keywordLi[2];
+							  var docArea=keywordLi[3];						  
+													  
+							  keywordS+='<div  style="background-color:#ccedff; border-bottom:1px solid #d9d9d9; margin-bottom:2px; border-radius:5px; padding:10px; " onclick="docAdd(\''+docID+'\')" >';						  				  
+							  keywordS+='<input type="hidden" id="doc'+docID+'" value="'+keywordStr[i]+'"/>'
+							  keywordS+='<h3 >'+docName+'</h3>';
+							  keywordS+='<p style="margin:0px; font-size:11px; line-height:normal; " >'+docAdd+'|'+docArea+'</p>';  
+							  keywordS+='</div>';
+							  keywordS+='<div style="clear:both;"></div>';	
+						  }					  
+						 
+						$('#doctorList').empty();
+						$('#doctorList').append(keywordS).trigger('create');
+						
+						
+						$("#btn_search_doc").show();
+						$("#wait_image_doc").hide();		
+					}else{					
+						$("#error_doctorList").text("Dr. Not Available.").removeClass('success').addClass('error');
+						$("#wait_image_doc").hide();
+						
+					}		
+				  }		
+			});
+		}
+	}
 }
 
 function clearDoc(){
@@ -794,23 +888,67 @@ function clearDoc(){
 
 
 <!-- op product-->
+function medList(){
+	$("#medicine_new").val("");
+	var medSearch=$("#opitemSearch").val();		
+	
+	if (medSearch!=""){
+		searchMedicine()
+	}else{
+		$('#medicineList').empty();		
+	}
+	
+	$.afui.drawer.show('#op_med_add','right','push');
+	
+		
+}
+
 function searchMedicine(){
 	$(".error").text("").removeClass('success').removeClass('error');
 	// opitemSearch
-	$('#medicineList').empty(); 
-	$("#btn_search_med").hide();
-	$("#wait_image_med").show();
+		
+	var searchValue = $("#opitemSearch").val().toUpperCase();
 	
-	var searchValue = $("#opitemSearch").val();
-	
-	if(searchValue.length<3){
-		$("#wait_image_med").hide();
+	if(searchValue.length>0 && searchValue.length<3){
+		//$("#wait_image_med").hide();
 		$('#error_medicineList').text('Type minimum 3 character').removeClass('success').addClass('error');
-		$("#btn_search_med").show();
-	}
-	else{
+		//$("#btn_search_med").show();
+	}else{
+		//$("#wait_image_med").show();
+		//$("#btn_search_med").hide();
+		
+		keywordStr=localStorage.medStr.split("||");
+		var keywordStrLen=keywordStr.length;
+		  var keywordS='';
+		  for (i=0;i<keywordStrLen;i++){
+			  keywordLi=keywordStr[i].split("|")
+			  var pID=keywordLi[0].trim();
+			  var medName=keywordLi[1];
+			  var brandName=keywordLi[2];//.toUpperCase()
+			  var brandNameS=keywordLi[2].toUpperCase();//
+			  
+			  if (brandNameS.indexOf(searchValue)==1){			 
+				  keywordS+='<div  style="background-color:#ccedff; border-bottom:1px solid #d9d9d9; margin-bottom:2px; border-radius:2px; padding:10px;">';						  					  
+				  keywordS+='<div  style="float:left; width:80%; font-size:12px;"   id="medId'+pID+'">';
+				  keywordS+='<span onclick="medClickVal2(\''+pID+'\',\''+medName+'\')"  >'+medName+'</span>' 
+				  keywordS+='</div>'
+				  keywordS+='<div style="float:left; width:15%;">'
+				  keywordS+='<input onmouseout="medClickVal(\''+pID+'\',\''+medName+'\')" id="inpId'+pID+'" type="hidden" style="width:50px; height:30px; margin:0px; padding:0px;" />'
+				  keywordS+='</div>'
+				  keywordS+='<div style="clear:both;"></div></div>';
+			  }
+		  }
+		  
+		  
+		$('#medicineList').empty();
+		$('#medicineList').append(keywordS).trigger('create');
+		
+		//$("#btn_search_med").show();
+		//$("#wait_image_med").hide();
+		
+		
 		//alert(localStorage.apipath+'search_medicine?searchValue='+searchValue);
-		$.ajax({
+/*		$.ajax({
 			  url: localStorage.apipath+'search_medicine?searchValue='+searchValue,
 			  success: function(resStr) {
 				if (resStr!=""){					
@@ -846,28 +984,46 @@ function searchMedicine(){
 			
 			  }
 			
-		});
+		});*/
 	}
 }
 
 function clearMedicine(){
 	$(".error").text("").removeClass('success').removeClass('error');	
 	$('#medicineList').empty(); 
-	$("#btn_search_med").show();
-	$("#wait_image_med").hide();	
+	//$("#btn_search_med").show();
+	//$("#wait_image_med").hide();	
 	$("#opitemSearch").val('');	
 }
 
-function removeCarItemOp(product_idGet){
-	
+function removeCarItemOp(product_idGet){	
 	$("#cartOp_"+product_idGet).remove();
-	var repl1='';
-	
+	var repl1='';	
 	iStr=localStorage.opProdID_Str.split('||');
 	iLen=iStr.length
 	for(i=0;i<iLen;i++){
 		iStrD=iStr[i].split('|');
 		if(iStrD[0]!=product_idGet){
+			if (repl1==''){
+				repl1=iStr[i]
+			}else{
+				repl1+='||'+iStr[i]
+			}				
+		}				
+	}
+	oprtunityVal = repl1;
+	localStorage.opProdID_Str=repl1;
+}
+
+function removeCartNewItem(n){	
+	var itemName=$("#inpId"+n).val();
+	$("#cartOp_"+n).remove();
+	var repl1='';	
+	iStr=localStorage.opProdID_Str.split('||');
+	iLen=iStr.length
+	for(i=0;i<iLen;i++){
+		iStrD=iStr[i].split('|');
+		if(iStrD[1]!=itemName){
 			if (repl1==''){
 				repl1=iStr[i]
 			}else{
@@ -904,40 +1060,111 @@ function medClickVal(pid, name){
 }
 
 function medClickVal2(pid, name){
-	var inpVal = $("#inpId"+pid).val(1);
-	$("#medId"+pid).addClass('bgc');
-	var pConcat = pid+'|'+name+'|'+1;
 	
-	if(oprtunityVal.indexOf(pid)==-1){
+	if (pid==0 && name==0){
+		name=$("#medicine_new").val();
+		if (name!=0 && (name!="" || name!=undefined)){
+			var pConcat = pid+'|'+name+'|'+1;			
+		}
+	}else{
+		name=name
+		var inpVal = $("#inpId"+pid).val(1);
+		$("#medId"+pid).addClass('bgc');
+		var pConcat = pid+'|'+name+'|'+1;
+	}
+	
+	
+	if (pid!=0){
+		if(oprtunityVal.indexOf(pid)==-1){
 			if (oprtunityVal==''){
 				oprtunityVal=pConcat
 			}else{
 				oprtunityVal+='||'+pConcat
 			}
+		}
+	}else{
+		if (oprtunityVal==''){
+			oprtunityVal=pConcat
+		}else{
+			oprtunityVal+='||'+pConcat
+		}
+
 	}
+	
+	createMedCart()
 }
 
 function medClick2(pid, name){
-	$("#medId"+pid).addClass('bgc');
-	//alert(localStorage.opProdID_Str);
-	var inpVal = $("#inpId"+pid).val();
-	if(inpVal==''||inpVal==undefined){
-		inpVal=0;
+	var pConcat=""
+	if (pid!=0 && name!=0){		
+		$("#medId"+pid).addClass('bgc');
+		//alert(localStorage.opProdID_Str);
+		var inpVal = $("#inpId"+pid).val();
+		if(inpVal==''||inpVal==undefined){
+			inpVal=0;
+		}
+		pConcat = pid+'|'+name+'|'+inpVal;		
 	}
-	var pConcat = pid+'|'+name+'|'+inpVal;
+	
+	
 	var campaign_doc_str=localStorage.opProdID_Str
 	
-	if(campaign_doc_str.indexOf(pid)==-1){
+	if (pid!=0){
+		if(campaign_doc_str.indexOf(pid)==-1){
 			if (campaign_doc_str==''){
 				campaign_doc_str=pConcat
 			}else{
 				campaign_doc_str+='||'+pConcat
 			}
+		}
 	}
-	localStorage.opProdID_Str=campaign_doc_str;
+	localStorage.opProdID_Str=campaign_doc_str;	
 	
 }
 
+
+
+function createMedCart(){
+		$('#opCart').empty();
+		localStorage.opProdID_Str = oprtunityVal;
+		campaign_doc_str=localStorage.opProdID_Str
+		
+		var campaignList = campaign_doc_str.split('||');
+		var campaignListLength=campaignList.length;
+		var medId='';
+		var medName='';
+		var medVal='';
+		
+		if (localStorage.opProdID_Str!=""){				
+			op_cart_list='<table style="width:100%;">';
+			op_cart_list+='<tr><td colspan="3" style="border-bottom:0px;"><h2 style="border-bottom:1px solid #d9d9d9;background-color:#ccedff; padding-left:5px; margin:0px;">Medicine</h2></td></tr>';			
+			op_cart_list+='<tr style="background-color:#99dbff; height:20px;"><td style="width:85%; padding-left:5px;">Name</td><td style="width:3px;"></td></tr>';	//<td style="width:10%; text-align:center;"></td>			
+			for ( i=0; i < campaignListLength; i++){
+				
+				var pID=campaignList[i];
+				var pIdSpilt = pID.split('|');				
+				
+				var medId = pIdSpilt[0];
+				var medName = pIdSpilt[1];
+				var medVal = pIdSpilt[2];
+			
+				if(medId==0){
+					op_cart_list+='<tr style="background-color:#ccedff; height:20px;" id="cartOp_'+i+'"><td style="padding-left:5px;">'+medName+'<input id="inpId'+i+'" type="hidden" value="'+medName+'"/></td><td style="text-align:center;">&nbsp;<a onClick="removeCartNewItem(\''+i+'\');" style="font-size:15px; text-decoration:none; color:#cc3300" class="icon remove"></a></td></tr>';
+				}else{						
+					op_cart_list+='<tr style="background-color:#ccedff; height:20px;" id="cartOp_'+medId+'"><td style="padding-left:5px;">'+medName+'<input id="inpId'+medId+'" type="hidden" value="'+medVal+'"/></td><td style="text-align:center;">&nbsp;<a onClick="removeCarItemOp(\''+medId+'\');" style="font-size:15px; text-decoration:none; color:#cc3300" class="icon remove"></a></td></tr>'; //<img  src="cancel.png" width="20" height="20" alt="X" > //< td style="text-align:center;" ></td>
+				}
+				
+			}
+			
+			op_cart_list+='</table>';
+				
+			//alert (op_cart_list)
+			$('#opCart').empty();
+			$('#opCart').html(op_cart_list);
+		}
+	
+	
+	}
 
 
 function check_user() {	
@@ -946,7 +1173,7 @@ function check_user() {
 	cid=$.trim(cid);
 	
 	//Local
-	//var apipath_base_photo_dm ='http://127.0.0.1:8000/skf/syncmobile_rx_171128/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+	//var apipath_base_photo_dm ='http://127.0.0.1:8000/w02_ipi/syncmobile_rx_171128/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 	//var apipath_base_photo_dm ='http://a007.yeapps.com/skf/dmpath_live_new/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
 	//online
     var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_new_new/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
@@ -1045,8 +1272,11 @@ function check_user() {
 													localStorage.areaStr=resultArray[3];
 													localStorage.territoryStr=resultArray[4];
 													localStorage.docCategoryStr=resultArray[5];
+													localStorage.medStr=resultArray[6];
+													
 													localStorage.synced='YES';
 													
+													localStorage.docListStr="";
 													localStorage.docStr="";
 													localStorage.opProdID_Str ="";
 													localStorage.doc_region='';
@@ -1055,8 +1285,6 @@ function check_user() {
 													localStorage.searchSelect='';
 													localStorage.doc_cart_list='';
 													localStorage.docSelect='';
-													
-													
 													
 													$('#opCart').empty();
 													$('#docCart').empty();
@@ -1106,10 +1334,13 @@ function associatedCall(){
 	var associated_call=document.getElementById('associated_call').checked?1:0;
 	localStorage.associated_call=associated_call;
 	}
+
+function associatedCallOthers(){
+	var associated_call_others=document.getElementById('associated_call_others').checked?1:0;
+	localStorage.associated_call_others=associated_call_others;
+	}
 	
 function prescription_submit(){
-	
-	//alert(localStorage.ff_present+'   '+localStorage.associated_call);
 	$("#error_prescription_submit").html("").removeClass('error').removeClass('success');		
 	$("#wait_image_prescription").show();
 	
@@ -1135,17 +1366,19 @@ function prescription_submit(){
 		var prescriptionPhoto=$("#"+imageText).val();
 		
 				
-		var medicine_1=$("#medicine_1").val();
-		var medicine_2=$("#medicine_2").val();
-		var medicine_3=$("#medicine_3").val();
-		var medicine_4=$("#medicine_4").val();
+		var medicine_1="";//$("#medicine_1").val();
+		var medicine_2="";//$("#medicine_2").val();
+		var medicine_3="";//$("#medicine_3").val();
+		var medicine_4="";//$("#medicine_4").val();
+		
+				
 		var now = $.now();
 		
 		var imageName=localStorage.user_id+'_'+now.toString()+'.jpg';
 				 
 		//alert(localStorage.base_url+'prescription_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId)+'&doctor_name='+encodeURIComponent(doctor_name)+'&category='+localStorage.doc_category+'&latitude='+latitude+'&longitude='+longitude+'&pres_photo='+imageName+'&opProdID_Str='+localStorage.opProdID_Str+'&medicine_1='+medicine_1+'&medicine_2='+medicine_2+'&medicine_3='+medicine_3+'&medicine_4='+medicine_4+'&ff_present='+localStorage.ff_present+'&associated_call='+localStorage.associated_call)
-		$("#errorShow").val(localStorage.base_url+'prescription_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId)+'&doctor_name='+encodeURIComponent(doctor_name)+'&category='+localStorage.doc_category+'&latitude='+latitude+'&longitude='+longitude+'&pres_photo='+imageName+'&opProdID_Str='+localStorage.opProdID_Str+'&medicine_1='+medicine_1+'&medicine_2='+medicine_2+'&medicine_3='+medicine_3+'&medicine_4='+medicine_4);
-		 $.ajax(localStorage.base_url+'prescription_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId)+'&doctor_name='+encodeURIComponent(doctor_name)+'&category='+localStorage.doc_category+'&latitude='+latitude+'&longitude='+longitude+'&pres_photo='+imageName+'&opProdID_Str='+localStorage.opProdID_Str+'&medicine_1='+medicine_1+'&medicine_2='+medicine_2+'&medicine_3='+medicine_3+'&medicine_4='+medicine_4+'&ff_present='+localStorage.ff_present+'&associated_call='+localStorage.associated_call,{
+		$("#errorShow").val(localStorage.base_url+'prescription_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId)+'&doctor_name='+encodeURIComponent(doctor_name)+'&category='+localStorage.doc_category+'&latitude='+latitude+'&longitude='+longitude+'&pres_photo='+imageName+'&opProdID_Str='+localStorage.opProdID_Str);
+		 $.ajax(localStorage.base_url+'prescription_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId)+'&doctor_name='+encodeURIComponent(doctor_name)+'&category='+localStorage.doc_category+'&latitude='+latitude+'&longitude='+longitude+'&pres_photo='+imageName+'&opProdID_Str='+localStorage.opProdID_Str+'&ff_present='+localStorage.ff_present+'&associated_call='+localStorage.associated_call+'&associated_call_others='+localStorage.associated_call_others,{
 				// cid:localStorage.cid,rep_id:localStorage.user_id,rep_pass:localStorage.user_pass,synccode:localStorage.synccode,
 				type: 'POST',
 				timeout: 30000,

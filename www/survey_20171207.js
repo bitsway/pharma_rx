@@ -195,31 +195,7 @@ $(document).ready(function(){
 				$('#opCart').html(op_cart_list);
 			}
 		
-		});
-		
-		
-		var ffPresentStr='<div ><div style="width:70%; float:left;"><label  >FF Present</label></div><div style="width:30%; float:right; padding-right:30px;"><input type="checkbox" id="ff_present" name="ff_present" class="toggle" onChange="ffPresent()" ><label for="ff_present" data-on="Yes" data-off="NO" ><span></span></label></div></div>';
-		var associativeCallStr='<div ><div style="width:70%; float:left;"><label>Associated Call(FS)</label></div><div style="width:30%; float:right; padding-right:30px;"><input type="checkbox" id="associated_call" name="associated_call" class="toggle" onChange="associatedCall()" ><label for="associated_call" data-on="YES" data-off="NO" ><span ></span></label></div></div>'; 
-		var associativeOthersCallStr='<div ><div style="width:70%; float:left;"><label>Associated Call(Others)</label></div><div style="width:30%; float:right; padding-right:30px;"><input type="checkbox" id="associated_call_others" name="associated_call_others" class="toggle" onChange="associatedCallOthers()" ><label for="associated_call_others" data-on="YES" data-off="NO" ><span ></span></label></div></div>'; 
-		
-		$('#ffPresentDiv').empty();
-		$('#ffPresentDiv').html(ffPresentStr);
-		$('#associativeCallDiv').empty();
-		$('#associativeCallDiv').html(associativeCallStr);
-		$('#associativeCallOthersDiv').empty();
-		$('#associativeCallOthersDiv').html(associativeOthersCallStr);
-		
-		
-		
-		$("#opitemSearch").keyup(function(){
-			searchMedicine()
-			});
-		
-		$("#drSearch").keyup(function(){
-			searchDoc()
-			});	
-		
-			
+		});		
     });
 
 $.afui.animateHeader(true);
@@ -239,7 +215,6 @@ function showSearchDoc() {
         cancelCallback: function () {},
         doneText: "Search",
         doneCallback: function () {
-			localStorage.docListStr="";
 			localStorage.doc_region=$('#doc_region').val();
 			localStorage.doc_area=$('#doc_area').val();
 			localStorage.doc_territory=$('#doc_territory').val();
@@ -263,8 +238,7 @@ function showSearchDoc() {
 			  	localStorage.docSelect='';
 				
 				$('#searchSelect').empty();
-				$("#error_doctorList").text("Required Territory.").removeClass('success').addClass('error');
-				searchDoc()								
+				$("#error_doctorList").text("Required Territory.").removeClass('success').addClass('error');							
 			}else{			
 				localStorage.searchSelect='<div  style="background-color:#e6fff9; border-bottom:1px solid #00cc99; margin:5px; border-radius:5px; padding:5px;" ><h3 >Region &nbsp;&nbsp;&nbsp;:<span style="font-size:11px;">'+localStorage.doc_region+'</span></h3><h3 >Area &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<span style="font-size:11px;">'+localStorage.doc_area+'</span></h3><h3 >Territory &nbsp;:<span style="font-size:11px;">'+localStorage.doc_territory+'</span></h3><h3 >Category &nbsp;:<span style="font-size:11px;">'+localStorage.doc_category+'</span></h3></div>'
 				
@@ -353,17 +327,12 @@ function addNewDoc() {
 	$("#error_doctorList").text("").removeClass('success').removeClass('error');
     $.afui.popup({
         title: "New Doctor <hr/>",
-        message: "<div id='doc_add_region_cmb' ></div><div id='doc_add_area_cmb' ></div><div id='doc_add_tr_cmb' ></div><div>Name<sup style='color:#F00;'>*</sup>: <input type='text' id='doc_name_new' ></div><div>Address<sup style='color:#F00;'>*</sup>: <textarea col='50' rows='3' id='doc_address_new'></textarea></div>",
+        message: "Region<sup style='color:#F00;'>*</sup>: <div id='doc_add_region_cmb' ></div><div id='doc_add_area_cmb' ></div><div id='doc_add_tr_cmb' ></div><div>Name<sup style='color:#F00;'>*</sup>: <input type='text' id='doc_name_new' ></div><div>Address<sup style='color:#F00;'>*</sup>: <textarea col='50' rows='3' id='doc_address_new'></textarea></div>",
         cancelText: "Cancel",
         cancelCallback: function () {},
         doneText: "Save",
-        doneCallback: function () {			
-			if (localStorage.doc_territory!='undefined'){
-				var docTr=localStorage.doc_territory.split('|');
-				var doc_tr_new=docTr[0];
-			}else{ 		
-				var doc_tr_new=$('#doc_add_territory').val();
-			}
+        doneCallback: function () {		
+			var doc_tr_new=$('#doc_add_territory').val();
 			
 			if (doc_tr_new==undefined){
 				$("#error_doctorList").text("Required Territory for New Doctor Add.").removeClass('success').addClass('error');
@@ -374,16 +343,17 @@ function addNewDoc() {
 				if (doc_name_new=='' || doc_address_new==''){
 					$("#error_doctorList").text("Required Name and address For New Doctor Add.").removeClass('success').addClass('error');
 				}else{
-										
-					if (localStorage.doc_region=='undefined'){					
-						localStorage.doc_region=$('#doc_add_region').val();				
-					}
+					localStorage.doc_region=$('#doc_add_region').val();
+					localStorage.doc_area=$('#doc_add_area').val();
+					localStorage.doc_territory=$('#doc_add_territory').val();
 					
 					if (localStorage.doc_area=='undefined'){
-						localStorage.doc_area=$('#doc_add_area').val();						
+						localStorage.doc_area='';
 					}
-						
-					localStorage.doc_territory=doc_tr_new;
+					
+					if (localStorage.doc_territory=='undefined'){
+						localStorage.doc_territory='';
+					}
 								
 					localStorage.searchSelect='<div  style="background-color:#e6fff9; border-bottom:1px solid #00cc99; margin:5px; border-radius:5px; padding:5px;" ><h3 >Region &nbsp;&nbsp;&nbsp;:<span style="font-size:11px;">'+localStorage.doc_region+'</span></h3><h3 >Area &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<span style="font-size:11px;">'+localStorage.doc_area+'</span></h3><h3 >Territory &nbsp;:<span style="font-size:11px;">'+localStorage.doc_territory+'</span></h3></div>'
 					
@@ -416,25 +386,18 @@ function addNewDoc() {
         cancelOnly: false
     });
 	
-/*	var docRegion=localStorage.doc_region.split('|');
-	var docArea=localStorage.doc_area.split('|');*/
-	var docTr=localStorage.doc_territory.split('|');
-	if (docTr==''){
-		var regionCmbo='';
-		var regionArr=localStorage.regionStr.split('<rd>');
-		var regionArrLen=regionArr.length;
-		regionCmbo+='Region<sup style="color:#F00;">*</sup>:';	
-		regionCmbo+='<select id="doc_add_region" onChange="getDocAddArea()">';
-		regionCmbo+='<option value="">Select Region</option>';
-		for (i=0;i<regionArrLen;i++){
-			var regionS=regionArr[i].split('<fd>');																																								
-			regionCmbo+='<option value="'+regionS[0]+'|'+regionS[1]+'">'+regionS[1]+'</option>';																												
-			}
-		regionCmbo+='</select>'	
-		$('#doc_add_region_cmb').html(regionCmbo);
-	}else{
-		$('#doc_add_region_cmb').hide();	
-	}
+	var regionCmbo='';
+	var regionArr=localStorage.regionStr.split('<rd>');
+	var regionArrLen=regionArr.length;	
+	regionCmbo+='<select id="doc_add_region" onChange="getDocAddArea()">';
+	regionCmbo+='<option value="">Select Region</option>';
+	for (i=0;i<regionArrLen;i++){
+		var regionS=regionArr[i].split('<fd>');																																								
+		regionCmbo+='<option value="'+regionS[0]+'|'+regionS[1]+'">'+regionS[1]+'</option>';																												
+		}
+	regionCmbo+='</select>'	
+	$('#doc_add_region_cmb').html(regionCmbo);
+	
 }
 
 
@@ -624,16 +587,13 @@ function gotoPic(picNo) {
 		  			
 		}
 	
-		var ffPresentStr='<div ><div style="width:70%; float:left;"><label  >FF Present</label></div><div style="width:30%; float:right; padding-right:30px;"><input type="checkbox" id="ff_present" name="ff_present" class="toggle" onChange="ffPresent()" ><label for="ff_present" data-on="Yes" data-off="NO" ><span></span></label></div></div>';
-		var associativeCallStr='<div ><div style="width:70%; float:left;"><label>Associated Call(FS)</label></div><div style="width:30%; float:right; padding-right:30px;"><input type="checkbox" id="associated_call" name="associated_call" class="toggle" onChange="associatedCall()" ><label for="associated_call" data-on="YES" data-off="NO" ><span ></span></label></div></div>'; 
-		var associativeOthersCallStr='<div ><div style="width:70%; float:left;"><label>Associated Call(Others)</label></div><div style="width:30%; float:right; padding-right:30px;"><input type="checkbox" id="associated_call_others" name="associated_call_others" class="toggle" onChange="associatedCallOthers()" ><label for="associated_call_others" data-on="YES" data-off="NO" ><span ></span></label></div></div>'; 
-		
-		$('#ffPresentDiv').empty();
-		$('#ffPresentDiv').html(ffPresentStr);
-		$('#associativeCallDiv').empty();
-		$('#associativeCallDiv').html(associativeCallStr);
-		$('#associativeCallOthersDiv').empty();
-		$('#associativeCallOthersDiv').html(associativeOthersCallStr);	  
+	var ffPresentStr='<div ><div style="width:70%; float:left;"><label  >FF Present</label></div><div style="width:30%; float:right; padding-right:30px;"><input type="checkbox" id="ff_present" name="ff_present" class="toggle" onChange="ffPresent()" ><label for="ff_present" data-on="Yes" data-off="NO" ><span></span></label></div></div>';
+	var associativeCallStr='<div ><div style="width:70%; float:left;"><label>Associated Call(FS)</label></div><div style="width:30%; float:right; padding-right:30px;"><input type="checkbox" id="associated_call" name="associated_call" class="toggle" onChange="associatedCall()" ><label for="associated_call" data-on="YES" data-off="NO" ><span ></span></label></div></div>'; 
+	
+	$('#ffPresentDiv').empty();
+	$('#ffPresentDiv').html(ffPresentStr);
+	$('#associativeCallDiv').empty();
+	$('#associativeCallDiv').html(associativeCallStr);	  
 		
 	if (prPic!=''){		
 		$.afui.loadContent("#imageSinglePage",true,true,'right');
@@ -733,7 +693,7 @@ function docAdd(docid){
 			  doc_cart_list+='<input type="hidden" id="doc'+docID+'" value="'+localStorage.docStr+'"/>'
 			  doc_cart_list+='<h2 style="border-bottom:1px solid #d9d9d9;">Doctor</h2>';
 			  doc_cart_list+='<h3 > '+docName+'</h3>';
-			  doc_cart_list+='<p style="margin:0px; font-size:11px; line-height:normal;">'+docAdd+'|'+docArea+'</p>';  
+			  doc_cart_list+='<p style="margin:0px; font-size:11px; line-height:normal;">'+docAdd+'</p>';  
 			  doc_cart_list+='</div>';
 			  doc_cart_list+='<div style="clear:both;"></div><br/>';
 			  
@@ -756,19 +716,10 @@ function docList(){
 	
 	if (localStorage.doc_territory!=""){
 		searchDoc()
-	}else{
-		$('#docSelect').empty();
-		$('#doctorList').empty();
-		$("#wait_image_doc").show();
-		$('#searchSelect').empty();
-		$("#wait_image_doc").hide();
+		}
 		
 	}
-		
-}
-
 	
-
 function searchDoc(){
 	$("#error_doctorList").text("").removeClass('success').removeClass('error');
 	// opitemSearch
@@ -784,72 +735,31 @@ function searchDoc(){
 	var docArea=localStorage.doc_area.split('|');
 	var docTr=localStorage.doc_territory.split('|');
 	var docCat=localStorage.doc_category;
-	var searchValue = $("#drSearch").val().toUpperCase();
+	var searchValue = $("#drSearch").val();
 	
-	if(localStorage.docListStr!=""){
-		$("#wait_image_doc").hide();
-		var keywordStr=localStorage.docListStr.split("||");
-		var keywordStrLen=keywordStr.length;
-		  var keywordS='<br/>';
-		  for (i=0;i<keywordStrLen;i++){
-			  keywordLi=keywordStr[i].split("|")
-			  var docID=keywordLi[0].trim();
-			  var docName=keywordLi[1];
-			  var docAdd=keywordLi[2];
-			  var docArea=keywordLi[3];						  
-			  
-			  var docNameS=keywordLi[1].toUpperCase();
-			  var docAddS=keywordLi[2].toUpperCase();
-			  
-			  if(searchValue==''){
-				  keywordS+='<div  style="background-color:#ccedff; border-bottom:1px solid #d9d9d9; margin-bottom:2px; border-radius:5px; padding:5px; " onclick="docAdd(\''+docID+'\')" >';						  				  
-				  keywordS+='<input type="hidden" id="doc'+docID+'" value="'+keywordStr[i]+'"/>'
-				  keywordS+='<h3 >'+docName+'</h3>';
-				  keywordS+='<p style="margin:0px; font-size:11px; line-height:normal; " >'+docAdd+'|'+docArea+'</p>';  
-				  keywordS+='</div>';
-				  keywordS+='<div style="clear:both;"></div>';  
-			  
-			  }else{			  
-				  if(docNameS.indexOf(searchValue)>0 || docAddS.indexOf(searchValue)>0 ){						  
-					  keywordS+='<div  style="background-color:#ccedff; border-bottom:1px solid #d9d9d9; margin-bottom:2px; border-radius:5px; padding:5px; " onclick="docAdd(\''+docID+'\')" >';						  				  
-					  keywordS+='<input type="hidden" id="doc'+docID+'" value="'+keywordStr[i]+'"/>'
-					  keywordS+='<h3 >'+docName+'</h3>';
-					  keywordS+='<p style="margin:0px; font-size:11px; line-height:normal; " >'+docAdd+'|'+docArea+'</p>'; 
-					  keywordS+='</div>';
-					  keywordS+='<div style="clear:both;"></div>';
-				  }
-			  }
-		  }					  
-		 
-		$('#doctorList').empty();
-		$('#doctorList').append(keywordS).trigger('create');	
-		
-	}else{			
+	
 		//alert(localStorage.apipath+'search_doctor?region='+docRegion[0]+'&area='+docArea[0]+'&tr='+docTr[0]+'&category='+docCat+'&searchValue='+searchValue);
 		$.ajax({
 			  url: localStorage.apipath+'search_doctor?region='+docRegion[0]+'&area='+docArea[0]+'&tr='+docTr[0]+'&category='+docCat+'&searchValue='+searchValue,
 			  success: function(resStr) {
 				if (resStr!=""){
-					localStorage.docListStr=resStr;
-					
-					var keywordStr=resStr.split("||");
-					var keywordStrLen=keywordStr.length;
+					keywordStr=resStr.split("||");
 					  var keywordS='<br/>';
-					  for (i=0;i<keywordStrLen;i++){
+					  for (i=0;i<keywordStr.length;i++){
 						  keywordLi=keywordStr[i].split("|")
 						  var docID=keywordLi[0].trim();
 						  var docName=keywordLi[1];
 						  var docAdd=keywordLi[2];
 						  var docArea=keywordLi[3];						  
-												  
+						  						  
 						  keywordS+='<div  style="background-color:#ccedff; border-bottom:1px solid #d9d9d9; margin-bottom:2px; border-radius:5px; padding:5px; " onclick="docAdd(\''+docID+'\')" >';						  				  
 						  keywordS+='<input type="hidden" id="doc'+docID+'" value="'+keywordStr[i]+'"/>'
 						  keywordS+='<h3 >'+docName+'</h3>';
-						  keywordS+='<p style="margin:0px; font-size:11px; line-height:normal; " >'+docAdd+'|'+docArea+'</p>';  
+						  keywordS+='<p style="margin:0px; font-size:11px; line-height:normal; " >'+docAdd+'</p>';  
 						  keywordS+='</div>';
 						  keywordS+='<div style="clear:both;"></div>';	
 					  }					  
-					 
+					  
 					$('#doctorList').empty();
 					$('#doctorList').append(keywordS).trigger('create');
 					
@@ -860,10 +770,12 @@ function searchDoc(){
 					$("#error_doctorList").text("Dr. Not Available.").removeClass('success').addClass('error');
 					$("#wait_image_doc").hide();
 					
-				}		
-			  }		
+				}
+			
+			  }
+			
 		});
-	}
+
 }
 
 function clearDoc(){
@@ -886,51 +798,19 @@ function searchMedicine(){
 	$(".error").text("").removeClass('success').removeClass('error');
 	// opitemSearch
 	$('#medicineList').empty(); 
-		
+	$("#btn_search_med").hide();
+	$("#wait_image_med").show();
 	
-	var searchValue = $("#opitemSearch").val().toUpperCase();
+	var searchValue = $("#opitemSearch").val();
 	
-	if(searchValue.length>0 && searchValue.length<3){
+	if(searchValue.length<3){
 		$("#wait_image_med").hide();
 		$('#error_medicineList').text('Type minimum 3 character').removeClass('success').addClass('error');
 		$("#btn_search_med").show();
 	}
 	else{
-		$("#wait_image_med").show();
-		$("#btn_search_med").hide();
-		
-		keywordStr=localStorage.medStr.split("||");
-		var keywordStrLen=keywordStr.length;
-		  var keywordS='';
-		  for (i=0;i<keywordStrLen;i++){
-			  keywordLi=keywordStr[i].split("|")
-			  var pID=keywordLi[0].trim();
-			  var medName=keywordLi[1];
-			  var brandName=keywordLi[2];//.toUpperCase()
-			  var brandNameS=keywordLi[2].toUpperCase();//
-			  
-			  if (brandNameS.indexOf(searchValue)==1){			 
-				  keywordS+='<div  style="background-color:#ccedff; border-bottom:1px solid #d9d9d9; margin-bottom:2px; border-radius:2px; padding:5px;">';						  					  
-				  keywordS+='<div  style="float:left; width:80%;"   id="medId'+pID+'">';
-				  keywordS+='<span onclick="medClickVal2(\''+pID+'\',\''+medName+'\')"  >'+medName+'</span>' 
-				  keywordS+='</div>'
-				  keywordS+='<div style="float:left; width:15%;">'
-				  keywordS+='<input onmouseout="medClickVal(\''+pID+'\',\''+medName+'\')" id="inpId'+pID+'" type="hidden" style="width:50px; height:30px; margin:0px; padding:0px;" />'
-				  keywordS+='</div>'
-				  keywordS+='<div style="clear:both;"></div></div>';
-			  }
-		  }
-		  
-		  
-		$('#medicineList').empty();
-		$('#medicineList').append(keywordS).trigger('create');
-		
-		$("#btn_search_med").show();
-		$("#wait_image_med").hide();
-		
-		
 		//alert(localStorage.apipath+'search_medicine?searchValue='+searchValue);
-/*		$.ajax({
+		$.ajax({
 			  url: localStorage.apipath+'search_medicine?searchValue='+searchValue,
 			  success: function(resStr) {
 				if (resStr!=""){					
@@ -966,7 +846,7 @@ function searchMedicine(){
 			
 			  }
 			
-		});*/
+		});
 	}
 }
 
@@ -1066,7 +946,7 @@ function check_user() {
 	cid=$.trim(cid);
 	
 	//Local
-	//var apipath_base_photo_dm ='http://127.0.0.1:8000/w02_ipi/syncmobile_rx_171128/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+	//var apipath_base_photo_dm ='http://127.0.0.1:8000/skf/syncmobile_rx_171128/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 	//var apipath_base_photo_dm ='http://a007.yeapps.com/skf/dmpath_live_new/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
 	//online
     var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_new_new/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
@@ -1165,11 +1045,8 @@ function check_user() {
 													localStorage.areaStr=resultArray[3];
 													localStorage.territoryStr=resultArray[4];
 													localStorage.docCategoryStr=resultArray[5];
-													localStorage.medStr=resultArray[6];
-													
 													localStorage.synced='YES';
 													
-													localStorage.docListStr="";
 													localStorage.docStr="";
 													localStorage.opProdID_Str ="";
 													localStorage.doc_region='';
@@ -1178,6 +1055,8 @@ function check_user() {
 													localStorage.searchSelect='';
 													localStorage.doc_cart_list='';
 													localStorage.docSelect='';
+													
+													
 													
 													$('#opCart').empty();
 													$('#docCart').empty();
