@@ -1060,17 +1060,18 @@ function medClickVal(pid, name){
 }
 
 function medClickVal2(pid, name){
-	
-	if (pid==0 && name==0){
-		name=$("#medicine_new").val();
-		if (name!=0 && (name!="" || name!=undefined)){
-			var pConcat = pid+'|'+name+'|'+1;			
+	var pConcat ="";
+	if (pid==0 && name==0 ){
+		name=$("#medicine_new").val();		
+		if (name!=0 && (name!="" || name!='undefined')){
+			pConcat = pid+'|'+name+'|'+1;			
 		}
+		
 	}else{
 		name=name
 		var inpVal = $("#inpId"+pid).val(1);
 		$("#medId"+pid).addClass('bgc');
-		var pConcat = pid+'|'+name+'|'+1;
+		pConcat = pid+'|'+name+'|'+1;
 	}
 	
 	

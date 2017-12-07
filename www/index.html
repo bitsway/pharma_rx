@@ -50,9 +50,10 @@
 		.button{ border:none;}
 		
 		.slide-right-out,.slide-left-out {
-			-webkit-animation:none;
-			animation:none;
+			-webkit-animation:cover;
+			animation:cover;			
 		}
+		
 		
     </style>
 
@@ -263,9 +264,9 @@
         <!--<a href="#"  onclick="$.afui.drawer.show('#med_add','right','push')">Med</a>-->
     </footer>
     
-    <nav id="doctor_add"  style="z-index:100; background-color:#e6f6ff; width:65%;" >			
+    <nav id="doctor_add"  style="z-index:100; background-color:#e6f6ff; width:50%;" >			
         <header align="left" style="padding:3px;">        
-        	&nbsp;&nbsp;<input type="text" id="drSearch" style="width:80%; height:40px; color:#000; background-color:#F4F8FF; font-weight:normal" placeholder="Doctor Name/ Address"   />&nbsp;&nbsp;
+        	&nbsp;&nbsp;<input type="text" id="drSearch" style="width:70%; height:40px; color:#000; background-color:#F4F8FF; font-weight:normal" placeholder="Doctor Name/ Address"   />&nbsp;&nbsp;
             <!--<a href="#" id="btn_search_doc" onClick="searchDoc()" style="font-size:25px; text-decoration:none; color:#FFF;" class="icon magnifier" ></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--><a href="#" onClick="clearDoc()" style="font-size:20px; text-decoration:none; color:#FFF;" class="icon refresh" ></a>
         </header>
          
@@ -289,11 +290,11 @@
             <input id="medicine_4" type="text" style="width:90%; color:#000; background-color:#F4F8FF; font-size:12px; margin:2px 10px;" placeholder="Orphan Drug 4"   />
         
     </nav>-->
- 
-    
-    <nav id="op_med_add"  style="z-index:100; background-color:#e6f6ff; width:65%;" >			
+ 	
+       
+    <nav id="op_med_add"  style="z-index:100; background-color:#e6f6ff; width:50%;" >			
         <header align="left" style="padding:3px;">
-        	&nbsp;&nbsp;<input type="text" id="opitemSearch" style="width:80%; height:40px; color:#000; background-color:#F4F8FF; font-weight:normal" placeholder="Medicine Name"   />&nbsp;&nbsp;
+        	&nbsp;&nbsp;<input type="text" id="opitemSearch" style="width:70%; height:40px; color:#000; background-color:#F4F8FF; font-weight:normal" placeholder="Medicine Name"   />&nbsp;&nbsp;
             <!--<a href="#" id="btn_search_med" onClick="searchMedicine()" style="font-size:25px; text-decoration:none; color:#FFF;" class="icon magnifier" ></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--><a href="#" onClick="clearMedicine()" style="font-size:20px; text-decoration:none; color:#FFF;" class="icon refresh" ></a>
         </header>        	
         <!--<div style="height:30px;"><img id="wait_image_med" src="loading.gif" /></div>-->
@@ -304,7 +305,7 @@
             <a href="#" class="button" onclick="$.afui.drawer.show('#ul_med_add','left','push')" style="background-color:#00a6ff; color:#FFF;">New</a>
         </div>-->
         <footer style="z-index:100; background-color:#0088d1; height:100px;">
-        	<input id="medicine_new" type="text" style="width:80%; color:#000; background-color:#F4F8FF; font-size:12px; margin:1px 5px 1px 10px;" placeholder="Type New Medicine Name"   /><a href="#" style="font-size:5px; margin-top:5px; text-decoration:none;" onClick="medClickVal2(0,0);medClick2(0,0)" class="icon add"  ></a>
+        	<input id="medicine_new" type="text" style="width:70%; color:#000; background-color:#F4F8FF; font-size:12px; margin:1px 5px 1px 10px;" placeholder="New Medicine Name"   /><a href="#" style="font-size:5px; margin-top:5px; text-decoration:none;" onClick="medClickVal2(0,0)" class="icon add"  ></a>
     	</footer>
         
     </nav>
