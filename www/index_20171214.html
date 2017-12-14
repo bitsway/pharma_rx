@@ -38,8 +38,8 @@
     <style>
 		body{ font-size:80%;}
 		.bgc{color:red;}
-		.error{ background-color:#ffe6e6; color:#e60000; padding:10px; border-bottom:1px solid #ff0000; border-top:1px solid #ff0000; font-size:12px; border-radius:5px;}
-		.success{ background-color:#ecf9f2; color:#339966; padding:10px; border-bottom:1px solid #66cc99; border-top:1px solid #66cc99; font-size:12px; border-radius:5px;}
+		.error{ background-color:#ffe6e6; color:#e60000; padding:10px; border-bottom:1px solid #ff0000; border-top:1px solid #ff0000; font-size:16px; border-radius:5px;}
+		.success{ background-color:#ecf9f2; color:#339966; padding:10px; border-bottom:1px solid #66cc99; border-top:1px solid #66cc99; font-size:16px; border-radius:5px;}
 		
 		.parent{ height:330px; border:1px solid #00bfff; border-radius:5px; margin:1%; box-shadow:3px 3px 3px #b3e4ff; overflow:hidden; }
 		
@@ -171,7 +171,7 @@
     </div>    
     <footer>
         <a href="#pageHome" class="icon home" ></a>
-        <a class="icon camera" onClick="takePicture()" style="font-size:35px;" ></a>
+        <a ></a>
     </footer>
 </div>
  
@@ -190,7 +190,7 @@
     </div>    
     <footer>
         <a href="#pageHome" class="icon home" ></a>
-        <a class="icon camera" onClick="takePicture()" style="font-size:35px;" ></a>
+        <a ></a>
     </footer>
 </div>
 
@@ -212,7 +212,7 @@
     </div>    
     <footer>
         <a href="#pageHome" class="icon home" ></a>
-        <a class="icon camera" onClick="takePicture()" style="font-size:35px;" ></a>
+        <a ></a>
     </footer>
 </div>
 
@@ -225,22 +225,21 @@
         </header> 
         <div class="panel" id="imageSinglePage" style="background-color:#e6f6ff">
             </br></br></br>
-            	<section >
+            	<section>
                     <div class="parent">
                         <div class="panzoom" >
-                        	<!--camera.png-->
+                        	<!--<img src="camera.png" style="border-radius: 5px; width:100%"  alt="&nbsp;&nbsp;Image"  id="myImagePrescription_show" />-->
                             <img src="" style="border-radius: 5px; width:100%"  alt="&nbsp;&nbsp;Image"  id="myImagePrescription_show" />
                         </div>
                     </div>
-                   
-                    <div >
-                    	<a href="#" id="btn_rotate" class="button red" style="background-color:#00a6ff; margin:1%;" >Rotate</a>
-                        <a href="#"  class="button zoom-in red " style="background-color:#00a6ff; margin:1%;" >Zoom +</a>
-                        <a href="#"  class="button remove zoom-out red " style="background-color:#00a6ff; margin:1%;" >Zoom -</a>
-                        <a href="#" id="btn_reset" class="button reset red" style="background-color:#00a6ff; margin:1%;" >Reset</a>                        
+                    
+                    <div style="width:130px; margin:0px auto;" >
+                        <a href="#" style="font-size:30px; text-decoration:none; color:#00a6ff;" class="icon add zoom-in" ></a>&nbsp;&nbsp;
+                        <a href="#" style="font-size:30px; text-decoration:none; color:#00a6ff;" class="icon remove zoom-out" ></a>&nbsp;&nbsp;
+                        <a href="#" style="font-size:25px; text-decoration:none; color:#00a6ff;" class="icon refresh reset" ></a>
                     </div>                
             	</section>
-            <div style="clear:both;"></div>
+            
             <div id="docCart"></div>           
             <div id="opCart"></div>
             <input type="hidden" name="lat" id="lat" >
@@ -253,42 +252,34 @@
             
            <div style="clear:both;"></div>             
             <div id="error_prescription_submit" ></div>            
-            <input type="submit" class="button red block" id="btn_prescription_submit" onClick="prescription_submit()" style="width:100%; height:50px; background-color:#00a6ff; color:#FFF; font-size:20px; margin-top:6px;" value="     Submit     "   />
+            <input type="submit" id="btn_prescription_submit" onClick="prescription_submit()" style="width:100%; height:50px; background-color:#0088d1; color:#FFF; font-size:20px; margin-top:6px;" value="     Submit     "   />
             <br/><br/>
 			<div align="center"><img id="wait_image_prescription" style="font-size:30px;"  src="loading.gif" /></div>                               
         </div>
     </div>
     <footer>
         <a href="#" onclick="docList()"><img src="doctor_add.png" style="width:40px;" /></a>
-        <a class="icon camera" onClick="takePicture()" style="font-size:35px;" ></a>
         <!--<a href="#"  onclick="$.afui.drawer.show('#ul_med_add','left','push')" style="font-size:15px; padding:10px 0px;"> New Medicine !</a>-->
         <a href="#"  onclick="medList()" ><img src="med.png" style="width:30px;" /></a>
         <!--<a href="#"  onclick="$.afui.drawer.show('#med_add','right','push')">Med</a>-->
     </footer>
     
-    <nav id="doctor_add"  style="z-index:100; background-color:#e6f6ff; width:65%;" >			
-        <header align="left" style="padding:3px;">
-        	<div class="button-grouped flex tabbed">
-                <a href="#" class="button" onClick="showSearchDoc()" style="border-right:1px solid #FFF; background-color:#0088d1; color:#FFF;" >Select</a>
-                <a href="#" class="button" onClick="clearDoc()" style="background-color:#0088d1; color:#FFF;">Clear</a>
-            </div>
-        	<!--<a href="#" class="button" onClick="showSearchDoc()" >Select</a><a href="#" class="button" onClick="clearDoc()" >Clear</a>-->        
-        	<!--&nbsp;&nbsp;<input type="text" id="drSearch" style="width:70%; height:40px; color:#000; background-color:#F4F8FF; font-weight:normal" placeholder="Doctor Name/ Address"   />&nbsp;&nbsp;-->
-            <!--<a href="#" id="btn_search_doc" onClick="searchDoc()" style="font-size:25px; text-decoration:none; color:#FFF;" class="icon magnifier" ></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+    <nav id="doctor_add"  style="z-index:100; background-color:#e6f6ff; width:50%;" >			
+        <header align="left" style="padding:3px;">        
+        	&nbsp;&nbsp;<input type="text" id="drSearch" style="width:70%; height:40px; color:#000; background-color:#F4F8FF; font-weight:normal" placeholder="Doctor Name/ Address"   />&nbsp;&nbsp;
+            <!--<a href="#" id="btn_search_doc" onClick="searchDoc()" style="font-size:25px; text-decoration:none; color:#FFF;" class="icon magnifier" ></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--><a href="#" onClick="clearDoc()" style="font-size:20px; text-decoration:none; color:#FFF;" class="icon refresh" ></a>
         </header>
-        
-        <div id="searchSelect" style="font-size:10px; height:55px; height:auto;"></div>
-        <div id="docSelect" style="height:50px; height:auto;" ></div>
-        <div id="error_doctorList" ></div>
-        <div style="border-bottom:1px solid #00cc99; border-top:1px solid #00cc99; height:45px; padding:2px; top:190px; position:fixed; ">
-        	<input type="text" id="drSearch" style="width:80%; height:40px; color:#000; background-color:#F4F8FF; font-weight:normal" placeholder="Doctor Name/ Address"   />&nbsp;<a href="#" onClick="clearSearcDoc()" style="font-size:15px; text-decoration:none; color:#000;" >Clear</a>
-        </div>                                
-        <div id="doctorList" style="height:54%; width:63%; margin:2px; bottom:35px; position:fixed; overflow:scroll;">
-        	<div ><img id="wait_image_doc" src="loading.gif" /></div>        	        
+         
+         <div class="button-grouped flex tabbed">
+            <a href="#" class="button" onClick="showSearchDoc()" style="border-right:2px solid #FFF; background-color:#00a6ff; color:#FFF;" >Search</a>
+            <a href="#" class="button" onClick="addNewDoc()" style="background-color:#00a6ff; color:#FFF;">New</a>
         </div>
-        
-        <a href="#" onClick="addNewDoc()" class="button red block" style="bottom:0; position:fixed; background-color:#00a6ff; margin:0px; height:35px; width:65%;"  >New Doctor</a>        	
-              
+               	
+        <div style="height:30px;"><img id="wait_image_doc" src="loading.gif" /></div>
+        <div id="error_doctorList" ></div>         
+        <div id="searchSelect" style="font-size:10px; height:55px;"></div>
+        <div id="docSelect" style="height:45px;" ></div>                  
+        <div id="doctorList" style="height:60%; margin:5px; overflow:scroll;"></div>       
     </nav>
 <!--    <nav id="ul_med_add"  style="z-index:100; background-color:#e6f6ff; width:80%;" >			
         <header ><h1 style="text-align:left; width:100%; font-size:12px;">New Medicine Add</h1></header>
@@ -304,20 +295,19 @@
     <nav id="op_med_add"  style="z-index:100; background-color:#e6f6ff; width:50%;" >			
         <header align="left" style="padding:3px;">
         	&nbsp;&nbsp;<input type="text" id="opitemSearch" style="width:70%; height:40px; color:#000; background-color:#F4F8FF; font-weight:normal" placeholder="Medicine Name"   />&nbsp;&nbsp;
-            <!--<a href="#" id="btn_search_med" onClick="searchMedicine()" style="font-size:25px; text-decoration:none; color:#FFF;" class="icon magnifier" ></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--><a href="#" onClick="clearMedicine()" style="font-size:11px; text-decoration:none; color:#FFF;" >Clear</a>
+            <!--<a href="#" id="btn_search_med" onClick="searchMedicine()" style="font-size:25px; text-decoration:none; color:#FFF;" class="icon magnifier" ></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--><a href="#" onClick="clearMedicine()" style="font-size:20px; text-decoration:none; color:#FFF;" class="icon refresh" ></a>
         </header>        	
-        <!--<div style="height:30px;"><img id="wait_image_med" src="loading.gif" /></div>
-        <div id="error_medicineList" ></div>-->        
-        <div id="medicineList" style="height:85%; margin:0px 5px; overflow:scroll;"></div>
+        <!--<div style="height:30px;"><img id="wait_image_med" src="loading.gif" /></div>-->
+        <div id="error_medicineList" style="height:40px;" ></div>        
+        <div id="medicineList" style="height:76%; margin:0px 5px; overflow:scroll;"></div>
          <!--<div class="button-grouped flex tabbed" style="margin-bottom:0;">
             <a href="#" class="button" id="opMedAdd" style="border-right:2px solid #FFF; background-color:#00a6ff; color:#FFF;" >Save</a>
             <a href="#" class="button" onclick="$.afui.drawer.show('#ul_med_add','left','push')" style="background-color:#00a6ff; color:#FFF;">New</a>
         </div>-->
-        <div style=" bottom:0; width:50%; background-color:#0088d1; position:fixed;">        	
-            <input id="medicine_new" type="text" style="width:65%; height:35px; color:#000; background-color:#F4F8FF; font-size:12px; margin:5px 5px 1px 10px;" placeholder="New Medicine"   />
-            <a href="#" onClick="medClickVal2(0,0)" class="button red" style="background-color:#00a6ff; padding:5px;"  >Add</a>            
-        </div>
-               
+        <footer style="z-index:100; background-color:#0088d1; height:100px;">
+        	<input id="medicine_new" type="text" style="width:70%; color:#000; background-color:#F4F8FF; font-size:12px; margin:1px 5px 1px 10px;" placeholder="New Medicine Name"   /><a href="#" style="font-size:5px; margin-top:5px; text-decoration:none;" onClick="medClickVal2(0,0)" class="icon add"  ></a>
+    	</footer>
+        
     </nav>
 </div>   
 

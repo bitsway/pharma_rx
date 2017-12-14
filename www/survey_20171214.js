@@ -215,31 +215,11 @@ $(document).ready(function(){
 		
 		$("#opitemSearch").keyup(function(){
 			searchMedicine()
-		});
+			});
 		
 		$("#drSearch").keyup(function(){
-			
-			var searchValue=$("#drSearch").val();
-			
-			if(searchValue.length<3){
-				$("#error_doctorList").text("Type Minimum 3 Character.").removeClass('success').addClass('error');
-			}else{
-				$('#doctorList').empty();				
-				$("#error_doctorList").text("").removeClass('success').removeClass('error');
-				searchDoc()
-			}
-		});	
-		
-		
-		var imgDegree=0;
-		$("#btn_rotate").click(function (){		
-			imgDegree+=90;
-			$("#myImagePrescription_show").css({'transform':'rotate('+imgDegree+'deg)'});			
-		});
-		
-		$("#btn_reset").click(function (){
-			$("#myImagePrescription_show").css({'transform':'rotate(0deg)'});			
-		});
+			searchDoc()
+			});	
 		
 			
     });
@@ -255,19 +235,17 @@ $.afui.animateHeader(true);
 function showSearchDoc() {
 	
     $.afui.popup({
-        title: "Select Area<hr/>",
+        title: "Search<hr/>",
         message: "Region :<div id='doc_region_cmb' ></div><div id='doc_area_cmb' ></div><div id='doc_tr_cmb' ></div><div id='doc_cat_cmb' ></div>",
         cancelText: "Cancel",
         cancelCallback: function () {},
-        doneText: "Select",
-        doneCallback: function () {	
-			$("#drSearch").val("");		
+        doneText: "Search",
+        doneCallback: function () {
 			localStorage.docListStr="";
 			localStorage.doc_region=$('#doc_region').val();
 			localStorage.doc_area=$('#doc_area').val();
 			localStorage.doc_territory=$('#doc_territory').val();
 			localStorage.doc_category=$('#doc_category').val();
-			
 			
 			if (localStorage.doc_area=='undefined'){
 				localStorage.doc_area='';
@@ -282,28 +260,25 @@ function showSearchDoc() {
 				localStorage.doc_region='';
 				localStorage.doc_area='';
 				localStorage.doc_territory='';
-				localStorage.doc_category='';
 				localStorage.searchSelect='';
 				localStorage.doc_cart_list='';
 			  	localStorage.docSelect='';
 				
-				localStorage.docListStr='';
-				
 				$('#searchSelect').empty();
 				$("#error_doctorList").text("Required Territory.").removeClass('success').addClass('error');
-				searchDoc()								
+				//searchDoc()								
 			}else{			
-				localStorage.searchSelect='<div  style="background-color:#e6fff9; border-bottom:1px solid #00cc99; margin:5px; border-radius:5px; padding:5px;" ><h3 ><span style="font-size:10px;">'+localStorage.doc_region+'</span></h3><h3 ><span style="font-size:10px;">'+localStorage.doc_area+'</span></h3><h3 ><span style="font-size:10px;">'+localStorage.doc_territory+'</span></h3></div>'
+				localStorage.searchSelect='<div  style="background-color:#e6fff9; border-bottom:1px solid #00cc99; margin:5px; border-radius:5px; padding:5px;" ><h3 >Region &nbsp;&nbsp;:<span style="font-size:10px;">'+localStorage.doc_region+'</span></h3><h3 >Area &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<span style="font-size:10px;">'+localStorage.doc_area+'</span></h3><h3 >Territory :<span style="font-size:10px;">'+localStorage.doc_territory+'</span></h3></div>'
 					
 				$('#searchSelect').empty();
 				$('#docCart').empty();
 				$('#searchSelect').append(localStorage.searchSelect);
 				
 			}
-						
+			
 			if (localStorage.searchSelect!=''){
 				searchDoc()	
-			}
+			}	
 			
         },
         cancelOnly: false		
@@ -384,14 +359,15 @@ function addNewDoc() {
         cancelText: "Cancel",
         cancelCallback: function () {},
         doneText: "Save",
-        doneCallback: function () {	
-			var doc_new_tr=$('#doc_add_territory').val();
-				
-			if (localStorage.doc_territory=='undefined' || localStorage.doc_territory==''){
-				localStorage.doc_territory=$('#doc_add_territory').val();				
+        doneCallback: function () {			
+			if (localStorage.doc_territory!='undefined'){
+				var docTr=localStorage.doc_territory.split('|');
+				var doc_tr_new=docTr[0];
+			}else{ 		
+				var doc_tr_new=$('#doc_add_territory').val();
 			}
-							
-			if (localStorage.doc_territory==""){
+			
+			if (doc_tr_new==undefined){
 				$("#error_doctorList").text("Required Territory for New Doctor Add.").removeClass('success').addClass('error');
 			}else{
 				var doc_name_new=$('#doc_name_new').val();
@@ -401,28 +377,24 @@ function addNewDoc() {
 					$("#error_doctorList").text("Required Name and address For New Doctor Add.").removeClass('success').addClass('error');
 				}else{
 										
-					if (localStorage.doc_region=='undefined' || localStorage.doc_region==''){					
+					if (localStorage.doc_region=='undefined'){					
 						localStorage.doc_region=$('#doc_add_region').val();				
 					}
 					
-					if (localStorage.doc_area=='undefined' || localStorage.doc_area==''){
+					if (localStorage.doc_area=='undefined'){
 						localStorage.doc_area=$('#doc_add_area').val();						
 					}
-					
-					if (localStorage.doc_territory=='undefined' || localStorage.doc_territory==''){
-						localStorage.doc_territory=$('#doc_add_territory').val();						
-					}
-					
-					
+						
+					localStorage.doc_territory=doc_tr_new;
 								
-					localStorage.searchSelect='<div  style="background-color:#e6fff9; border-bottom:1px solid #00cc99; margin:5px; border-radius:5px; padding:5px;" ><h3 ><span style="font-size:10px;">'+localStorage.doc_region+'</span></h3><h3 ><span style="font-size:10px;">'+localStorage.doc_area+'</span></h3><h3 ><span style="font-size:10px;">'+localStorage.doc_territory+'</span></h3></div>'
+					localStorage.searchSelect='<div  style="background-color:#e6fff9; border-bottom:1px solid #00cc99; margin:5px; border-radius:5px; padding:5px;" ><h3 >Region &nbsp;&nbsp;:<span style="font-size:10px;">'+localStorage.doc_region+'</span></h3><h3 >Area &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<span style="font-size:10px;">'+localStorage.doc_area+'</span></h3><h3 >Territory :<span style="font-size:10px;">'+localStorage.doc_territory+'</span></h3></div>'
 				
 					$('#searchSelect').empty();
-					$('#searchSelect').html(localStorage.searchSelect);
+					$('#searchSelect').append(localStorage.searchSelect);
 						
 					
 				
-					var doc_tr_new=localStorage.doc_territory.split('|');				
+					doc_tr_new=localStorage.doc_territory.split('|');				
 					var docStr='0|'+doc_name_new+'|'+doc_address_new+'|'+doc_tr_new[0];				
 					localStorage.docStr=docStr
 					
@@ -447,9 +419,9 @@ function addNewDoc() {
     });
 	
 /*	var docRegion=localStorage.doc_region.split('|');
-	var docArea=localStorage.doc_area.split('|');
-	var docTr=localStorage.doc_territory.split('|');*/
-	if (localStorage.doc_territory==""){	
+	var docArea=localStorage.doc_area.split('|');*/
+	var docTr=localStorage.doc_territory.split('|');
+	if (docTr==''){
 		var regionCmbo='';
 		var regionArr=localStorage.regionStr.split('<rd>');
 		var regionArrLen=regionArr.length;
@@ -462,8 +434,9 @@ function addNewDoc() {
 			}
 		regionCmbo+='</select>'	
 		$('#doc_add_region_cmb').html(regionCmbo);
-	}	
-
+	}else{
+		$('#doc_add_region_cmb').hide();	
+	}
 }
 
 
@@ -799,7 +772,6 @@ function docList(){
 	
 
 function searchDoc(){
-	
 	$("#error_doctorList").text("").removeClass('success').removeClass('error');
 	// opitemSearch
 	$('#docSelect').empty();
@@ -835,7 +807,7 @@ function searchDoc(){
 				  keywordS+='<div  style="background-color:#ccedff; border-bottom:1px solid #d9d9d9; margin-bottom:2px; border-radius:5px; padding:10px; " onclick="docAdd(\''+docID+'\')" >';						  				  
 				  keywordS+='<input type="hidden" id="doc'+docID+'" value="'+keywordStr[i]+'"/>'
 				  keywordS+='<h3 >'+docName+'</h3>';
-				  keywordS+='<p style="margin:0px; font-size:11px; line-height:normal; " >'+docAdd+'| <span style="background-color:#00a6ff; border-radius:5px; color:#FFF; padding:2px;">'+docArea+'</span></p>';  
+				  keywordS+='<p style="margin:0px; font-size:11px; line-height:normal; " >'+docAdd+'|'+docArea+'</p>';  
 				  keywordS+='</div>';
 				  keywordS+='<div style="clear:both;"></div>';  
 			  
@@ -844,7 +816,7 @@ function searchDoc(){
 					  keywordS+='<div  style="background-color:#ccedff; border-bottom:1px solid #d9d9d9; margin-bottom:2px; border-radius:5px; padding:10px; " onclick="docAdd(\''+docID+'\')" >';						  				  
 					  keywordS+='<input type="hidden" id="doc'+docID+'" value="'+keywordStr[i]+'"/>'
 					  keywordS+='<h3 >'+docName+'</h3>';
-					  keywordS+='<p style="margin:0px; font-size:11px; line-height:normal; " >'+docAdd+'| <span style="background-color:#00a6ff; border-radius:5px; color:#FFF; padding:2px;">'+docArea+'</span></p>'; 
+					  keywordS+='<p style="margin:0px; font-size:11px; line-height:normal; " >'+docAdd+'|'+docArea+'</p>'; 
 					  keywordS+='</div>';
 					  keywordS+='<div style="clear:both;"></div>';
 				  }
@@ -854,24 +826,13 @@ function searchDoc(){
 		$('#doctorList').empty();
 		$('#doctorList').append(keywordS).trigger('create');	
 		
-	}else{		
-		localStorage.docListStr="";
-		var doc_search_url="";
-		
-		if (searchValue!=""){			
-			doc_search_url=localStorage.apipath+'search_doctor?cid='+localStorage.cid+'&region=&area=&tr=&category=&searchValue='+searchValue;			
-		}else{		
-			if (docTr==undefined || docTr==""){
-				$("#error_doctorList").text("Select Territory.").removeClass('success').addClass('error');
-			}else{				
-				doc_search_url=localStorage.apipath+'search_doctor?cid='+localStorage.cid+'&region='+docRegion[0]+'&area='+docArea[0]+'&tr='+docTr[0]+'&category='+docCat+'&searchValue=';
-			}
-		}
-		
-		
-		if (doc_search_url!=""){
+	}else{
+		if (docTr==undefined){
+			$("#error_doctorList").text("Required Territory.").removeClass('success').addClass('error');
+		}else{			
+			//alert(localStorage.apipath+'search_doctor?cid='+localStorage.cid+'&region='+docRegion[0]+'&area='+docArea[0]+'&tr='+docTr[0]+'&category='+docCat+'&searchValue='+searchValue);
 			$.ajax({
-				  url: doc_search_url,
+				  url: localStorage.apipath+'search_doctor?cid='+localStorage.cid+'&region='+docRegion[0]+'&area='+docArea[0]+'&tr='+docTr[0]+'&category='+docCat+'&searchValue='+searchValue,
 				  success: function(resStr) {
 					if (resStr!=""){
 						localStorage.docListStr=resStr;
@@ -889,7 +850,7 @@ function searchDoc(){
 							  keywordS+='<div  style="background-color:#ccedff; border-bottom:1px solid #d9d9d9; margin-bottom:2px; border-radius:5px; padding:10px; " onclick="docAdd(\''+docID+'\')" >';						  				  
 							  keywordS+='<input type="hidden" id="doc'+docID+'" value="'+keywordStr[i]+'"/>'
 							  keywordS+='<h3 >'+docName+'</h3>';
-							  keywordS+='<p style="margin:0px; font-size:11px; line-height:normal; " >'+docAdd+'| <span style="background-color:#00a6ff; border-radius:5px; color:#FFF; padding:2px;">'+docArea+'</span></p>';  
+							  keywordS+='<p style="margin:0px; font-size:11px; line-height:normal; " >'+docAdd+'|'+docArea+'</p>';  
 							  keywordS+='</div>';
 							  keywordS+='<div style="clear:both;"></div>';	
 						  }					  
@@ -913,38 +874,17 @@ function searchDoc(){
 
 function clearDoc(){
 	//$('#docSelect').empty();
-	$("#error_doctorList").empty();	
+	$(".error").text("").removeClass('success').removeClass('error');	
 	$('#doctorList').empty(); 
 	$("#btn_search_doc").show();
 	$("#wait_image_doc").hide();	
 	$("#drSearch").val('');	
 	$('#docSelect').empty();
-	
-	localStorage.doc_region='';
-	localStorage.doc_area='';
-	localStorage.doc_territory='';
-	localStorage.doc_category='';
-	localStorage.searchSelect='';
-	localStorage.doc_cart_list='';
-	localStorage.docSelect='';
-	
-	localStorage.docListStr='';		
-	
-	searchDoc()
-	
+			
+	if (localStorage.doc_territory!=""){
+		searchDoc()
+		}
 }
-
-function clearSearcDoc(){
-	$('#doctorList').empty();
-	$("#drSearch").val('');	
-	$('#docSelect').empty();
-	localStorage.doc_cart_list='';
-	localStorage.docSelect='';
-	localStorage.docListStr='';	
-	
-	searchDoc()
-	
-	}
 
 
 <!-- op product-->
@@ -1120,11 +1060,11 @@ function medClickVal(pid, name){
 }
 
 function medClickVal2(pid, name){
-	var pConcat ="";	
+	var pConcat ="";
 	if (pid==0 && name==0 ){
-		name=$("#medicine_new").val();				
-		if (name!=""){
-			pConcat = pid+'|'+name+'|'+1;
+		name=$("#medicine_new").val();		
+		if (name!=0 && (name!="" || name!='undefined')){
+			pConcat = pid+'|'+name+'|'+1;			
 		}
 		
 	}else{
@@ -1144,15 +1084,12 @@ function medClickVal2(pid, name){
 			}
 		}
 	}else{
-		name=$("#medicine_new").val();				
-		if (name!=""){
-			if (oprtunityVal==''){
-				oprtunityVal=pConcat
-			}else{
-				oprtunityVal+='||'+pConcat
-			}
+		if (oprtunityVal==''){
+			oprtunityVal=pConcat
+		}else{
+			oprtunityVal+='||'+pConcat
 		}
-		$("#medicine_new").val("");
+
 	}
 	
 	createMedCart()
