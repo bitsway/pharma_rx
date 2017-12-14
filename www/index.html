@@ -159,7 +159,7 @@
             <br>            
             <input type="date" id="from_date" placeholder="Date" >
              <div style="float:right;">
-                <a class='button' href='#' onClick="summaryDaily()" >Daily Summary</a>
+                <a class='button red' href='#' onClick="summaryDaily()" style="background-color:#00a6ff;" >Daily Summary</a>
             </div>
             <div style="clear:both;" ></div>
             <div style="height:30px;"><img id="wait_image_daily_summary" src="loading.gif" /></div>
@@ -205,7 +205,7 @@
 		<div id="imgList" style="width:100%; margin:0px auto;"></div> 
         <div style="clear:both;"></div>
         </br></br>
-        &nbsp;&nbsp;&nbsp;<a class="icon refresh " onClick="clearPicture();" style="font-size:30px; color:#F00;" title="Reset"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!--<a class="icon upload " onClick="uploadPicture();" style="font-size:30px; color:#4d94ff;" title="Upload Image"></a>-->
+        &nbsp;&nbsp;&nbsp;<a class="button red" onClick="clearPicture();" title="Reset">Reset</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!--<a class="icon upload " onClick="uploadPicture();" style="font-size:30px; color:#4d94ff;" title="Upload Image"></a>-->
         </br></br>
         
         </div>    
@@ -226,18 +226,17 @@
         <div class="panel" id="imageSinglePage" style="background-color:#e6f6ff">
             </br></br></br>
             	<section >
-                    <div class="parent">
-                        <div class="panzoom" >
+                    <div class="parent" >
+                        <div class="panzoom"  >
                         	<!--camera.png-->
-                            <img src="" style="border-radius: 5px; width:100%"  alt="&nbsp;&nbsp;Image"  id="myImagePrescription_show" />
+                            <img src="" style="border-radius: 5px; width:100%;"  alt="&nbsp;&nbsp;Image"  id="myImagePrescription_show" />
                         </div>
-                    </div>
-                   
+                    </div>                                      
                     <div >
-                    	<a href="#" id="btn_rotate" class="button red" style="background-color:#00a6ff; margin:1%;" >Rotate</a>
-                        <a href="#"  class="button zoom-in red " style="background-color:#00a6ff; margin:1%;" >Zoom +</a>
-                        <a href="#"  class="button remove zoom-out red " style="background-color:#00a6ff; margin:1%;" >Zoom -</a>
-                        <a href="#" id="btn_reset" class="button reset red" style="background-color:#00a6ff; margin:1%;" >Reset</a>                        
+                    	<div align="center"  style="width:25%; float:left;"><a href="#" id="btn_rotate" class="button red" style="background-color:#00a6ff;" >Rotate</a></div>
+                        <div align="center"  style="width:25%; float:left;"><a href="#"  class="button zoom-in red " style="background-color:#00a6ff; " >Zoom +</a></div>
+                        <div align="center"  style="width:25%; float:left;"><a href="#"  class="button remove zoom-out red " style="background-color:#00a6ff; " >Zoom -</a></div>
+                        <div align="center"  style="width:25%; float:left;"><a href="#" id="btn_reset" class="button reset red" style="background-color:#00a6ff; " >Reset</a> </div>                       
                     </div>                
             	</section>
             <div style="clear:both;"></div>
@@ -280,7 +279,7 @@
         <div id="searchSelect" style="font-size:10px; height:55px; height:auto;"></div>
         <div id="docSelect" style="height:50px; height:auto;" ></div>
         <div id="error_doctorList" ></div>
-        <div style="border-bottom:1px solid #00cc99; border-top:1px solid #00cc99; height:45px; padding:2px; top:190px; position:fixed; ">
+        <div style="border-bottom:1px solid #00cc99; border-top:1px solid #00cc99; height:45px; width:65%; padding:2px; top:190px; position:fixed; z-index:100;">
         	<input type="text" id="drSearch" style="width:80%; height:40px; color:#000; background-color:#F4F8FF; font-weight:normal" placeholder="Doctor Name/ Address"   />&nbsp;<a href="#" onClick="clearSearcDoc()" style="font-size:15px; text-decoration:none; color:#000;" >Clear</a>
         </div>                                
         <div id="doctorList" style="height:54%; width:63%; margin:2px; bottom:35px; position:fixed; overflow:scroll;">

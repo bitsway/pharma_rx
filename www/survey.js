@@ -256,7 +256,7 @@ function showSearchDoc() {
 	
     $.afui.popup({
         title: "Select Area<hr/>",
-        message: "Region :<div id='doc_region_cmb' ></div><div id='doc_area_cmb' ></div><div id='doc_tr_cmb' ></div><div id='doc_cat_cmb' ></div>",
+        message: "Region<sup style='color:#F00;'>*</sup> :<div id='doc_region_cmb' ></div><div id='doc_area_cmb' ></div><div id='doc_tr_cmb' ></div><div id='doc_cat_cmb' ></div>",
         cancelText: "Cancel",
         cancelCallback: function () {},
         doneText: "Select",
@@ -268,17 +268,15 @@ function showSearchDoc() {
 			localStorage.doc_territory=$('#doc_territory').val();
 			localStorage.doc_category=$('#doc_category').val();
 			
-			
-			if (localStorage.doc_area=='undefined'){
-				localStorage.doc_area='';
-			}
-						
 			if (localStorage.doc_category=='undefined'){
 				localStorage.doc_category='';
 			}
-			if (localStorage.doc_territory=='undefined'){
-				localStorage.doc_territory='';
-				
+			
+			if (localStorage.doc_area=='undefined'){
+				localStorage.doc_area='';
+			}			
+			if (localStorage.doc_area==''){
+				localStorage.doc_territory='';				
 				localStorage.doc_region='';
 				localStorage.doc_area='';
 				localStorage.doc_territory='';
@@ -287,18 +285,18 @@ function showSearchDoc() {
 				localStorage.doc_cart_list='';
 			  	localStorage.docSelect='';
 				
+				localStorage.docStr='';
 				localStorage.docListStr='';
 				
 				$('#searchSelect').empty();
-				$("#error_doctorList").text("Required Territory.").removeClass('success').addClass('error');
+				$("#error_doctorList").text("Required Region ,Area.").removeClass('success').addClass('error');
 				searchDoc()								
 			}else{			
-				localStorage.searchSelect='<div  style="background-color:#e6fff9; border-bottom:1px solid #00cc99; margin:5px; border-radius:5px; padding:5px;" ><h3 ><span style="font-size:10px;">'+localStorage.doc_region+'</span></h3><h3 ><span style="font-size:10px;">'+localStorage.doc_area+'</span></h3><h3 ><span style="font-size:10px;">'+localStorage.doc_territory+'</span></h3></div>'
+				localStorage.searchSelect='<div  style="background-color:#e6fff9; border-bottom:1px solid #00cc99; margin:5px; border-radius:5px; padding:5px;" ><h3 ><span style="font-size:10px;">'+localStorage.doc_region+'</span></h3><h3 ><span style="font-size:10px;">'+localStorage.doc_area+'</span></h3><h3 ><span style="font-size:10px;">'+localStorage.doc_territory+'</span></h3><h3 ><span style="font-size:10px;">'+localStorage.doc_category+'</span></h3></div>'
 					
 				$('#searchSelect').empty();
 				$('#docCart').empty();
-				$('#searchSelect').append(localStorage.searchSelect);
-				
+				$('#searchSelect').append(localStorage.searchSelect);				
 			}
 						
 			if (localStorage.searchSelect!=''){
@@ -328,7 +326,7 @@ function showSearchDoc() {
 	var docCatArrLen=docCatArr.length;
 	docCatCmbo+='<div>Category :</div>';	
 	docCatCmbo+='<select id="doc_category">';
-	docCatCmbo+='<option value="">Select Category</option>';
+	docCatCmbo+='<option value="">ALL</option>';
 	for (i=0;i<docCatArrLen;i++){																																							
 		docCatCmbo+='<option value="'+docCatArr[i]+'">'+docCatArr[i]+'</option>';																												
 		}
@@ -343,7 +341,7 @@ function getArea(){
 	var areaCmbo='';
 	var areaArr=localStorage.areaStr.split('<rd>');
 	var areaArrLen=areaArr.length;
-	areaCmbo+='<div>Area :</div>';	
+	areaCmbo+='<div>Area<sup style="color:#F00;">*</sup> :</div>';	
 	areaCmbo+='<select id="doc_area" onChange="getTerritory()">';
 	areaCmbo+='<option value="">Select Area</option>';
 	for (i=0;i<areaArrLen;i++){
@@ -366,6 +364,7 @@ function getTerritory(){
 	var trArrLen=trArr.length;	
 	trCmbo+='<div>Territory :</div>';
 	trCmbo+='<select id="doc_territory" >';
+	trCmbo+='<option value="">ALL</option>';
 	for (i=0;i<trArrLen;i++){
 		var trS=trArr[i].split('<fd>');																																								
 			if (trS[0]==doc_region[0] && trS[1]==doc_area[0]){
@@ -387,13 +386,15 @@ function addNewDoc() {
         doneCallback: function () {	
 			var doc_new_tr=$('#doc_add_territory').val();
 				
-			if (localStorage.doc_territory=='undefined' || localStorage.doc_territory==''){
+/*			if (localStorage.doc_territory=='undefined' || localStorage.doc_territory==''){
 				localStorage.doc_territory=$('#doc_add_territory').val();				
-			}
+			}*/
+			localStorage.doc_territory=$('#doc_add_territory').val();
 							
 			if (localStorage.doc_territory==""){
 				$("#error_doctorList").text("Required Territory for New Doctor Add.").removeClass('success').addClass('error');
 			}else{
+				
 				var doc_name_new=$('#doc_name_new').val();
 				var doc_address_new=$('#doc_address_new').val();
 				
@@ -415,7 +416,7 @@ function addNewDoc() {
 					
 					
 								
-					localStorage.searchSelect='<div  style="background-color:#e6fff9; border-bottom:1px solid #00cc99; margin:5px; border-radius:5px; padding:5px;" ><h3 ><span style="font-size:10px;">'+localStorage.doc_region+'</span></h3><h3 ><span style="font-size:10px;">'+localStorage.doc_area+'</span></h3><h3 ><span style="font-size:10px;">'+localStorage.doc_territory+'</span></h3></div>'
+					localStorage.searchSelect='<div  style="background-color:#e6fff9; border-bottom:1px solid #00cc99; margin:5px; border-radius:5px; padding:5px;" ><h3 ><span style="font-size:10px;">'+localStorage.doc_region+'</span></h3><h3 ><span style="font-size:10px;">'+localStorage.doc_area+'</span></h3><h3 ><span style="font-size:10px;">'+localStorage.doc_territory+'</span></h3><h3 ><span style="font-size:10px;">'+localStorage.doc_category+'</span></h3></div>'
 				
 					$('#searchSelect').empty();
 					$('#searchSelect').html(localStorage.searchSelect);
@@ -449,7 +450,8 @@ function addNewDoc() {
 /*	var docRegion=localStorage.doc_region.split('|');
 	var docArea=localStorage.doc_area.split('|');
 	var docTr=localStorage.doc_territory.split('|');*/
-	if (localStorage.doc_territory==""){	
+	
+	if (localStorage.doc_area==""){	
 		var regionCmbo='';
 		var regionArr=localStorage.regionStr.split('<rd>');
 		var regionArrLen=regionArr.length;
@@ -462,7 +464,26 @@ function addNewDoc() {
 			}
 		regionCmbo+='</select>'	
 		$('#doc_add_region_cmb').html(regionCmbo);
-	}	
+	}else{
+		var doc_region=localStorage.doc_region.split('|');
+		var doc_area=localStorage.doc_area.split('|');
+		
+		var trCmbo='';
+		var trArr=localStorage.territoryStr.split('<rd>');
+		var trArrLen=trArr.length;
+		trCmbo+='Territory<sup style="color:#F00;">*</sup>:';	
+		trCmbo+='<select id="doc_add_territory" >';
+		for (i=0;i<trArrLen;i++){
+			var trS=trArr[i].split('<fd>');																																								
+				if (trS[0]==doc_region[0] && trS[1]==doc_area[0]){
+					trCmbo+='<option value="'+trS[2]+'|'+trS[3]+'">'+trS[3]+'</option>';		
+				}																													
+			}
+		trCmbo+='</select>'	
+		$('#doc_add_tr_cmb').html(trCmbo);
+		
+		
+		}	
 
 }
 
@@ -783,7 +804,7 @@ function docList(){
 	$("#wait_image_doc").hide();		
 	$.afui.drawer.show('#doctor_add','left','push');
 	
-	if (localStorage.doc_territory!=""){
+	if (localStorage.doc_area!=""){
 		searchDoc()
 	}else{
 		$('#docSelect').empty();
@@ -861,8 +882,8 @@ function searchDoc(){
 		if (searchValue!=""){			
 			doc_search_url=localStorage.apipath+'search_doctor?cid='+localStorage.cid+'&region=&area=&tr=&category=&searchValue='+searchValue;			
 		}else{		
-			if (docTr==undefined || docTr==""){
-				$("#error_doctorList").text("Select Territory.").removeClass('success').addClass('error');
+			if (docArea==undefined || docArea==""){
+				$("#error_doctorList").text("Select Area.").removeClass('success').addClass('error');
 			}else{				
 				doc_search_url=localStorage.apipath+'search_doctor?cid='+localStorage.cid+'&region='+docRegion[0]+'&area='+docArea[0]+'&tr='+docTr[0]+'&category='+docCat+'&searchValue=';
 			}
@@ -919,6 +940,7 @@ function clearDoc(){
 	$("#wait_image_doc").hide();	
 	$("#drSearch").val('');	
 	$('#docSelect').empty();
+	$("#docCart").empty();
 	
 	localStorage.doc_region='';
 	localStorage.doc_area='';
@@ -928,6 +950,7 @@ function clearDoc(){
 	localStorage.doc_cart_list='';
 	localStorage.docSelect='';
 	
+	localStorage.docStr='';
 	localStorage.docListStr='';		
 	
 	searchDoc()
