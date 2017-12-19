@@ -38,8 +38,8 @@
     <style>
 		body{ font-size:80%;}
 		.bgc{color:red;}
-		.error{ background-color:#ffe6e6; color:#e60000; padding:10px; border-bottom:1px solid #ff0000; border-top:1px solid #ff0000; font-size:12px; border-radius:5px; z-index:150;}
-		.success{ background-color:#ecf9f2; color:#339966; padding:10px; border-bottom:1px solid #66cc99; border-top:1px solid #66cc99; font-size:12px; border-radius:5px; z-index:150;}
+		.error{ background-color:#ffe6e6; color:#e60000; padding:10px; border-bottom:1px solid #ff0000; border-top:1px solid #ff0000; font-size:12px; border-radius:5px;}
+		.success{ background-color:#ecf9f2; color:#339966; padding:10px; border-bottom:1px solid #66cc99; border-top:1px solid #66cc99; font-size:12px; border-radius:5px;}
 		
 		.parent{ height:330px; border:1px solid #00bfff; border-radius:5px; margin:1%; box-shadow:3px 3px 3px #b3e4ff; overflow:hidden; }
 		
@@ -93,7 +93,7 @@
                     <input type="number" name="user_pass" id="user_pass"  placeholder="Password" value="">
                 </form>						
             </div>
-            <input type="submit" class="button red block" id="loginButton" onClick="check_user()" style="width:100%; height:50px; background-color:#00a6ff; color:#FFF; font-size:20px; margin-top:6px;" value="     Sync     "   />
+            <input type="submit" id="loginButton" onClick="check_user();"  style="width:100%; height:50px; background-color:#0088d1; color:#FFF; font-size:20px" value="     Sync     "   />
             
             </br></br></br>
             <div align="center"><img id="wait_image_login" style="font-size:30px;" src="loading.gif" ></div>
@@ -115,10 +115,10 @@
             </br></br></br></br>
             <div id="error_image" style="color:#C00"></div>                    
             <div>            	
-                <div align="center"  style="width:43%; background-color:#00a6ff; margin:10px; box-shadow:5px 5px 5px #8EBFF0; float:left;"><img style="height:114px;" onClick="page_PrescriptionCapture();" src="PrescriptionCapture.png"> </div>
-                <div align="center"  style="width:43%; background-color:#00a6ff; margin:10px; box-shadow:5px 5px 5px #8EBFF0; float:left; padding:10px;"><a href="#page_attendance" style="font-size:70px; color:#FFF;" class="icon user" onClick="page_attendance();" ></a><div style="color:#FFF;">Attendance</div></div>
-                <div align="center"  style="width:43%; background-color:#00a6ff; margin:10px; box-shadow:5px 5px 5px #8EBFF0; float:left; padding:10px;"><a href="#page_report" style="font-size:70px; color:#FFF;" class="icon paper" onClick="page_report();" ></a><div style="color:#FFF;">Report</div></div>
-                <div align="center"  style="width:43%; background-color:#00a6ff; margin:10px; box-shadow:5px 5px 5px #8EBFF0; float:left; padding:10px;"><a href="#page_notice" style="font-size:70px; color:#FFF;" class="icon warning" onClick="getNotice()" ></a><div style="color:#FFF;">Notice</div></div>
+                <div align="center"  style="width:43%; background-color:#09C; margin:10px; box-shadow:5px 5px 5px #8EBFF0; float:left;"><img style="height:114px;" onClick="page_PrescriptionCapture();" src="PrescriptionCapture.png"> </div>
+                <div align="center"  style="width:43%; background-color:#09C; margin:10px; box-shadow:5px 5px 5px #8EBFF0; float:left; padding:10px;"><a href="#page_attendance" style="font-size:70px; color:#FFF;" class="icon user" onClick="page_attendance();" ></a><div style="color:#FFF;">Attendance</div></div>
+                <div align="center"  style="width:43%; background-color:#09C; margin:10px; box-shadow:5px 5px 5px #8EBFF0; float:left; padding:10px;"><a href="#page_report" style="font-size:70px; color:#FFF;" class="icon paper" onClick="page_report();" ></a><div style="color:#FFF;">Report</div></div>
+                <div align="center"  style="width:43%; background-color:#09C; margin:10px; box-shadow:5px 5px 5px #8EBFF0; float:left; padding:10px;"><a href="#page_notice" style="font-size:70px; color:#FFF;" class="icon warning" onClick="getNotice()" ></a><div style="color:#FFF;">Notice</div></div>
             </div>               
         </div>
         
@@ -279,10 +279,10 @@
         <div id="searchSelect" style="font-size:10px; height:55px; height:auto;"></div>
         <div id="docSelect" style="height:50px; height:auto;" ></div>
         <div id="error_doctorList" ></div>
-        <div style="border-bottom:1px solid #00cc99; border-top:1px solid #00cc99; background-color:#e6f6ff; height:45px; width:65%; padding:2px; top:190px; position:fixed; z-index:100;">
+        <div style="border-bottom:1px solid #00cc99; border-top:1px solid #00cc99; height:45px; width:65%; padding:2px; top:190px; position:fixed; z-index:100;">
         	<input type="text" id="drSearch" style="width:80%; height:40px; color:#000; background-color:#F4F8FF; font-weight:normal" placeholder="Doctor Name/ Address"   />&nbsp;<a href="#" onClick="clearSearcDoc()" style="font-size:15px; text-decoration:none; color:#000;" >Clear</a>
         </div>                                
-        <div id="doctorList" style="height:54%; width:63%; margin:2px; top:220px; bottom:35px; position:fixed; overflow:scroll;">
+        <div id="doctorList" style="height:54%; width:63%; margin:2px; bottom:35px; position:fixed; overflow:scroll;">
         	<div ><img id="wait_image_doc" src="loading.gif" /></div>        	        
         </div>
         

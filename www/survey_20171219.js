@@ -222,12 +222,7 @@ $(document).ready(function(){
 			var searchValue=$("#drSearch").val();
 			
 			if(searchValue.length<3){
-				if (localStorage.doc_area!=""){
-					searchDoc()
-				}else{
-					$('#doctorList').empty();					
-					$("#error_doctorList").text("Type Minimum 3 Character.").removeClass('success').addClass('error');
-				}
+				$("#error_doctorList").text("Type Minimum 3 Character.").removeClass('success').addClass('error');
 			}else{
 				$('#doctorList').empty();				
 				$("#error_doctorList").text("").removeClass('success').removeClass('error');
@@ -250,6 +245,9 @@ $(document).ready(function(){
     });
 
 $.afui.animateHeader(true);
+
+
+
 
 
 
@@ -862,7 +860,7 @@ function searchDoc(){
 				  keywordS+='</div>';
 				  keywordS+='<div style="clear:both;"></div>';  
 			  
-			  }else{				  			  
+			  }else{			  
 				  if(docNameS.indexOf(searchValue)>0 || docAddS.indexOf(searchValue)>0 ){						  
 					  keywordS+='<div  style="background-color:#ccedff; border-bottom:1px solid #d9d9d9; margin-bottom:2px; border-radius:5px; padding:10px; " onclick="docAdd(\''+docID+'\')" >';						  				  
 					  keywordS+='<input type="hidden" id="doc'+docID+'" value="'+keywordStr[i]+'"/>'
@@ -872,27 +870,17 @@ function searchDoc(){
 					  keywordS+='<div style="clear:both;"></div>';
 				  }
 			  }
-		  }
+		  }					  
 		 
-		 if (keywordS=="<br/>"){
-			 $("#error_doctorList").text("Dr. Not Available.").removeClass('success').addClass('error');
-		 }else{	 
-			$('#doctorList').empty();
-			$('#doctorList').append(keywordS).trigger('create');
-		 }
+		$('#doctorList').empty();
+		$('#doctorList').append(keywordS).trigger('create');	
 		
-	}else{
-		localStorage.docSelect='';		
+	}else{		
 		localStorage.docListStr="";
 		var doc_search_url="";
 		
-		if (searchValue!=""){
-			if (searchValue.length<3){				
-				$('#doctorList').empty();
-				$("#error_doctorList").text("Type Minimum 3 Character.").removeClass('success').addClass('error');
-			}else{						
-				doc_search_url=localStorage.apipath+'search_doctor?cid='+localStorage.cid+'&region=&area=&tr=&category=&searchValue='+searchValue;			
-			}
+		if (searchValue!=""){			
+			doc_search_url=localStorage.apipath+'search_doctor?cid='+localStorage.cid+'&region=&area=&tr=&category=&searchValue='+searchValue;			
 		}else{		
 			if (docArea==undefined || docArea==""){
 				$("#error_doctorList").text("Select Area.").removeClass('success').addClass('error');
@@ -901,8 +889,8 @@ function searchDoc(){
 			}
 		}
 		
+		
 		if (doc_search_url!=""){
-			$("#wait_image_doc").show();			
 			$.ajax({
 				  url: doc_search_url,
 				  success: function(resStr) {
@@ -1828,8 +1816,8 @@ function getNotice(){
 				for ( i=0; i < noticeLen; i++){						
 					var noticeS=noticeStr[i];
 					var noticeSArr = noticeS.split('|');	
-					notice_list_str+='<div style="background-color:#e6fff9; border-bottom:1px solid #00cc99; margin:3px; border-radius:5px; padding:5px;">';		  
-					notice_list_str+='<h2 >'+noticeSArr[0]+'</h2>';	  
+					notice_list_str+='<div style="background-color:#ccedff; border-bottom:1px solid #d9d9d9; margin:10px; padding:5px; border-radius:2px; box-shadow:0 1px 4px #358495;">';		  
+					notice_list_str+='<h2 style="border-bottom:1px solid #d9d9d9;">'+noticeSArr[0]+'</h2>';	  
 					notice_list_str+='<p style="margin:0px; font-size:11px; line-height:normal;">'+noticeSArr[1]+'</p>';  
 					notice_list_str+='</div>';				
 				}
