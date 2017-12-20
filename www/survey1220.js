@@ -81,7 +81,7 @@ $(document).ready(function(){
 		getLocationInfo_ready();
 		
 	//===============SetPR=================
-	for (j=1; j <= 60; j++){
+	for (j=1; j <= 30; j++){
 		var picNo=parseInt(j); 
 		var imageDiv="myImage"+picNo
 		var imageText="prPhoto"+picNo
@@ -116,45 +116,89 @@ $(document).ready(function(){
 		if (picNo==27){imageSource=localStorage.prPhoto27}
 		if (picNo==28){imageSource=localStorage.prPhoto28}
 		if (picNo==29){imageSource=localStorage.prPhoto29}
-        if (picNo==30){imageSource=localStorage.prPhoto30}
-        if (picNo==31){imageSource=localStorage.prPhoto31}
-        if (picNo==32){imageSource=localStorage.prPhoto32}
-        if (picNo==33){imageSource=localStorage.prPhoto33}
-        if (picNo==34){imageSource=localStorage.prPhoto34}
-        if (picNo==35){imageSource=localStorage.prPhoto35}
-        if (picNo==36){imageSource=localStorage.prPhoto36}
-        if (picNo==37){imageSource=localStorage.prPhoto37}
-        if (picNo==38){imageSource=localStorage.prPhoto38}
-        if (picNo==39){imageSource=localStorage.prPhoto39}
-        if (picNo==40){imageSource=localStorage.prPhoto40}
-        if (picNo==41){imageSource=localStorage.prPhoto41}
-        if (picNo==42){imageSource=localStorage.prPhoto42}
-        if (picNo==43){imageSource=localStorage.prPhoto43}
-        if (picNo==44){imageSource=localStorage.prPhoto44}
-        if (picNo==45){imageSource=localStorage.prPhoto45}
-        if (picNo==46){imageSource=localStorage.prPhoto46}
-        if (picNo==47){imageSource=localStorage.prPhoto47}
-        if (picNo==48){imageSource=localStorage.prPhoto48}
-        if (picNo==49){imageSource=localStorage.prPhoto49}
-        if (picNo==50){imageSource=localStorage.prPhoto50}
-        if (picNo==51){imageSource=localStorage.prPhoto51}
-        if (picNo==52){imageSource=localStorage.prPhoto52}
-        if (picNo==53){imageSource=localStorage.prPhoto53}
-        if (picNo==54){imageSource=localStorage.prPhoto54}
-        if (picNo==55){imageSource=localStorage.prPhoto55}
-        if (picNo==56){imageSource=localStorage.prPhoto56}
-        if (picNo==57){imageSource=localStorage.prPhoto57}
-        if (picNo==58){imageSource=localStorage.prPhoto58}
-        if (picNo==59){imageSource=localStorage.prPhoto59}
-        if (picNo==60){imageSource=localStorage.prPhoto60} 
+        if (picNo == 30) { imageSource = localStorage.prPhoto30 }
+        if (picNo == 31) { imageSource = localStorage.prPhoto31 }
+        if (picNo == 32) { imageSource = localStorage.prPhoto32 }
+        if (picNo == 33) { imageSource = localStorage.prPhoto33 }
+        if (picNo == 34) { imageSource = localStorage.prPhoto34 }
+        if (picNo == 35) { imageSource = localStorage.prPhoto35 }
+        if (picNo == 36) { imageSource = localStorage.prPhoto36 }
+        if (picNo == 37) { imageSource = localStorage.prPhoto37 }
+        if (picNo == 38) { imageSource = localStorage.prPhoto38 }
+        if (picNo == 39) { imageSource = localStorage.prPhoto39 }
+        if (picNo == 40) { imageSource = localStorage.prPhoto40 }
+        if (picNo == 41) { imageSource = localStorage.prPhoto41 }
+        if (picNo == 42) { imageSource = localStorage.prPhoto42 }
+        if (picNo == 43) { imageSource = localStorage.prPhoto43 }
+        if (picNo == 44) { imageSource = localStorage.prPhoto44 }
+        if (picNo == 45) { imageSource = localStorage.prPhoto45 }
+        if (picNo == 46) { imageSource = localStorage.prPhoto46 }
+        if (picNo == 47) { imageSource = localStorage.prPhoto47 }
+        if (picNo == 48) { imageSource = localStorage.prPhoto48 }
+        if (picNo == 49) { imageSource = localStorage.prPhoto49 }
+        if (picNo == 50) { imageSource = localStorage.prPhoto50 }
+        if (picNo == 51) { imageSource = localStorage.prPhoto51 }
+        if (picNo == 52) { imageSource = localStorage.prPhoto52 }
+        if (picNo == 53) { imageSource = localStorage.prPhoto53 }
+        if (picNo == 54) { imageSource = localStorage.prPhoto54 }
+        if (picNo == 55) { imageSource = localStorage.prPhoto55 }
+        if (picNo == 56) { imageSource = localStorage.prPhoto56 }
+        if (picNo == 57) { imageSource = localStorage.prPhoto57 }
+        if (picNo == 58) { imageSource = localStorage.prPhoto58 }
+        if (picNo == 59) { imageSource = localStorage.prPhoto59 }
+        if (picNo == 60) { imageSource = localStorage.prPhoto60 } 
 		                                                   
 		//alert (imageSource)
-		var image=document.getElementById(imageDiv);
-		image.src=imageSource;
-		imagePath=imageSource;
+		var image = document.getElementById(imageDiv);
+		image.src = imageSource;
+		imagePath = imageSource;
 		$("#"+imageText).val(imagePath);
 		
 	}
+
+	
+	
+
+		//------------------ op search
+/*		$("#opMedAdd").click(function (){
+			$('#opCart').empty();
+			localStorage.opProdID_Str = oprtunityVal;
+			campaign_doc_str=localStorage.opProdID_Str
+			
+			var campaignList = campaign_doc_str.split('||');
+			var campaignListLength=campaignList.length;
+			var medId='';
+			var medName='';
+			var medVal='';
+			
+			if (localStorage.opProdID_Str!=""){				
+				op_cart_list='<table style="width:100%;">';
+				op_cart_list+='<tr><td colspan="3" style="border-bottom:0px;"><h2 style="border-bottom:1px solid #d9d9d9;background-color:#ccedff; padding-left:5px; margin:0px;">Medicine</h2></td></tr>';			
+				op_cart_list+='<tr style="background-color:#99dbff; height:20px;"><td style="width:85%; padding-left:5px;">Name</td><td style="width:10%; text-align:center;"></td><td style="width:3px;"></td></tr>';				
+				for ( i=0; i < campaignListLength; i++){
+					
+					var pID=campaignList[i];
+					var pIdSpilt = pID.split('|');
+					
+					for(n=0; n < pIdSpilt.length; n++){
+						medId = pIdSpilt[0];
+						medName = pIdSpilt[1];
+						medVal = pIdSpilt[2];
+					}
+					
+					if(medId!=''){						
+						op_cart_list+='<tr style="background-color:#ccedff; height:20px;" id="cartOp_'+medId+'"><td style="padding-left:5px;">'+medName+'<input id="inpId'+medId+'" type="hidden" value="'+medVal+'"/></td><td style="text-align:center;" ></td><td style="text-align:center;">&nbsp;<a onClick="removeCarItemOp(\''+medId+'\');" style="font-size:15px; text-decoration:none; color:#cc3300" class="icon remove"></a></td></tr>'; //<img  src="cancel.png" width="20" height="20" alt="X" >
+					}				
+				}
+				op_cart_list+='</table>';
+					
+				//alert (op_cart_list)
+				$('#opCart').empty();
+				$('#opCart').html(op_cart_list);
+			}
+		
+		});*/
+		
 		
 		var ffPresentStr='<div ><div style="width:70%; float:left;"><label  >FF Present</label></div><div style="width:30%; float:left; padding-right:30px;"><input type="checkbox" id="ff_present" name="ff_present" class="toggle" onChange="ffPresent()" ><label for="ff_present" data-on="Yes" data-off="NO" ><span></span></label></div></div>';
 		var associativeCallStr='<div ><div style="width:70%; float:left;"><label>Associated Call (FS)</label></div><div style="width:30%; float:left; padding-right:30px;"><input type="checkbox" id="associated_call" name="associated_call" class="toggle" onChange="associatedCall()" ><label for="associated_call" data-on="YES" data-off="NO" ><span ></span></label></div></div>'; 
@@ -177,14 +221,14 @@ $(document).ready(function(){
 			
 			var searchValue=$("#drSearch").val();
 			
-			if(searchValue.length<3){				
+			if(searchValue.length<3){
 				if (localStorage.doc_area!=""){
 					searchDoc()
 				}else{
 					$('#doctorList').empty();					
 					$("#error_doctorList").text("Type Minimum 3 Character.").removeClass('success').addClass('error');
 				}
-			}else{				
+			}else{
 				$('#doctorList').empty();				
 				$("#error_doctorList").text("").removeClass('success').removeClass('error');
 				searchDoc()
@@ -492,8 +536,16 @@ function getDocAddTerritory(){
 
 
 //==Reload Location
-function getLocationInfo_ready() { 
-	//$("#wait_image_prescription").show();	
+function getLocationInfo_ready() { //location
+	$("#wait_image_visit_submit").show();
+	$("#visit_location").hide();
+	
+	$("#checkLocation").html(''); 
+	
+	
+	$("#wait_image_visit_submit_doc").hide();	
+	$("#checkLocation_doc").html('');
+	
 	var options = { enableHighAccuracy: true, timeout:30000};
 	navigator.geolocation.getCurrentPosition(onSuccess_ready, onError_ready, options);
 }
@@ -507,26 +559,26 @@ function onSuccess_ready(position) {
 	localStorage.longitude=position.coords.longitude	
 	
 		
-	//$("#checkLocation").html('Location Confirmed'); 		
+	$("#checkLocation").html('Location Confirmed'); 		
 	
-	//$("#wait_image_visit_submit").hide();
-	//$("#visit_submit").show();
-	//$("#visit_location").hide();
+	$("#wait_image_visit_submit").hide();
+	$("#visit_submit").show();
+	$("#visit_location").hide();
 	
-	//$("#checkLocation_doc").html('Location Confirmed');
+	$("#checkLocation_doc").html('Location Confirmed');
 		
 } 
 function onError_ready(error) {	
 	$("#lat").val(0);
 	$("#longitude").val(0);	
 		
-	/*$("#checkLocation").html(''); 
+	$("#checkLocation").html(''); 
 	$("#wait_image_visit_submit").hide();
 	$("#visit_submit").show();
 	$("#visit_location").hide();
 		
     $("#checkLocation_doc").html('');
-	$("#wait_image_visit_submit_doc").hide();*/
+	$("#wait_image_visit_submit_doc").hide();
 	alert ("Please on your GPS")
 	
 }
@@ -680,37 +732,37 @@ function cancelPicture(i){
 	if (picNo==27){localStorage.prPhoto27=''}
 	if (picNo==28){localStorage.prPhoto28=''}
 	if (picNo==29){localStorage.prPhoto29=''}
-    if (picNo==30){localStorage.prPhoto30=''}
-    if (picNo==31){localStorage.prPhoto31=''}
-    if (picNo==32){localStorage.prPhoto32=''}
-    if (picNo==33){localStorage.prPhoto33=''}
-    if (picNo==34){localStorage.prPhoto34=''}
-    if (picNo==35){localStorage.prPhoto35=''}
-    if (picNo==36){localStorage.prPhoto36=''}
-    if (picNo==37){localStorage.prPhoto37=''}
-    if (picNo==38){localStorage.prPhoto38=''}
-    if (picNo==39){localStorage.prPhoto39=''}
-    if (picNo==40){localStorage.prPhoto40=''}
-    if (picNo==41){localStorage.prPhoto41=''}
-    if (picNo==42){localStorage.prPhoto42=''}
-    if (picNo==43){localStorage.prPhoto43=''}
-    if (picNo==44){localStorage.prPhoto44=''}
-    if (picNo==45){localStorage.prPhoto45=''}
-    if (picNo==46){localStorage.prPhoto46=''}
-    if (picNo==47){localStorage.prPhoto47=''}
-    if (picNo==48){localStorage.prPhoto48=''}
-    if (picNo==49){localStorage.prPhoto49=''}
-    if (picNo==50){localStorage.prPhoto50=''}
-    if (picNo==51){localStorage.prPhoto51=''}
-    if (picNo==52){localStorage.prPhoto52=''}
-    if (picNo==53){localStorage.prPhoto53=''}
-    if (picNo==54){localStorage.prPhoto54=''}
-    if (picNo==55){localStorage.prPhoto55=''}
-    if (picNo==56){localStorage.prPhoto56=''}
-    if (picNo==57){localStorage.prPhoto57=''}
-    if (picNo==58){localStorage.prPhoto58=''}
-    if (picNo==59){localStorage.prPhoto59=''}
-    if (picNo==60){localStorage.prPhoto60=''}
+    if (picNo == 30) { localStorage.prPhoto30 = '' }
+    if (picNo == 31) { localStorage.prPhoto31 = '' }
+    if (picNo == 32) { localStorage.prPhoto32 = '' }
+    if (picNo == 33) { localStorage.prPhoto33 = '' }
+    if (picNo == 34) { localStorage.prPhoto34 = '' }
+    if (picNo == 35) { localStorage.prPhoto35 = '' }
+    if (picNo == 36) { localStorage.prPhoto36 = '' }
+    if (picNo == 37) { localStorage.prPhoto37 = '' }
+    if (picNo == 38) { localStorage.prPhoto38 = '' }
+    if (picNo == 39) { localStorage.prPhoto39 = '' }
+    if (picNo == 40) { localStorage.prPhoto40 = '' }
+    if (picNo == 41) { localStorage.prPhoto41 = '' }
+    if (picNo == 42) { localStorage.prPhoto42 = '' }
+    if (picNo == 43) { localStorage.prPhoto43 = '' }
+    if (picNo == 44) { localStorage.prPhoto44 = '' }
+    if (picNo == 45) { localStorage.prPhoto45 = '' }
+    if (picNo == 46) { localStorage.prPhoto46 = '' }
+    if (picNo == 47) { localStorage.prPhoto47 = '' }
+    if (picNo == 48) { localStorage.prPhoto48 = '' }
+    if (picNo == 49) { localStorage.prPhoto49 = '' }
+    if (picNo == 50) { localStorage.prPhoto50 = '' }
+    if (picNo == 51) { localStorage.prPhoto51 = '' }
+    if (picNo == 52) { localStorage.prPhoto52 = '' }
+    if (picNo == 53) { localStorage.prPhoto53 = '' }
+    if (picNo == 54) { localStorage.prPhoto54 = '' }
+    if (picNo == 55) { localStorage.prPhoto55 = '' }
+    if (picNo == 56) { localStorage.prPhoto56 = '' }
+    if (picNo == 57) { localStorage.prPhoto57 = '' }
+    if (picNo == 58) { localStorage.prPhoto58 = '' }
+    if (picNo == 59) { localStorage.prPhoto59 = '' }
+    if (picNo == 60) { localStorage.prPhoto60 = '' }
 	
 }
 
@@ -762,7 +814,6 @@ function docList(){
 		$("#wait_image_doc").show();
 		$('#searchSelect').empty();
 		$("#wait_image_doc").hide();
-		$("#drSearch").val('');
 		
 	}
 		
@@ -771,9 +822,12 @@ function docList(){
 	
 
 function searchDoc(){
+	
 	$("#error_doctorList").text("").removeClass('success').removeClass('error');
+	// opitemSearch
 	$('#docSelect').empty();
-	$('#doctorList').empty();
+	$('#doctorList').empty(); 
+	//$("#btn_search_doc").hide();
 	$("#wait_image_doc").show();
 	$('#searchSelect').empty();
 	$('#docSelect').html(localStorage.docSelect);
@@ -785,7 +839,6 @@ function searchDoc(){
 	var docCat=localStorage.doc_category;
 	var searchValue = $("#drSearch").val().toUpperCase();
 	
-	var doc_search_url="";
 	if(localStorage.docListStr!=""){
 		$("#wait_image_doc").hide();
 		var keywordStr=localStorage.docListStr.split("||");
@@ -822,9 +875,7 @@ function searchDoc(){
 		  }
 		 
 		 if (keywordS=="<br/>"){
-			 localStorage.docSelect='';		
-			 localStorage.docListStr="";
-			 doc_search_url=localStorage.apipath+'search_doctor?cid='+localStorage.cid+'&region=&area=&tr=&category=&searchValue='+searchValue;
+			 $("#error_doctorList").text("Dr. Not Available.").removeClass('success').addClass('error');
 		 }else{	 
 			$('#doctorList').empty();
 			$('#doctorList').append(keywordS).trigger('create');
@@ -833,7 +884,8 @@ function searchDoc(){
 	}else{
 		localStorage.docSelect='';		
 		localStorage.docListStr="";
-				
+		var doc_search_url="";
+		
 		if (searchValue!=""){
 			if (searchValue.length<3){				
 				$('#doctorList').empty();
@@ -848,49 +900,48 @@ function searchDoc(){
 				doc_search_url=localStorage.apipath+'search_doctor?cid='+localStorage.cid+'&region='+docRegion[0]+'&area='+docArea[0]+'&tr='+docTr[0]+'&category='+docCat+'&searchValue=';
 			}
 		}
+		
+		if (doc_search_url!=""){
+			$("#wait_image_doc").show();			
+			$.ajax({
+				  url: doc_search_url,
+				  success: function(resStr) {
+					if (resStr!=""){
+						localStorage.docListStr=resStr;
+						
+						var keywordStr=resStr.split("||");
+						var keywordStrLen=keywordStr.length;
+						  var keywordS='<br/>';
+						  for (i=0;i<keywordStrLen;i++){
+							  keywordLi=keywordStr[i].split("|")
+							  var docID=keywordLi[0].trim();
+							  var docName=keywordLi[1];
+							  var docAdd=keywordLi[2];
+							  var docArea=keywordLi[3];						  
+													  
+							  keywordS+='<div  style="background-color:#ccedff; border-bottom:1px solid #d9d9d9; margin-bottom:2px; border-radius:5px; padding:10px; " onclick="docAdd(\''+docID+'\')" >';						  				  
+							  keywordS+='<input type="hidden" id="doc'+docID+'" value="'+keywordStr[i]+'"/>'
+							  keywordS+='<h3 >'+docName+'</h3>';
+							  keywordS+='<p style="margin:0px; font-size:11px; line-height:normal; " >'+docAdd+'| <span style="background-color:#00a6ff; border-radius:5px; color:#FFF; padding:2px;">'+docArea+'</span></p>';  
+							  keywordS+='</div>';
+							  keywordS+='<div style="clear:both;"></div>';	
+						  }					  
+						 
+						$('#doctorList').empty();
+						$('#doctorList').append(keywordS).trigger('create');
+						
+						
+						$("#btn_search_doc").show();
+						$("#wait_image_doc").hide();		
+					}else{					
+						$("#error_doctorList").text("Dr. Not Available.").removeClass('success').addClass('error');
+						$("#wait_image_doc").hide();
+						
+					}		
+				  }		
+			});
+		}
 	}
-	
-	if (doc_search_url!=""){
-		$("#wait_image_doc").show();			
-		$.ajax({
-			  url: doc_search_url,
-			  success: function(resStr) {
-				if (resStr!=""){
-					localStorage.docListStr=resStr;
-					
-					var keywordStr=resStr.split("||");
-					var keywordStrLen=keywordStr.length;
-					  var keywordS='<br/>';
-					  for (i=0;i<keywordStrLen;i++){
-						  keywordLi=keywordStr[i].split("|")
-						  var docID=keywordLi[0].trim();
-						  var docName=keywordLi[1];
-						  var docAdd=keywordLi[2];
-						  var docArea=keywordLi[3];						  
-												  
-						  keywordS+='<div  style="background-color:#ccedff; border-bottom:1px solid #d9d9d9; margin-bottom:2px; border-radius:5px; padding:10px; " onclick="docAdd(\''+docID+'\')" >';						  				  
-						  keywordS+='<input type="hidden" id="doc'+docID+'" value="'+keywordStr[i]+'"/>'
-						  keywordS+='<h3 >'+docName+'</h3>';
-						  keywordS+='<p style="margin:0px; font-size:11px; line-height:normal; " >'+docAdd+'| <span style="background-color:#00a6ff; border-radius:5px; color:#FFF; padding:2px;">'+docArea+'</span></p>';  
-						  keywordS+='</div>';
-						  keywordS+='<div style="clear:both;"></div>';	
-					  }					  
-					 
-					$('#doctorList').empty();
-					$('#doctorList').append(keywordS).trigger('create');
-					
-					
-					//$("#btn_search_doc").show();
-					$("#wait_image_doc").hide();		
-				}else{					
-					$("#error_doctorList").text("Dr. Not Available.").removeClass('success').addClass('error');
-					$("#wait_image_doc").hide();
-					
-				}		
-			  }		
-		});
-	}
-	
 }
 
 function clearDoc(){
@@ -1320,8 +1371,7 @@ function check_user() {
 													localStorage.areaStr=resultArray[3];
 													localStorage.territoryStr=resultArray[4];
 													localStorage.docCategoryStr=resultArray[5];
-													localStorage.rxGpsStr=resultArray[6];
-													localStorage.medStr=resultArray[7];
+													localStorage.medStr=resultArray[6];
 													
 													localStorage.synced='YES';
 													
@@ -1400,183 +1450,169 @@ function prescription_submit(){
 		$("#wait_image_prescription").hide();
 		$("#btn_prescription_submit").show();
 	}else{
+		$("#btn_prescription_submit").hide();
+		
+		var doctorId=localStorage.docStr.split('|')[0]	
+		var doctor_name=localStorage.docStr.split('|')[1]		
+		var areaId=localStorage.docStr.split('|')[3]
+		
 		var latitude=$("#lat").val();
 		var longitude=$("#longitude").val();
 		
-		if (latitude==''){
-			latitude=0
-			}
-		if (longitude==''){
-			longitude=0
-			}
+		var picNo = localStorage.picNo
+		var imageDiv="myImage"+picNo
+		var imageText="prPhoto"+picNo
+		var prescriptionPhoto=$("#"+imageText).val();
 		
-		if (localStorage.rxGpsStr=="YES" && (latitude==0 && longitude==0)){	
-			$("#wait_image_prescription").hide();		
-			alert ("Please on your GPS")
-		}else{		
-			$("#btn_prescription_submit").hide();		
-			
-			var doctorId=localStorage.docStr.split('|')[0]	
-			var doctor_name=localStorage.docStr.split('|')[1]		
-			var areaId=localStorage.docStr.split('|')[3]
-			
-			
-			
-			var picNo = localStorage.picNo
-			var imageDiv="myImage"+picNo
-			var imageText="prPhoto"+picNo
-			var prescriptionPhoto=$("#"+imageText).val();
-			
-					
-			var medicine_1="";//$("#medicine_1").val();
-			var medicine_2="";//$("#medicine_2").val();
-			var medicine_3="";//$("#medicine_3").val();
-			var medicine_4="";//$("#medicine_4").val();
-			
-					
-			var now = $.now();
-			
-			var imageName=localStorage.user_id+'_'+now.toString()+'.jpg';
-					 
-			//alert(localStorage.base_url+'prescription_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId)+'&doctor_name='+encodeURIComponent(doctor_name)+'&category='+localStorage.doc_category+'&latitude='+latitude+'&longitude='+longitude+'&pres_photo='+imageName+'&opProdID_Str='+localStorage.opProdID_Str+'&medicine_1='+medicine_1+'&medicine_2='+medicine_2+'&medicine_3='+medicine_3+'&medicine_4='+medicine_4+'&ff_present='+localStorage.ff_present+'&associated_call='+localStorage.associated_call)
-			$("#errorShow").val(localStorage.base_url+'prescription_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId)+'&doctor_name='+encodeURIComponent(doctor_name)+'&category='+localStorage.doc_category+'&latitude='+latitude+'&longitude='+longitude+'&pres_photo='+imageName+'&opProdID_Str='+localStorage.opProdID_Str);
-			 $.ajax(localStorage.base_url+'prescription_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId)+'&doctor_name='+encodeURIComponent(doctor_name)+'&category='+localStorage.doc_category+'&latitude='+latitude+'&longitude='+longitude+'&pres_photo='+imageName+'&opProdID_Str='+localStorage.opProdID_Str+'&ff_present='+localStorage.ff_present+'&associated_call='+localStorage.associated_call+'&associated_call_others='+localStorage.associated_call_others,{
-					// cid:localStorage.cid,rep_id:localStorage.user_id,rep_pass:localStorage.user_pass,synccode:localStorage.synccode,
-					type: 'POST',
-					timeout: 30000,
-					error: function(xhr) {							
-								var resultArray = data.split('<SYNCDATA>');
-								$("#error_prescription_submit").html(resultArray[1]);
-								$("#wait_image_prescription").hide();
-								$("#btn_prescription_submit").show();							
-					},
-				success:function(data, status,xhr){					
-				if (status!='success'){				
-					$("#error_prescription_submit").html('Network timeout. Please ensure you have active internet connection.').removeClass('success').addClass('error');
-					$("#wait_image_prescription").hide();
-					$("#btn_prescription_submit").show();
-				}
-				else{
-					//alert (data)
-					   var resultArray = data.split('<SYNCDATA>');	
-						if (resultArray[0]=='FAILED'){						
+				
+		var medicine_1="";//$("#medicine_1").val();
+		var medicine_2="";//$("#medicine_2").val();
+		var medicine_3="";//$("#medicine_3").val();
+		var medicine_4="";//$("#medicine_4").val();
+		
+				
+		var now = $.now();
+		
+		var imageName=localStorage.user_id+'_'+now.toString()+'.jpg';
+				 
+		//alert(localStorage.base_url+'prescription_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId)+'&doctor_name='+encodeURIComponent(doctor_name)+'&category='+localStorage.doc_category+'&latitude='+latitude+'&longitude='+longitude+'&pres_photo='+imageName+'&opProdID_Str='+localStorage.opProdID_Str+'&medicine_1='+medicine_1+'&medicine_2='+medicine_2+'&medicine_3='+medicine_3+'&medicine_4='+medicine_4+'&ff_present='+localStorage.ff_present+'&associated_call='+localStorage.associated_call)
+		$("#errorShow").val(localStorage.base_url+'prescription_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId)+'&doctor_name='+encodeURIComponent(doctor_name)+'&category='+localStorage.doc_category+'&latitude='+latitude+'&longitude='+longitude+'&pres_photo='+imageName+'&opProdID_Str='+localStorage.opProdID_Str);
+		 $.ajax(localStorage.base_url+'prescription_submit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+encodeURIComponent(localStorage.user_pass)+'&synccode='+localStorage.synccode+'&areaId='+areaId+'&doctor_id='+encodeURIComponent(doctorId)+'&doctor_name='+encodeURIComponent(doctor_name)+'&category='+localStorage.doc_category+'&latitude='+latitude+'&longitude='+longitude+'&pres_photo='+imageName+'&opProdID_Str='+localStorage.opProdID_Str+'&ff_present='+localStorage.ff_present+'&associated_call='+localStorage.associated_call+'&associated_call_others='+localStorage.associated_call_others,{
+				// cid:localStorage.cid,rep_id:localStorage.user_id,rep_pass:localStorage.user_pass,synccode:localStorage.synccode,
+				type: 'POST',
+				timeout: 30000,
+				error: function(xhr) {							
+							var resultArray = data.split('<SYNCDATA>');
 							$("#error_prescription_submit").html(resultArray[1]);
 							$("#wait_image_prescription").hide();
-							$("#btn_prescription_submit").show();
-						}else if (resultArray[0]=='SUCCESS'){
-							
-							localStorage.opProdID_Str='';
-							localStorage.prProdID_Str='';
-							oprtunityVal='';
-							optionVal='';
-							
-														
-							uploadPhoto(prescriptionPhoto, imageName);
-							
+							$("#btn_prescription_submit").show();							
+				},
+			success:function(data, status,xhr){					
+			if (status!='success'){				
+				$("#error_prescription_submit").html('Network timeout. Please ensure you have active internet connection.').removeClass('success').addClass('error');
+				$("#wait_image_prescription").hide();
+				$("#btn_prescription_submit").show();
+			}
+			else{
+				//alert (data)
+				   var resultArray = data.split('<SYNCDATA>');	
+					if (resultArray[0]=='FAILED'){						
+						$("#error_prescription_submit").html(resultArray[1]);
+						$("#wait_image_prescription").hide();
+						$("#btn_prescription_submit").show();
+					}else if (resultArray[0]=='SUCCESS'){
+						
+						localStorage.opProdID_Str='';
+						localStorage.prProdID_Str='';
+						oprtunityVal='';
+						optionVal='';
+						
 													
-							imageSource=''
-							var image = document.getElementById(imageDiv);
-							image.src = imageSource;
-							imagePath = imageSource;
-							$("#"+imageText).val(imagePath);
-							
-							
-							if (picNo==1){localStorage.prPhoto1=''}
-							if (picNo==2){localStorage.prPhoto2=''}
-							if (picNo==3){localStorage.prPhoto3=''}
-							if (picNo==4){localStorage.prPhoto4=''}
-							if (picNo==5){localStorage.prPhoto5=''}
-							if (picNo==6){localStorage.prPhoto6=''}
-							if (picNo==7){localStorage.prPhoto7=''}
-							if (picNo==8){localStorage.prPhoto8=''}
-							if (picNo==9){localStorage.prPhoto9=''}
-							if (picNo==10){localStorage.prPhoto10=''}
-							if (picNo==11){localStorage.prPhoto11=''}
-							if (picNo==12){localStorage.prPhoto12=''}
-							if (picNo==13){localStorage.prPhoto13=''}
-							if (picNo==14){localStorage.prPhoto14=''}
-							if (picNo==15){localStorage.prPhoto15=''}
-							if (picNo==16){localStorage.prPhoto16=''}
-							if (picNo==17){localStorage.prPhoto17=''}
-							if (picNo==18){localStorage.prPhoto18=''}
-							if (picNo==19){localStorage.prPhoto19=''}
-							if (picNo==20){localStorage.prPhoto20=''}
-							if (picNo==21){localStorage.prPhoto21=''}
-							if (picNo==22){localStorage.prPhoto22=''}
-							if (picNo==23){localStorage.prPhoto23=''}
-							if (picNo==24){localStorage.prPhoto24=''}
-							if (picNo==25){localStorage.prPhoto25=''}
-							if (picNo==26){localStorage.prPhoto26=''}
-							if (picNo==27){localStorage.prPhoto27=''}
-							if (picNo==28){localStorage.prPhoto28=''}
-							if (picNo==29){localStorage.prPhoto29=''}
-							if (picNo==30){localStorage.prPhoto30=''}
-							if (picNo==31){localStorage.prPhoto31=''}
-							if (picNo==32){localStorage.prPhoto32=''}
-							if (picNo==33){localStorage.prPhoto33=''}
-							if (picNo==34){localStorage.prPhoto34=''}
-							if (picNo==35){localStorage.prPhoto35=''}
-							if (picNo==36){localStorage.prPhoto36=''}
-							if (picNo==37){localStorage.prPhoto37=''}
-							if (picNo==38){localStorage.prPhoto38=''}
-							if (picNo==39){localStorage.prPhoto39=''}
-							if (picNo==40){localStorage.prPhoto40=''}
-							if (picNo==41){localStorage.prPhoto41=''}
-							if (picNo==42){localStorage.prPhoto42=''}
-							if (picNo==43){localStorage.prPhoto43=''}
-							if (picNo==44){localStorage.prPhoto44=''}
-							if (picNo==45){localStorage.prPhoto45=''}
-							if (picNo==46){localStorage.prPhoto46=''}
-							if (picNo==47){localStorage.prPhoto47=''}
-							if (picNo==48){localStorage.prPhoto48=''}
-							if (picNo==49){localStorage.prPhoto49=''}
-							if (picNo==50){localStorage.prPhoto50=''}
-							if (picNo==51){localStorage.prPhoto51=''}
-							if (picNo==52){localStorage.prPhoto52=''}
-							if (picNo==53){localStorage.prPhoto53=''}
-							if (picNo==54){localStorage.prPhoto54=''}
-							if (picNo==55){localStorage.prPhoto55=''}
-							if (picNo==56){localStorage.prPhoto56=''}
-							if (picNo==57){localStorage.prPhoto57=''}
-							if (picNo==58){localStorage.prPhoto58=''}
-							if (picNo==59){localStorage.prPhoto59=''}
-							if (picNo==60){localStorage.prPhoto60=''}
-	
-	
-							$("#lat").val("");
-							$("#long").val("");
-							$("#medicine_1").val('');
-							$("#medicine_2").val('');
-							$("#medicine_3").val('');
-							$("#medicine_4").val('');
-							$("#medicine_5").val('');
-							$("#wait_image_prescription").hide();
-							$("#btn_prescription_submit").hide();
-							
-							
-							$('#medicineList').empty();
-							$('#doctorList').empty();
-							$("#docCart").empty();						
-							$("#opCart").empty();
-							$("#docSelect").empty();
-	
-							//--------------------------
-							//$("#error_prescription_submit").text("Uploading.").addClass('success');	
-							//$.afui.loadContent("#imageSinglePage",true,true,'right');
-							
-						}else{						
-							$("#error_prescription_submit").html('Authentication error. Please register and sync to retry.').removeClass('success').addClass('error');
-							$("#wait_image_prescription").hide();
-							$("#btn_prescription_submit").show();
-							}
-					}
+						uploadPhoto(prescriptionPhoto, imageName);
+						
+												
+						imageSource=''
+						var image = document.getElementById(imageDiv);
+						image.src = imageSource;
+						imagePath = imageSource;
+						$("#"+imageText).val(imagePath);
+						
+						
+						if (picNo==1){localStorage.prPhoto1=''}
+						if (picNo==2){localStorage.prPhoto2=''}
+						if (picNo==3){localStorage.prPhoto3=''}
+						if (picNo==4){localStorage.prPhoto4=''}
+						if (picNo==5){localStorage.prPhoto5=''}
+						if (picNo==6){localStorage.prPhoto6=''}
+						if (picNo==7){localStorage.prPhoto7=''}
+						if (picNo==8){localStorage.prPhoto8=''}
+						if (picNo==9){localStorage.prPhoto9=''}
+						if (picNo==10){localStorage.prPhoto10=''}
+						if (picNo==11){localStorage.prPhoto11=''}
+						if (picNo==12){localStorage.prPhoto12=''}
+						if (picNo==13){localStorage.prPhoto13=''}
+						if (picNo==14){localStorage.prPhoto14=''}
+						if (picNo==15){localStorage.prPhoto15=''}
+						if (picNo==16){localStorage.prPhoto16=''}
+						if (picNo==17){localStorage.prPhoto17=''}
+						if (picNo==18){localStorage.prPhoto18=''}
+						if (picNo==19){localStorage.prPhoto19=''}
+						if (picNo==20){localStorage.prPhoto20=''}
+						if (picNo==21){localStorage.prPhoto21=''}
+						if (picNo==22){localStorage.prPhoto22=''}
+						if (picNo==23){localStorage.prPhoto23=''}
+						if (picNo==24){localStorage.prPhoto24=''}
+						if (picNo==25){localStorage.prPhoto25=''}
+						if (picNo==26){localStorage.prPhoto26=''}
+						if (picNo==27){localStorage.prPhoto27=''}
+						if (picNo==28){localStorage.prPhoto28=''}
+						if (picNo==29){localStorage.prPhoto29=''}
+                        if (picNo == 30) { localStorage.prPhoto30 = '' }
+                        if (picNo == 31) { localStorage.prPhoto31 = '' }
+                        if (picNo == 32) { localStorage.prPhoto32 = '' }
+                        if (picNo == 33) { localStorage.prPhoto33 = '' }
+                        if (picNo == 34) { localStorage.prPhoto34 = '' }
+                        if (picNo == 35) { localStorage.prPhoto35 = '' }
+                        if (picNo == 36) { localStorage.prPhoto36 = '' }
+                        if (picNo == 37) { localStorage.prPhoto37 = '' }
+                        if (picNo == 38) { localStorage.prPhoto38 = '' }
+                        if (picNo == 39) { localStorage.prPhoto39 = '' }
+                        if (picNo == 40) { localStorage.prPhoto40 = '' }
+                        if (picNo == 41) { localStorage.prPhoto41 = '' }
+                        if (picNo == 42) { localStorage.prPhoto42 = '' }
+                        if (picNo == 43) { localStorage.prPhoto43 = '' }
+                        if (picNo == 44) { localStorage.prPhoto44 = '' }
+                        if (picNo == 45) { localStorage.prPhoto45 = '' }
+                        if (picNo == 46) { localStorage.prPhoto46 = '' }
+                        if (picNo == 47) { localStorage.prPhoto47 = '' }
+                        if (picNo == 48) { localStorage.prPhoto48 = '' }
+                        if (picNo == 49) { localStorage.prPhoto49 = '' }
+                        if (picNo == 50) { localStorage.prPhoto50 = '' }
+                        if (picNo == 51) { localStorage.prPhoto51 = '' }
+                        if (picNo == 52) { localStorage.prPhoto52 = '' }
+                        if (picNo == 53) { localStorage.prPhoto53 = '' }
+                        if (picNo == 54) { localStorage.prPhoto54 = '' }
+                        if (picNo == 55) { localStorage.prPhoto55 = '' }
+                        if (picNo == 56) { localStorage.prPhoto56 = '' }
+                        if (picNo == 57) { localStorage.prPhoto57 = '' }
+                        if (picNo == 58) { localStorage.prPhoto58 = '' }
+                        if (picNo == 59) { localStorage.prPhoto59 = '' }
+                        if (picNo == 60) { localStorage.prPhoto60 = '' }
+
+
+						$("#lat").val("");
+						$("#long").val("");
+						$("#medicine_1").val('');
+						$("#medicine_2").val('');
+						$("#medicine_3").val('');
+						$("#medicine_4").val('');
+						$("#medicine_5").val('');
+						$("#wait_image_prescription").hide();
+						$("#btn_prescription_submit").hide();
+						
+						
+						$('#medicineList').empty();
+						$('#doctorList').empty();
+						$("#docCart").empty();						
+						$("#opCart").empty();
+						$("#docSelect").empty();
+
+						//--------------------------
+						//$("#error_prescription_submit").text("Uploading.").addClass('success');	
+						//$.afui.loadContent("#imageSinglePage",true,true,'right');
+						
+					}else{						
+						$("#error_prescription_submit").html('Authentication error. Please register and sync to retry.').removeClass('success').addClass('error');
+						$("#wait_image_prescription").hide();
+						$("#btn_prescription_submit").show();
+						}
 				}
-			});		
-		
-			$("#wait_image_prescription").hide();
-			$("#btn_prescription_submit").show();				
-	//		}pic else
-		}
+			}
+		});		
+	
+		$("#wait_image_prescription").hide();
+		$("#btn_prescription_submit").show();				
+//		}pic else
 	}
 //$.afui.loadContent("#page_confirm_visit_success",true,true,'right');
 }
@@ -1665,37 +1701,37 @@ function cameraSuccess(uri){
 	if (picNo==27){localStorage.prPhoto27=uri}
 	if (picNo==28){localStorage.prPhoto28=uri}
 	if (picNo==29){localStorage.prPhoto29=uri}
-    if (picNo==30){localStorage.prPhoto30=uri}
-    if (picNo==31){localStorage.prPhoto31=uri}
-    if (picNo==32){localStorage.prPhoto32=uri}
-    if (picNo==33){localStorage.prPhoto33=uri}
-    if (picNo==34){localStorage.prPhoto34=uri}
-    if (picNo==35){localStorage.prPhoto35=uri}
-    if (picNo==36){localStorage.prPhoto36=uri}
-    if (picNo==37){localStorage.prPhoto37=uri}
-    if (picNo==38){localStorage.prPhoto38=uri}
-    if (picNo==39){localStorage.prPhoto39=uri}
-    if (picNo==40){localStorage.prPhoto40=uri}
-    if (picNo==41){localStorage.prPhoto41=uri}
-    if (picNo==42){localStorage.prPhoto42=uri}
-    if (picNo==43){localStorage.prPhoto43=uri}
-    if (picNo==44){localStorage.prPhoto44=uri}
-    if (picNo==45){localStorage.prPhoto45=uri}
-    if (picNo==46){localStorage.prPhoto46=uri}
-    if (picNo==47){localStorage.prPhoto47=uri}
-    if (picNo==48){localStorage.prPhoto48=uri}
-    if (picNo==49){localStorage.prPhoto49=uri}
-    if (picNo==50){localStorage.prPhoto50=uri}
-    if (picNo==51){localStorage.prPhoto51=uri}
-    if (picNo==52){localStorage.prPhoto52=uri}
-    if (picNo==53){localStorage.prPhoto53=uri}
-    if (picNo==54){localStorage.prPhoto54=uri}
-    if (picNo==55){localStorage.prPhoto55=uri}
-    if (picNo==56){localStorage.prPhoto56=uri}
-    if (picNo==57){localStorage.prPhoto57=uri}
-    if (picNo==58){localStorage.prPhoto58=uri}
-    if (picNo==59){localStorage.prPhoto59=uri}
-    if (picNo==60){localStorage.prPhoto60=uri}
+    if (picNo == 30) { localStorage.prPhoto30 = uri }
+    if (picNo == 31) { localStorage.prPhoto31 = uri }
+    if (picNo == 32) { localStorage.prPhoto32 = uri }
+    if (picNo == 33) { localStorage.prPhoto33 = uri }
+    if (picNo == 34) { localStorage.prPhoto34 = uri }
+    if (picNo == 35) { localStorage.prPhoto35 = uri }
+    if (picNo == 36) { localStorage.prPhoto36 = uri }
+    if (picNo == 37) { localStorage.prPhoto37 = uri }
+    if (picNo == 38) { localStorage.prPhoto38 = uri }
+    if (picNo == 39) { localStorage.prPhoto39 = uri }
+    if (picNo == 40) { localStorage.prPhoto40 = uri }
+    if (picNo == 41) { localStorage.prPhoto41 = uri }
+    if (picNo == 42) { localStorage.prPhoto42 = uri }
+    if (picNo == 43) { localStorage.prPhoto43 = uri }
+    if (picNo == 44) { localStorage.prPhoto44 = uri }
+    if (picNo == 45) { localStorage.prPhoto45 = uri }
+    if (picNo == 46) { localStorage.prPhoto46 = uri }
+    if (picNo == 47) { localStorage.prPhoto47 = uri }
+    if (picNo == 48) { localStorage.prPhoto48 = uri }
+    if (picNo == 49) { localStorage.prPhoto49 = uri }
+    if (picNo == 50) { localStorage.prPhoto50 = uri }
+    if (picNo == 51) { localStorage.prPhoto51 = uri }
+    if (picNo == 52) { localStorage.prPhoto52 = uri }
+    if (picNo == 53) { localStorage.prPhoto53 = uri }
+    if (picNo == 54) { localStorage.prPhoto54 = uri }
+    if (picNo == 55) { localStorage.prPhoto55 = uri }
+    if (picNo == 56) { localStorage.prPhoto56 = uri }
+    if (picNo == 57) { localStorage.prPhoto57 = uri }
+    if (picNo == 58) { localStorage.prPhoto58 = uri }
+    if (picNo == 59) { localStorage.prPhoto59 = uri }
+    if (picNo == 60) { localStorage.prPhoto60 = uri }
 
 		
 	takePicture();

@@ -41,7 +41,7 @@
 		.error{ background-color:#ffe6e6; color:#e60000; padding:10px; border-bottom:1px solid #ff0000; border-top:1px solid #ff0000; font-size:12px; border-radius:5px; z-index:150;}
 		.success{ background-color:#ecf9f2; color:#339966; padding:10px; border-bottom:1px solid #66cc99; border-top:1px solid #66cc99; font-size:12px; border-radius:5px; z-index:150;}
 		
-		.parent{ height:490px; border:1px solid #00bfff; border-radius:5px; margin:1%; box-shadow:3px 3px 3px #b3e4ff; overflow:hidden; }
+		.parent{ height:330px; border:1px solid #00bfff; border-radius:5px; margin:1%; box-shadow:3px 3px 3px #b3e4ff; overflow:hidden; }
 		
 		
 		label{ width:100%; text-align:left;}
@@ -266,10 +266,10 @@
     </footer>
     
     <nav id="doctor_add"  style="z-index:100; background-color:#e6f6ff; width:65%;" >			
-        <header align="left" style="padding:3px; background-color:#39ac39;">
+        <header align="left" style="padding:3px;">
         	<div class="button-grouped flex tabbed">
-                <a href="#" class="button" onClick="showSearchDoc()" style="border-right:1px solid #FFF; background-color:#39ac39; color:#FFF;" >Select</a>
-                <a href="#" class="button" onClick="clearDoc()" style="background-color:#39ac39; color:#FFF;">Clear</a>
+                <a href="#" class="button" onClick="showSearchDoc()" style="border-right:1px solid #FFF; background-color:#0088d1; color:#FFF;" >Select</a>
+                <a href="#" class="button" onClick="clearDoc()" style="background-color:#0088d1; color:#FFF;">Clear</a>
             </div>
         	<!--<a href="#" class="button" onClick="showSearchDoc()" >Select</a><a href="#" class="button" onClick="clearDoc()" >Clear</a>-->        
         	<!--&nbsp;&nbsp;<input type="text" id="drSearch" style="width:70%; height:40px; color:#000; background-color:#F4F8FF; font-weight:normal" placeholder="Doctor Name/ Address"   />&nbsp;&nbsp;-->
@@ -282,11 +282,11 @@
         <div style="border-bottom:1px solid #00cc99; border-top:1px solid #00cc99; background-color:#e6f6ff; height:45px; width:65%; padding:2px; top:190px; position:fixed; z-index:100;">
         	<input type="text" id="drSearch" style="width:80%; height:40px; color:#000; background-color:#F4F8FF; font-weight:normal" placeholder="Doctor Name/ Address"   />&nbsp;<a href="#" onClick="clearSearcDoc()" style="font-size:15px; text-decoration:none; color:#000;" >Clear</a>
         </div>                                
-        <div id="doctorList" style="height:60%; width:63%; margin:2px; top:220px; bottom:35px; position:fixed; overflow:scroll;">
+        <div id="doctorList" style="height:54%; width:63%; margin:2px; top:220px; bottom:35px; position:fixed; overflow:scroll;">
         	<div ><img id="wait_image_doc" src="loading.gif" /></div>        	        
         </div>
         
-        <a href="#" onClick="addNewDoc()" class="button red block" style="bottom:0; position:fixed; background-color:#39ac39; margin:0px; height:35px; width:65%;"  >New Doctor</a>        	
+        <a href="#" onClick="addNewDoc()" class="button red block" style="bottom:0; position:fixed; background-color:#00a6ff; margin:0px; height:35px; width:65%;"  >New Doctor</a>        	
               
     </nav>
 <!--    <nav id="ul_med_add"  style="z-index:100; background-color:#e6f6ff; width:80%;" >			
@@ -301,7 +301,7 @@
  	
        
     <nav id="op_med_add"  style="z-index:100; background-color:#e6f6ff; width:50%;" >			
-        <header align="left" style="padding:3px; background-color:#39ac39;">
+        <header align="left" style="padding:3px;">
         	&nbsp;&nbsp;<input type="text" id="opitemSearch" style="width:70%; height:40px; color:#000; background-color:#F4F8FF; font-weight:normal" placeholder="Medicine Name"   />&nbsp;&nbsp;
             <!--<a href="#" id="btn_search_med" onClick="searchMedicine()" style="font-size:25px; text-decoration:none; color:#FFF;" class="icon magnifier" ></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--><a href="#" onClick="clearMedicine()" style="font-size:11px; text-decoration:none; color:#FFF;" >Clear</a>
         </header>        	
@@ -312,9 +312,9 @@
             <a href="#" class="button" id="opMedAdd" style="border-right:2px solid #FFF; background-color:#00a6ff; color:#FFF;" >Save</a>
             <a href="#" class="button" onclick="$.afui.drawer.show('#ul_med_add','left','push')" style="background-color:#00a6ff; color:#FFF;">New</a>
         </div>-->
-        <div style=" bottom:0; width:50%; background-color:#39ac39; position:fixed;">        	
+        <div style=" bottom:0; width:50%; background-color:#0088d1; position:fixed;">        	
             <input id="medicine_new" type="text" style="width:65%; height:35px; color:#000; background-color:#F4F8FF; font-size:12px; margin:5px 5px 1px 10px;" placeholder="New Medicine"   />
-            <a href="#" onClick="medClickVal2(0,0)" class="button red" style="background-color:#39ac39; padding:5px;"  >Add</a>            
+            <a href="#" onClick="medClickVal2(0,0)" class="button red" style="background-color:#00a6ff; padding:5px;"  >Add</a>            
         </div>
                
     </nav>
