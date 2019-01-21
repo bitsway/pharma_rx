@@ -2,7 +2,7 @@ $.afui.useOSThemes=false;
 $.afui.useOSThemes=false;
 $.afui.loadDefaultHash=true;
 $.afui.autoLaunch=false;
-var clickCount=0;
+
 //check search
 var search=document.location.search.toLowerCase().replace("?","");
 if(search.length>0){
@@ -202,9 +202,7 @@ $(document).ready(function(){
 			$("#myImagePrescription_show").css({'transform':'rotate(0deg)'});			
 		});
 		
-		
-		
-					
+			
     });
 
 $.afui.animateHeader(true);
@@ -1223,11 +1221,11 @@ function check_user() {
 	cid=$.trim(cid);
 	
 	//Local
-	//var apipath_base_photo_dm ='http://127.0.0.1:8000/skf_w04/syncmobile_rx_171128/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
+	//var apipath_base_photo_dm ='http://127.0.0.1:8000/w02_ipi/syncmobile_rx_171128/dmpath?CID='+cid +'&HTTPPASS=e99business321cba'
 	//var apipath_base_photo_dm ='http://a007.yeapps.com/skf/dmpath_live_new/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
 	//online
     var apipath_base_photo_dm ='http://e2.businesssolutionapps.com/welcome/dmpath_live_new_new/get_path?CID='+cid +'&HTTPPASS=e99business321cba'
-   // alert (apipath_base_photo_dm)	
+    //alert (apipath_base_photo_dm)	
 	
 	var user_id=$("#user_id").val();
 	var user_pass=$("#user_pass").val();
@@ -1391,11 +1389,7 @@ function associatedCallOthers(){
 	localStorage.associated_call_others=associated_call_others;
 	}
 	
-function prescription_submit(){	
-	clickCount++
-	if(clickCount==1){
-	
-	$("#btn_prescription_submit").hide();
+function prescription_submit(){
 	$("#error_prescription_submit").html("").removeClass('error').removeClass('success');		
 	$("#wait_image_prescription").show();
 	
@@ -1476,7 +1470,6 @@ function prescription_submit(){
 							oprtunityVal='';
 							optionVal='';
 							
-							clickCount=0;
 														
 							uploadPhoto(prescriptionPhoto, imageName);
 							
@@ -1585,7 +1578,6 @@ function prescription_submit(){
 	//		}pic else
 		}
 	}
-}
 //$.afui.loadContent("#page_confirm_visit_success",true,true,'right');
 }
 
