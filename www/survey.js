@@ -29,7 +29,7 @@ localStorage.associated_call_others=0
 
 $(document).ready(function(){
         $.afui.launch();
-		
+		clickCount=0;
 		localStorage.ff_present=0
 		localStorage.associated_call=0
 		localStorage.associated_call_others=0		
@@ -1345,7 +1345,7 @@ function check_user() {
 													if (localStorage.rxGpsStr=='YES'){
 														getLocationInfo_ready();
 													}
-													
+													clickCount=0;
 													$.afui.loadContent("#pageHome",true,true,'right');
 													//$.afui.loadContent("#page_PrescriptionCapture",true,true,'right');													
 
@@ -1395,16 +1395,14 @@ function associatedCallOthers(){
 	localStorage.associated_call_others=associated_call_others;
 	}
 	
-function prescription_submit(){	
-	clickCount+=1
-	if(clickCount==1){
-	
+function prescription_submit(){
 	$("#btn_prescription_submit").hide();
 	$("#error_prescription_submit").html("").removeClass('error').removeClass('success');		
 	$("#wait_image_prescription").show();
-	
-	
-	
+		
+	clickCount+=1
+	if(clickCount==1){
+		
 	if (localStorage.docStr	==undefined || localStorage.docStr	=="" ){
 		$("#error_prescription_submit").text("Required Doctor.").removeClass('success').addClass('error');		
 		$("#wait_image_prescription").hide();
@@ -1481,7 +1479,7 @@ function prescription_submit(){
 							optionVal='';
 							
 							
-														
+							clickCount=0;							
 							uploadPhoto(prescriptionPhoto, imageName);
 							
 													
