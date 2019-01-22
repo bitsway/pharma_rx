@@ -78,7 +78,7 @@ $(document).ready(function(){
 		$("#wait_image_login").hide();
 		$("#loginButton").show();
 		
-		getLocationInfo_ready();
+		//getLocationInfo_ready();
 		
 	//===============SetPR=================
 	for (j=1; j <= 60; j++){
@@ -1341,7 +1341,10 @@ function check_user() {
 													$('#docCart').empty();
 													$('#docSelect').empty();	
 													$('#doctorList').empty();
-																									
+													
+													if (localStorage.rxGpsStr=='YES'){
+														getLocationInfo_ready();
+													}
 													
 													$.afui.loadContent("#pageHome",true,true,'right');
 													//$.afui.loadContent("#page_PrescriptionCapture",true,true,'right');													
@@ -1359,7 +1362,8 @@ function check_user() {
 }		
 }//Function
 
-function page_PrescriptionCapture() {	
+function page_PrescriptionCapture() {
+	clickCount=0;
 	//localStorage.doctor_pr=1;
 //	localStorage.doctor_plan_flag=0
 //	localStorage.doctor_flag=1
@@ -1392,7 +1396,7 @@ function associatedCallOthers(){
 	}
 	
 function prescription_submit(){	
-	clickCount++
+	clickCount+=1
 	if(clickCount==1){
 	
 	$("#btn_prescription_submit").hide();
@@ -1476,7 +1480,7 @@ function prescription_submit(){
 							oprtunityVal='';
 							optionVal='';
 							
-							clickCount=0;
+							
 														
 							uploadPhoto(prescriptionPhoto, imageName);
 							
